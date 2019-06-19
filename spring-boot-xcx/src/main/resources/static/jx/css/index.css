@@ -1,0 +1,21 @@
+
+.warp {
+    height: auto;
+    min-height: 100%;
+    position: relative;
+    overflow: auto;
+}
+
+.top {
+    width: 100%;
+    text-align: center;
+    height: 55px;
+    background-color: rgb(98,185,0);
+    line-height: 55px;
+}
+.top_img{
+	width:30px; 
+	height:30px;
+	border-radius: 50%;
+	margin-top: -10px;
+}
