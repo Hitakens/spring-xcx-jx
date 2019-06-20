@@ -3,6 +3,7 @@ package com.forword.car.controller;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.forword.car.service.MainService;
@@ -16,8 +17,7 @@ public class MainController extends BasController {
 	@Autowired
 	private MainService carService;
 	@RequestMapping("index")
-	public String mianIndex(){
-		
+	public String mianIndex(Model m){
 		return "/main/index";
 	}
 }
