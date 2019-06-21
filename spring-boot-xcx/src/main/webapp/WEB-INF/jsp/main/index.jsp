@@ -70,7 +70,7 @@ top: -8px;
   
 
     <div class="weui-grids">
-      <a href="" class="weui-grid js_grid">
+      <a href="${pageContext.request.contextPath}/main/jqlx/kyjqlx" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img  src="${pageContext.request.contextPath}/static/jx/img/lx.png" alt="">
         </div>
