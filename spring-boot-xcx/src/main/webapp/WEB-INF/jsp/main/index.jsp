@@ -70,7 +70,7 @@ top: -8px;
   
 
     <div class="weui-grids">
-      <a href="${pageContext.request.contextPath}/main/jqlx/kyjqlx" class="weui-grid js_grid">
+      <a href="${pageContext.request.contextPath}/main/xckmy/jqlx" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img  src="${pageContext.request.contextPath}/static/jx/img/lx.png" alt="">
         </div>
@@ -78,7 +78,7 @@ top: -8px;
           技巧练习
         </p>
       </a>
-      <a href="" class="weui-grid js_grid">
+      <a href="${pageContext.request.contextPath}/main/xckmy/fllx" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img src="${pageContext.request.contextPath}/static/jx/img/lx1.png" alt="">
         </div>
@@ -126,7 +126,7 @@ top: -8px;
 		<!-- 科目四开始 -->							 
       <h4 class="demos-title">科目四</h4>
     <div class="weui-grids">
-      <a href="" class="weui-grid js_grid">
+      <a href="${pageContext.request.contextPath}/main/xckms/jqlx" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img  src="${pageContext.request.contextPath}/static/jx/img/lx.png" alt="">
         </div>
@@ -134,7 +134,7 @@ top: -8px;
           技巧练习
         </p>
       </a>
-      <a href="" class="weui-grid js_grid">
+      <a href="${pageContext.request.contextPath}/main/xckms/fllx" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img src="${pageContext.request.contextPath}/static/jx/img/lx1.png" alt="">
         </div>
