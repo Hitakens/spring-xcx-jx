@@ -183,4 +183,9 @@ footer{
 }
 .weui-tabbar-zdy{
 	height: 52px;
+	position: fixed;
+	 bottom:0;
+	overflow: hidden;
+	z-index:1;
+	
 }

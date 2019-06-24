@@ -103,20 +103,21 @@
 				<!-- 底部 -->
 			</div>
 		</div>
+		</div>
 		 <div class="weui-tabbar weui-tabbar-zdy">
-        <a id='previousQuestion' href="javascrip:void(0)" class="weui-tabbar__item weui-bar__item--on">
+        <a id='previousQuestion' href="javascript:void(0)" class="weui-tabbar__item weui-bar__item--on">
           <div class="weui-tabbar__icon">
             <img src="${pageContext.request.contextPath}/static/jx/img/db/syt.png" alt="">
           </div>
           <p class="weui-tabbar__label">上一题</p>
         </a>
-        <a id="unHeart" href="javascrip:void(0)" class="weui-tabbar__item">
+        <a id="unHeart" href="javascript:void(0)" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
            <img src="${pageContext.request.contextPath}/static/jx/img/db/sc.png" alt="">
           </div>
           <p class="weui-tabbar__label">收藏本题</p>
         </a>
-        <a  id="heart" href="javascrip:void(0)" class="weui-tabbar__item" style="color: #C40000; display: none;">
+        <a  id="heart" href="javascript:void(0)" class="weui-tabbar__item" style="color: #C40000; display: none;">
           <div class="weui-tabbar__icon">
            <img src="${pageContext.request.contextPath}/static/jx/img/db/bsc.png" alt="">
           </div>
@@ -140,20 +141,20 @@
           </div>
           <p class="weui-tabbar__label">5/100</p>
         </a>
-        <a id='nextQuestion' href="javascrip:void(0)" class="weui-tabbar__item">
+        <a id='nextQuestion' href="javascript:void(0)" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
             <img src="${pageContext.request.contextPath}/static/jx/img/db/xyt.png" alt="">
           </div>
           <p class="weui-tabbar__label">下一题</p>
         </a>
-        <a id="submitQuestions" href="javascrip:void(0)" class="weui-tabbar__item" style="color: #C40000; display: none;">
+        <a id="submitQuestions" href="javascript:void(0)" class="weui-tabbar__item" style="color: #C40000; display: none;">
           <div class="weui-tabbar__icon">
             <img src="${pageContext.request.contextPath}/static/jx/img/db/xyt.png" alt="">
           </div>
           <p class="weui-tabbar__label">提交</p>
         </a>
       </div>
-	</div>
+	
 
 </body>
 </html>
