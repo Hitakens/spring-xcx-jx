@@ -31,8 +31,8 @@
 	src="${pageContext.request.contextPath}/static/jx/js/Questions.js"></script>
 <style type="text/css">
 .warp {
-	height: 100%;
-	min-height: 100%;
+    width:100%;
+	height: 90%;
 	position: relative;
 	overflow: auto;
 	font-size: 13px;
@@ -50,40 +50,13 @@
 					style="width: 100%; height: auto; display: inline-block;">
 					<div style="width: 100%;">
 						<div style="width: 100%; margin: 0px auto">
-							<div
-								style="width: 100%; height: 51px; border-bottom: none; background: #FFF;">
 								<div class="middle-top"
-									style="width: 100%; height: 51px;  background: #2D3339; position: relative;">
-									<div class="middle-top-left pull-left"
-										style="height: 100%; background: #232C31; color: #FFF;width: 60%;">
-										<div class="pull-left"
-											style="width: 135px; line-height: 20px; height: 20px; margin: 15px; font-size: 15px;">
-											<!--已做答的数量和考题总数-->
-											当前第<span class="questioned"></span>题/共<span
-												class="question_sum"></span>题
-										</div>
-									</div>
-									<div class="middle-top-right text-center pull-left"
-										style="width: 40%; height: 100%; border-left: 1px solid red; position: absolute; right: 0px; ">
-										<div class="stop pull-left"
-											style="width: 50px; height: 100%; padding: 10px;">
-											<a href="javascript:void(0);" class="text-center"
-												style="color: #FE6547;">
-												<div class="time-stop glyphicon glyphicon-pause" title="暂停"
-													style="width: 30px; height: 30px; line-height: 30px; border-radius: 15px; border: 1px solid #FE6547;"></div>
-												<div class="time-start glyphicon glyphicon-play" title="开始"
-													style="width: 30px; height: 30px; line-height: 30px; border-radius: 15px; border: 1px solid #FE6547; display: none;"></div>
-											</a>
-										</div>
-										<div class="pull-left"
-											style="width: 50px; height: 100%; padding: 10px 0px 10px 0px;">
-											<div class="time"
-												style="width: 50px; height: 30px; line-height: 30px; border-radius: 15px; font-size: 15px; color: #FFF;">
-											</div>
-										</div>
-									</div>
+									style="width: 100%; height: 30px;  background: #2D3339; position: relative;">
+									<a href="">
+									<div class='top_left'><img alt="" width="30px" height="29px" src="${pageContext.request.contextPath}/static/jx/img/db/cz.png">重做</div></a>
+										<a id="submitQuestions" href="javascript:void(0)" ><div class='top_right'>提交<img alt="" width="30px" height="29px" src="${pageContext.request.contextPath}/static/jx/img/db/tj.png"></div></a>
 								</div>
-							</div>
+							
 							<div
 								style="width: 100%; height: auto; display: inline-block; border-bottom: 1px dashed #CCC; background: #FFF;">
 								<div
@@ -94,6 +67,7 @@
 									</ul>
 									
 								</div>
+		                      <span class=markedred>标红的字</span>
 							</div>
 							<!-- 答题卡 -->
 						</div>
@@ -101,6 +75,7 @@
 				</div>
 			
 				<!-- 底部 -->
+				
 			</div>
 		</div>
 		</div>
@@ -123,23 +98,19 @@
           </div>
           <p class="weui-tabbar__label">已收藏</p>
         </a>
-        <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+        <a id='openCardcw' href="javascript:void(0)" class="weui-tabbar__item open-popup" data-target="#half">
           <div class="weui-tabbar__icon">
             <img src="${pageContext.request.contextPath}/static/jx/img/db/ct.png" alt="">
           </div>
-          <p class="weui-tabbar__label">错题(0)</p>
+          <p class="weui-tabbar__label">错题率<span class='questionctl'></span></p>
         </a>
-        <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
-          <div class="weui-tabbar__icon">
-            <img src="${pageContext.request.contextPath}/static/jx/img/db/dt.png" alt="">
-          </div>
-          <p class="weui-tabbar__label">对题</p>
-        </a>
-        <a href="#tab3" class="weui-tabbar__item">
+       
+        <a id='openCard' href="javascript:void(0)" class="weui-tabbar__item open-popup" data-target="#half">
            <div class="weui-tabbar__icon">
             <img src="${pageContext.request.contextPath}/static/jx/img/db/sl.png" alt="">
           </div>
-          <p class="weui-tabbar__label">5/100</p>
+          <p class="weui-tabbar__label"><span class="questioned"></span>题/共<span
+												class="question_sum"></span>题</p>
         </a>
         <a id='nextQuestion' href="javascript:void(0)" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
@@ -147,14 +118,38 @@
           </div>
           <p class="weui-tabbar__label">下一题</p>
         </a>
-        <a id="submitQuestions" href="javascript:void(0)" class="weui-tabbar__item" style="color: #C40000; display: none;">
-          <div class="weui-tabbar__icon">
-            <img src="${pageContext.request.contextPath}/static/jx/img/db/xyt.png" alt="">
-          </div>
-          <p class="weui-tabbar__label">提交</p>
-        </a>
       </div>
-	
+	<div id="half" class='weui-popup__container popup-bottom'>
+      <div class="weui-popup__overlay"></div>
+      <div class="weui-popup__modal">
+        <div class="toolbar">
+          <div class="toolbar-inner">
+            <a href="javascript:;" class="picker-button close-popup">关闭</a>
+           
+          </div>
+        </div>
+        <div class="modal-content">
+        <!-- 展示答题卡 -->
+             <div id="answerCard" style="display: none;">
+											<div class="panel-body form-horizontal" style="padding: 0px;">
+												<ul class="list-unstyled">
+												</ul>
+											</div>
+										</div>
+	   <!-- 展示错误的答题卡 -->
+             <div id="answerCardcw1" style="display: none;">
+											<div class="panel-body form-horizontal" style="padding: 0px;">
+												<ul class="list-unstyled list-unstyled-zdy">
+												</ul>
+											</div>
+										</div>
+          </div>
+        </div>
+      </div>
+<script
+		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
+
+    
 
 </body>
 </html>
