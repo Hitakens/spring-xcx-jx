@@ -22,7 +22,7 @@
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
-	
+	var 
 </script>
 <style type="text/css">
 .warp {

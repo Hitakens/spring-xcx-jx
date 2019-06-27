@@ -384,7 +384,7 @@ $(function() {
 				$('#pjsp').removeClass('markedred')
 				$('#pjsp').removeClass('markedaqua')
 				$('#pjsp').removeClass('markedgreen')
-			if(sum.length<80 && 1==2){
+			if(sum.length<80){
 				$('#mlssimg').html('<img class="tjimg" src="../../static/jx/img/sy/mlss.jpeg"></img>')
 				$('#pjsp').html('超级马路杀手');
 				$('#pjsp').addClass('markedred')
