@@ -11,6 +11,10 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+
 /**
  * 处理计算公式以及SQL拼装等特殊公式
  * @author foresee
@@ -131,5 +135,19 @@ public class StringUtil implements Serializable {
 		}else{
 			return null;
 		}
+	}
+	/**
+	 * 字符串转化为json
+	 */
+	public static String StringTojson(String key,String json){
+		Object object=null;
+		JSONArray jsonArray = JSONArray.fromObject(json); 
+		Object[] os = jsonArray .toArray(); 
+		for(int i=0; i<os.length; i++) { 
+			JSONObject jsonObj = JSONObject.fromObject(os[i]); 
+			 object = jsonObj.get(key);
+          }
+		
+		return object.toString();
 	}
 }

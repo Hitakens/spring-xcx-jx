@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.forword.car.dao.MainMapper">
-
+<select id="getopenidisnull" parameterType="string" resultType="string">
+ select t.sessionid from wx_yhxx t where t.openid=#{openid,jdbcType=VARCHAR}
+</select>
+<update id="updateYhxx">
+ update wx_yhxx t set t.wxname=#{nickName,jdbcType=VARCHAR},
+ t.avatarurl=#{avatarUrl,jdbcType=VARCHAR},
+ t.sessionid=#{sesionnid,jdbcType=VARCHAR} 
+ <where>
+   t.openid=#{openid,jdbcType=VARCHAR}
+   and t.yxbz='Y'
+ </where>
+</update>
 </mapper>
