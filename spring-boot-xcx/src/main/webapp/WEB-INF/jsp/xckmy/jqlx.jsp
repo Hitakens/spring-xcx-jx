@@ -58,13 +58,13 @@ margin-left: 40px;
 	<div class="warp">
 	 <div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div  class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/1.png">
       </div>
       <div class="weui-media-box__bd">
       <div class="button_sp_area">
-        <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary">技巧练习</a>
+        <a href="${pageContext.request.contextPath}/main/xckmy/jqlxdt" class="weui-btn weui-btn_mini weui-btn_primary">技巧练习</a>
         <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary weui-btn_primary-zdy">单元测试</a>
       </div>
       </div>
@@ -74,13 +74,13 @@ margin-left: 40px;
 	<!-- 练习一结束 --> 
 	 <div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div  class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/2.png">
       </div>
       <div class="weui-media-box__bd">
       <div class="button_sp_area">
-        <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary">技巧练习</a>
+        <a href="${pageContext.request.contextPath}/main/xckmy/jqlxdt" class="weui-btn weui-btn_mini weui-btn_primary">技巧练习</a>
         <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary weui-btn_primary-zdy">单元测试</a>
       </div>
       </div>
@@ -90,7 +90,7 @@ margin-left: 40px;
 	<!-- 练习二结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div  class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/3.png">
       </div>
@@ -106,7 +106,7 @@ margin-left: 40px;
 	<!-- 练习三结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/4.png">
       </div>
@@ -122,7 +122,7 @@ margin-left: 40px;
 	<!-- 练习四结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/5.png">
       </div>
@@ -138,7 +138,7 @@ margin-left: 40px;
 	<!-- 练习五结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/6.png">
       </div>
@@ -154,7 +154,7 @@ margin-left: 40px;
 	<!-- 练习六结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/7.png">
       </div>
@@ -170,7 +170,7 @@ margin-left: 40px;
 	<!-- 练习七结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/8.png">
       </div>
@@ -186,7 +186,7 @@ margin-left: 40px;
 	<!-- 练习八结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/9.png">
       </div>
@@ -202,7 +202,7 @@ margin-left: 40px;
 	<!-- 练习九结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/ss.png">
       </div>
@@ -218,7 +218,7 @@ margin-left: 40px;
 	<!-- 练习手势结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/jl.png">
       </div>
@@ -234,7 +234,7 @@ margin-left: 40px;
 	<!-- 禁令标志结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/jg.png">
       </div>
@@ -250,7 +250,7 @@ margin-left: 40px;
 	<!-- 警告标志结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/zs.png">
       </div>
@@ -266,7 +266,7 @@ margin-left: 40px;
 	<!-- 指示标志结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/zl.png">
       </div>
@@ -282,7 +282,7 @@ margin-left: 40px;
 	<!-- 指路标志结束 --> 
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/jx.png">
       </div>
@@ -298,7 +298,7 @@ margin-left: 40px;
 	<!-- 机械常识结束 -->
 	<div class='first-weiui'>
 		 <div class="weui-panel__bd">
-    <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box weui-media-box_appmsg">
       <div class="weui-media-box__hd">
         <img class='lift-img' src="${pageContext.request.contextPath}/static/jx/img/ky/jc.png">
       </div>

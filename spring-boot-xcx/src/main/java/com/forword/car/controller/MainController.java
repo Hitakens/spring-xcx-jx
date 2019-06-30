@@ -44,19 +44,19 @@ public class MainController extends BasController {
 		String result="";
 		try {
 			
-			String openid = getOpenid(js_code);
-			String oppenid = StringUtil.StringTojson("openid",openid);
+			String res = getOpenid(js_code);
+			String oppenid = StringUtil.StringTojson("openid",res);
 			String pdopenid = pdopenid(oppenid);
 			String yhxx=null;
 			if(pdopenid!=null && !pdopenid.equals("")){
-				yhxx= carService.updateYhxx(oppenid,avatarUrl,nickName,StringUtil.StringTojson("session_key",openid));
+				yhxx= carService.updateYhxx(oppenid,avatarUrl,nickName,StringUtil.StringTojson("session_key",res));
 				result=yhxx;
 			}else{
 				result="0";
 			}
 		} catch (Exception e) {
 			result="0";
-			log.error("请求小程序openid发生错误");
+			log.error("请求小程序openid发生错误",e.fillInStackTrace());
 		}
 			
 		return result;
