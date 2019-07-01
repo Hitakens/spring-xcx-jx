@@ -29,6 +29,13 @@
 	src="${pageContext.request.contextPath}/static/jx/js/bootstrap.js"></script>
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/Questions.js"></script>
+<script type="text/javascript">
+var pathName='${pageContext.request.contextPath}';
+var questions = [];
+$(function() {
+	getKmydata(1);
+})
+</script>
 <style type="text/css">
 .warp {
 	width: 100%;
@@ -44,8 +51,6 @@
 	<div class="warp">
 		<div class="col-md-10">
 			<div class="content">
-
-
 				<div style="width: 100%; height: auto; display: inline-block;">
 					<div style="width: 100%;">
 						<div style="width: 100%; margin: 0px auto">
@@ -116,7 +121,7 @@
 					src="${pageContext.request.contextPath}/static/jx/img/db/sc.png"
 					alt="">
 			</div>
-			<p class="weui-tabbar__label">收藏本题</p>
+			<p class="weui-tabbar__label">收藏</p>
 		</a> <a id="heart" href="javascript:void(0)" class="weui-tabbar__item"
 			style="color: #C40000; display: none;">
 			<div class="weui-tabbar__icon">
@@ -133,7 +138,7 @@
 					alt="">
 			</div>
 			<p class="weui-tabbar__label">
-				错题率<span class='questionctl'></span>
+				<span class='questionctl'></span>
 			</p>
 		</a> <a id='openCard' href="javascript:void(0)"
 			class="weui-tabbar__item open-popup" data-target="#half">
@@ -143,7 +148,7 @@
 					alt="">
 			</div>
 			<p class="weui-tabbar__label">
-				<span class="questioned"></span>题/共<span class="question_sum"></span>题
+				<span class="questioned"></span>/<span class="question_sum"></span>
 			</p>
 		</a> <a id='nextQuestion' href="javascript:void(0)"
 			class="weui-tabbar__item">
@@ -205,7 +210,6 @@
     </div>
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
-
 
 
 </body>

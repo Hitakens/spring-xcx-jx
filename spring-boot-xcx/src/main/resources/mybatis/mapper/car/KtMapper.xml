@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forword.car.dao.KtMapper">
+	<select id="getKmydata" parameterType="int" resultType="map">
+		SELECT 
+		t.uuid,t.questionTitle,t.questionItems,t.questionAnswer,t.questionSkills,t.answerAnalysis,t.questionImg
+		FROM xckmy t where t.uuid between #{starNum,jdbcType=INTEGER} and #{endNum,jdbcType=INTEGER};
+	</select>
+</mapper>

@@ -1,11 +1,38 @@
 /**
  * Created by Administrator on 2019/11/15.
  */
+var HH = 0;// 时
+var mm = 0;// 分
+var ss = 0;// 秒
+var timeState = true;// 时间状态 默认为true 开启时间
 var itemList = [ "A", "B", "C", "D", "E", "F" ]
 var activeQuestion = 0; // 当前操作的考题编号
 var questioned = 0; //
 var checkQues = []; // 已做答的题的集合
-var questionuuid='';//当前题的uuid
+/* 实现计时器 */
+
+var time = setInterval(function() {
+	if (timeState) {
+		if (HH == 24)
+			HH = 0;
+		str = "";
+		if (++ss == 60) {
+			if (++mm == 60) {
+				HH++;
+				mm = 0;
+			}
+			ss = 0;
+		}
+		str += HH < 10 ? "0" + HH : HH;
+		str += ":";
+		str += mm < 10 ? "0" + mm : mm;
+		str += ":";
+		str += ss < 10 ? "0" + ss : ss;
+		$(".time").text(str);
+	} else {
+		$(".time").text(str);
+	}
+}, 1000);
 //获取数据
 function getKmydata(pa) {
 	 $.ajax({
@@ -14,10 +41,6 @@ function getKmydata(pa) {
          url: pathName+"/kt/getKmydata/"+pa, //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
          success: function (result) {
         	 questions=eval(result);
-        	    showQuestion(0);
-        		answerCard();
-        		showctlv();
-        		showQuestion(0);
          },
          error: function(data) {
         	 $.toast("网络错误,请稍后再试!", "cancel");
@@ -27,6 +50,10 @@ function getKmydata(pa) {
 }
 // 展示考卷信息
 function showQuestion(id) {
+	var id=0;
+	for(var i=0;i<questions.length;i++){
+		id+=1;
+	}
 	$(".questioned").text(id+1);
 	questioned = (id+1) / questions.length
 	if (activeQuestion != undefined) {
@@ -37,18 +64,17 @@ function showQuestion(id) {
 	$(".question").find(".question_info").remove();
 	$(".question").find(".quest-sum").remove();
 	var question = questions[id];
-	questionuuid=question.uuid;
 	var htmlpj = '<a onclick="musicplay()" href="javascript:;" class=" weui-btn_default-zdy"><img class="jq-left-img"  src="../../static/jx/img/sy/dt.png"></a>'
 	$(".question_title").html(
 			"<strong>第 " + (id+1) + " 题 、</strong>" + question.questionTitle+ htmlpj);
 	$('#showjq').html(question.questionSkills);
-	$('.bzda-db').html(question.answerAnalysis)
+	$('.bzda-db').html('answerAnalysis')
 	var items = question.questionItems.split(";");
 	var item = "";
 	if(question.questionImg!='无'){
 		$(".question")
 		.append(
-				'<li class="quest-sum"><img class="question-img" alt="" src="../../static/jx/img/xckmy/'+question.questionImg+'"></li>')
+				'<li class="quest-sum"><img class="question-img" alt="" src="../../static/jx/img/xckmy/"+'+question.questionImg+'></li>')
 	}
 	for (var i = 0; i < items.length; i++) {
 		item = "<li class='question_info' onclick='clickTrim(this)' id='item"
@@ -80,6 +106,7 @@ function answerCard() {
 }
 /* 展现错误的答题卡 */
 function answerCardcw() {
+	debugger;
 	$('.list-unstyled-zdy').empty();
 	for (var i = 0; i < checkQues.length; i++) {
 		if (checkQues[i].zqda == 0) {
@@ -188,10 +215,104 @@ function saveQuestionState(clickId) {
 	showQuestion(clickId)
 }
 
+$(function() {
+	/* alert(QuestionJosn.length); */
+	/* 实现进度条信息加载的动画 */
+	var str = '';
+	/* 开启或者停止时间 */
+	$(".time-stop").click(function() {
+		timeState = false;
+		$(this).hide();
+		$(".time-start").show();
+	});
+	$(".time-start").click(function() {
+		timeState = true;
+		$(this).hide();
+		$(".time-stop").show();
+	});
 
-	
+	/* 收藏按钮的切换 */
+	$("#unHeart").click(function() {
+		$(this).hide();
+		$("#heart").show();
+	})
+	$("#heart").click(function() {
+		$(this).hide();
+		$("#unHeart").show();
+	})
 
+	/* 答题卡的切换 */
+	$("#openCard").click(function() {
+		$("#answerCardcw1").hide();
+		$("#answerCard").slideDown();
 
+	})
+
+	$("#openCardcw").click(function() {
+		$("#answerCard").hide();
+		answerCardcw();
+		$("#answerCardcw1").show();
+	})
+
+	$("#closeCard").click(function() {
+		$("#openCard").show();
+		$("#answerCard").slideUp();
+		$(this).hide();
+	})
+
+	// 提交试卷
+	$("#submitQuestions").click(
+			function() {
+				var sum = [];
+				if (checkQues.length < 1) {
+					return;
+					} else {
+					for (var i = 0; i < checkQues.length; i++) {
+						if (checkQues[i].zqda == 1) {
+							sum.push(1);
+						}
+					}
+				}
+				$('#pjsp').removeClass('markedred')
+				$('#pjsp').removeClass('markedaqua')
+				$('#pjsp').removeClass('markedgreen')
+			if(sum.length<80){
+				$('#mlssimg').html('<img class="tjimg" src="../../static/jx/img/sy/mlss.jpeg"></img>')
+				$('#pjsp').html('超级马路杀手');
+				$('#pjsp').addClass('markedred')
+			}else if(sum.length<100 && sum.length>80){
+				$('#mlssimg').html('<img class="tjimg" src="../../static/jx/img/sy/nl.png"></img>')
+				$('#pjsp').html('继续加油');
+				$('#pjsp').addClass('markedaqua')
+			}else{
+				$('#mlssimg').html('<img  class="tjimg" src="../../static/jx/img/sy/100.jpeg"></img>')
+				$('#pjsp').html('秋名山车神');
+				$('#pjsp').addClass('markedgreen')
+			}
+			$('#pjspdesc').html("已做答:" +checkQues.length + "道题,错了"+eval(checkQues.length-sum.length)+"道题,还有"
+					+ (questions.length - checkQues.length)+ "道题未完成");
+				
+			})
+	// 进入下一题
+	$("#nextQuestion").click(function() {
+		if ((activeQuestion + 1) != questions.length) {
+			showQuestion(activeQuestion + 1);
+			$('#jqhide').hide();
+		} else {
+			showQuestion(activeQuestion)
+		}
+
+	})
+
+	$("#previousQuestion").click(function() {
+		if ((activeQuestion - 1) >= 0) {
+			showQuestion(activeQuestion - 1);
+		} else {
+			showQuestion(activeQuestion)
+		}
+	})
+
+})
 function sleep(numberMillis) {
 	var now = new Date();
 	var exitTime = now.getTime() + numberMillis;
@@ -205,14 +326,14 @@ function sleep(numberMillis) {
 function showctlv() {
 	var sum = [];
 	if (checkQues.length < 1) {
-		$('.questionctl').text('0/0')
+		$('.questionctl').text('(0/0)')
 	} else {
 		for (var i = 0; i < checkQues.length; i++) {
 			if (checkQues[i].zqda == 0) {
 				sum.push(1);
 			}
 		}
-		$('.questionctl').text(sum.length + '/' + checkQues.length)
+		$('.questionctl').text('(' + sum.length + '/' + checkQues.length + ')')
 	}
 }
 function musicplay() {
@@ -232,101 +353,3 @@ function musicjqplay(){
 	audio.src = url;
 	audio.play();
 }
-//收藏本题
-function scthisquestion(pa) {
-	 $.ajax({
-         type: "post",
-         dataType: "html",
-         url: pathName+"/kt/scbt", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
-         data:{uuid:questionuuid,sclx:pa}
-         dataType: "json",
-         success: function (result) {
-        	
-         },
-         error: function(data) {
-        	 $.toast("网络错误,请稍后再试!", "cancel");
-          }  
-         });
-}
-$(function() {
-/* 收藏按钮的切换 */
-$("#unHeart").click(function() {
-	$(this).hide();
-	$("#heart").show();
-})
-$("#heart").click(function() {
-	$(this).hide();
-	$("#unHeart").show();
-})
-
-/* 答题卡的切换 */
-$("#openCard").click(function() {
-	$("#answerCardcw1").hide();
-	$("#answerCard").slideDown();
-
-})
-
-$("#openCardcw").click(function() {
-	$("#answerCard").hide();
-	answerCardcw();
-	$("#answerCardcw1").show();
-})
-
-$("#closeCard").click(function() {
-	$("#openCard").show();
-	$("#answerCard").slideUp();
-	$(this).hide();
-})
-
-// 提交试卷
-$("#submitQuestions").click(
-		function() {
-			var sum = [];
-			if (checkQues.length < 1) {
-				return;
-				} else {
-				for (var i = 0; i < checkQues.length; i++) {
-					if (checkQues[i].zqda == 1) {
-						sum.push(1);
-					}
-				}
-			}
-			$('#pjsp').removeClass('markedred')
-			$('#pjsp').removeClass('markedaqua')
-			$('#pjsp').removeClass('markedgreen')
-		if(sum.length<80){
-			$('#mlssimg').html('<img class="tjimg" src="../../static/jx/img/sy/mlss.jpeg"></img>')
-			$('#pjsp').html('超级马路杀手');
-			$('#pjsp').addClass('markedred')
-		}else if(sum.length<100 && sum.length>80){
-			$('#mlssimg').html('<img class="tjimg" src="../../static/jx/img/sy/nl.png"></img>')
-			$('#pjsp').html('继续加油');
-			$('#pjsp').addClass('markedaqua')
-		}else{
-			$('#mlssimg').html('<img  class="tjimg" src="../../static/jx/img/sy/100.jpeg"></img>')
-			$('#pjsp').html('秋名山车神');
-			$('#pjsp').addClass('markedgreen')
-		}
-		$('#pjspdesc').html("已做答:" +checkQues.length + "道题,错了"+eval(checkQues.length-sum.length)+"道题,还有"
-				+ (questions.length - checkQues.length)+ "道题未完成");
-			
-		})
-// 进入下一题
-$("#nextQuestion").click(function() {
-	if ((activeQuestion + 1) != questions.length) {
-		showQuestion(activeQuestion + 1);
-		$('#jqhide').hide();
-	} else {
-		showQuestion(activeQuestion)
-	}
-
-})
-
-$("#previousQuestion").click(function() {
-	if ((activeQuestion - 1) >= 0) {
-		showQuestion(activeQuestion - 1);
-	} else {
-		showQuestion(activeQuestion)
-	}
-})
-})

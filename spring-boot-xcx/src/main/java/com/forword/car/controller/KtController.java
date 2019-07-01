@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.forword.car.service.KtService;
 @Controller
@@ -17,10 +18,34 @@ public class KtController {
 	public Logger log = Logger.getLogger(KtController.class);
 	@Autowired
 	private KtService ktService;
-	
+	/**
+	 * @Title: getKmydata 
+	 * @Description:  题目展示
+	 * @param pa
+	 * @return
+	 * @return: List<Map<String,Object>>
+	 */
 	@RequestMapping(value = "getKmydata/{pa}", method = RequestMethod.GET)
+	@ResponseBody
 	public List<Map<String,Object>> getKmydata(@PathVariable String pa){
-		ktService.getKmydata(pa);
-		return null;
+		List<Map<String,Object>> listdate=null;
+		try {
+			listdate=ktService.getKmydata(pa);
+		} catch (Exception e) {
+			log.error("请求"+pa+"出现异常", e.fillInStackTrace());
+		}
+		return listdate;
+	}
+	
+	@RequestMapping(value = "scbt", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String,Object>> getKmydata(String sclx,String uuid){
+		List<Map<String,Object>> listdate=null;
+		try {
+			listdate=ktService.scbt(pa);
+		} catch (Exception e) {
+			log.error("收藏"+sclx+"出现异常", e.fillInStackTrace());
+		}
+		return listdate;
 	}
 }
