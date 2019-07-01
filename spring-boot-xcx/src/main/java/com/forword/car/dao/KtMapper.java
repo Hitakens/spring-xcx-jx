@@ -12,5 +12,10 @@ public interface KtMapper {
 	List<Map<String, Object>> getKmydata(@Param(value = "starNum")int starNum,
 			@Param(value = "endNum") int endNum);
 
+	String selectScdtByuuidandsclx(@Param(value = "sclx")String sclx,
+			@Param(value = "uuid") Integer uuid);
+
+	void insertScdt(String sclx, Integer uuid, String openid);
+
 
 }

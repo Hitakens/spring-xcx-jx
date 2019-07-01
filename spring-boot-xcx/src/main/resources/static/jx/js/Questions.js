@@ -7,6 +7,7 @@ var questioned = 0; //
 var checkQues = []; // 已做答的题的集合
 var questionuuid='';//当前题的uuid
 //获取数据
+
 function getKmydata(pa) {
 	 $.ajax({
          type: "get",
@@ -238,7 +239,7 @@ function scthisquestion(pa) {
          type: "post",
          dataType: "html",
          url: pathName+"/kt/scbt", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
-         data:{uuid:questionuuid,sclx:pa}
+         data:{uuid:questionuuid,sclx:pa},
          dataType: "json",
          success: function (result) {
         	

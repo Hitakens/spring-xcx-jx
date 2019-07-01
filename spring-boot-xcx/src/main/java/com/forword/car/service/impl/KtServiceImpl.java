@@ -24,4 +24,22 @@ public class KtServiceImpl implements KtService{
 		}
 		return listData;
 	}
+
+	@Override
+	public String scbt(String sclx, Integer uuid, String openid) {
+		String msg="";
+		try {
+			String suuid= ktMapper.selectScdtByuuidandsclx(sclx,uuid);
+			if(suuid!=null) {
+				msg="本题已收藏!";
+			}else {
+				ktMapper.insertScdt(sclx,uuid,openid);
+			}
+		} catch (Exception e) {
+			msg="网络延迟!";
+			e.getMessage();
+		}
+		
+		return null;
+	}
 }

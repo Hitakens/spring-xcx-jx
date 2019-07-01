@@ -3,6 +3,8 @@ package com.forword.car.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,13 +41,14 @@ public class KtController {
 	
 	@RequestMapping(value = "scbt", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Map<String,Object>> getKmydata(String sclx,String uuid){
-		List<Map<String,Object>> listdate=null;
+	public String getKmydata(String sclx,Integer uuid,HttpServletRequest re){
+		String rusel=null;
 		try {
-			listdate=ktService.scbt(pa);
+			String openid = (String) re.getSession().getAttribute("openid");
+			rusel=ktService.scbt(sclx,uuid,openid);
 		} catch (Exception e) {
 			log.error("收藏"+sclx+"出现异常", e.fillInStackTrace());
 		}
-		return listdate;
+		return rusel;
 	}
 }

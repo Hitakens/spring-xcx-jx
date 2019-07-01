@@ -6,4 +6,10 @@
 		t.uuid,t.questionTitle,t.questionItems,t.questionAnswer,t.questionSkills,t.answerAnalysis,t.questionImg
 		FROM xckmy t where t.uuid between #{starNum,jdbcType=INTEGER} and #{endNum,jdbcType=INTEGER};
 	</select>
+	<select id="selectScdtByuuidandsclx" parameterType="string">
+	select t.uuid from tk_sc t where t.tkuuid=#{uuid,jdbcType=INTEGER} and t.sclx=#{sclx,jdbcType=VARCHAR}
+	</select>
+	<insert id="insertScdt">
+	insert into tk_sc(openid,tkuuid,sclx) values(#{openid,jdbcType=VARCHAR},#{uuid,jdbcType=INTEGER},#{sclx,jdbcType=VARCHAR})
+	</insert>
 </mapper>

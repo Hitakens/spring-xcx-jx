@@ -40,12 +40,14 @@ public class MainController extends BasController {
 
 	@RequestMapping("/getOpenid")
 	@ResponseBody
-	public String getOpenid(HttpServletResponse response,String js_code,String avatarUrl,String nickName) {
+	public String getOpenid(HttpServletResponse response, HttpServletRequest request,
+			String js_code,String avatarUrl,String nickName) {
 		String result="";
 		try {
 			
 			String res = getOpenid(js_code);
 			String oppenid = StringUtil.StringTojson("openid",res);
+			request.getSession().setAttribute("openid", oppenid);
 			String pdopenid = pdopenid(oppenid);
 			String yhxx=null;
 			if(pdopenid!=null && !pdopenid.equals("")){
