@@ -70,20 +70,20 @@ top: -8px;
   
 
     <div class="weui-grids">
-      <a href="${pageContext.request.contextPath}/main/xckmy/jqlx" class="weui-grid js_grid">
+      <a href="${pageContext.request.contextPath}/main/xckmy/bzt" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img  src="${pageContext.request.contextPath}/static/jx/img/lx.png" alt="">
         </div>
         <p class="weui-grid__label">
-          技巧练习
+          必做题
         </p>
       </a>
-      <a href="${pageContext.request.contextPath}/main/xckmy/fllx" class="weui-grid js_grid">
+      <a href="${pageContext.request.contextPath}/main/xckmy/xzt" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img src="${pageContext.request.contextPath}/static/jx/img/lx1.png" alt="">
         </div>
         <p class="weui-grid__label">
-          分类练习
+          选做题
         </p>
       </a>
       <a href="" class="weui-grid js_grid">
@@ -104,10 +104,10 @@ top: -8px;
       </a>
       <a href="" class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="${pageContext.request.contextPath}/static/jx/img/tj.png" alt="">
+          <img src="${pageContext.request.contextPath}/static/jx/img/wdsc.png" alt="">
         </div>
         <p class="weui-grid__label">
-          答题统计
+          我的收藏
         </p>
       </a>
       <a href="" class="weui-grid js_grid">
@@ -131,7 +131,7 @@ top: -8px;
           <img  src="${pageContext.request.contextPath}/static/jx/img/lx.png" alt="">
         </div>
         <p class="weui-grid__label">
-          技巧练习
+          必做题
         </p>
       </a>
       <a href="${pageContext.request.contextPath}/main/xckms/fllx" class="weui-grid js_grid">
@@ -139,7 +139,7 @@ top: -8px;
           <img src="${pageContext.request.contextPath}/static/jx/img/lx1.png" alt="">
         </div>
         <p class="weui-grid__label">
-          分类练习
+          选做题
         </p>
       </a>
       <a href="" class="weui-grid js_grid">
@@ -160,10 +160,10 @@ top: -8px;
       </a>
       <a href="" class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="${pageContext.request.contextPath}/static/jx/img/tj.png" alt="">
+          <img src="${pageContext.request.contextPath}/static/jx/img/wdsc.png" alt="">
         </div>
         <p class="weui-grid__label">
-          答题统计
+          我的收藏
         </p>
       </a>
   
@@ -213,10 +213,10 @@ top: -8px;
       </a>
       <a href="" class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="${pageContext.request.contextPath}/static/jx/img/tj.png" alt="">
+          <img src="${pageContext.request.contextPath}/static/jx/img/wdsc.png" alt="">
         </div>
         <p class="weui-grid__label">
-          答题统计
+          我的收藏
         </p>
       </a>
       <a href="" class="weui-grid js_grid">
@@ -269,10 +269,10 @@ top: -8px;
       </a>
       <a href="" class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="${pageContext.request.contextPath}/static/jx/img/tj.png" alt="">
+          <img src="${pageContext.request.contextPath}/static/jx/img/wdsc.png" alt="">
         </div>
         <p class="weui-grid__label">
-          答题统计
+          我的收藏
         </p>
       </a>
   
@@ -322,10 +322,10 @@ top: -8px;
       </a>
       <a href="" class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="${pageContext.request.contextPath}/static/jx/img/tj.png" alt="">
+          <img src="${pageContext.request.contextPath}/static/jx/img/wdsc.png" alt="">
         </div>
         <p class="weui-grid__label">
-          答题统计
+          我的收藏
         </p>
       </a>
       <a href="" class="weui-grid js_grid">
@@ -378,10 +378,10 @@ top: -8px;
       </a>
       <a href="" class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="${pageContext.request.contextPath}/static/jx/img/tj.png" alt="">
+          <img src="${pageContext.request.contextPath}/static/jx/img/wdsc.png" alt="">
         </div>
         <p class="weui-grid__label">
-          答题统计
+        我的收藏
         </p>
       </a>
   

@@ -8,17 +8,17 @@ var checkQues = []; // 已做答的题的集合
 var questionuuid='';//当前题的uuid
 //获取数据
 
-function getKmydata(pa) {
+function getKmydata() {
+	 $.showLoading();
 	 $.ajax({
          type: "get",
          dataType: "html",
-         url: pathName+"/kt/getKmydata/"+pa, //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+         url: pathName+"/kt/getKmydata/"+cs+"/"+tmlx, //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
          success: function (result) {
         	 questions=eval(result);
         	    showQuestion(0);
         		answerCard();
         		showctlv();
-        		showQuestion(0);
          },
          error: function(data) {
         	 $.toast("网络错误,请稍后再试!", "cancel");
@@ -39,7 +39,7 @@ function showQuestion(id) {
 	$(".question").find(".quest-sum").remove();
 	var question = questions[id];
 	questionuuid=question.uuid;
-	var htmlpj = '<a onclick="musicplay()" href="javascript:;" class=" weui-btn_default-zdy"><img class="jq-left-img"  src="../../static/jx/img/sy/dt.png"></a>'
+	var htmlpj = '<a onclick="musicplay()" href="javascript:;" class=" weui-btn_default-zdy"><img class="jq-left-img"  src="'+pathName+'/static/jx/img/sy/dt.png"></a>'
 	$(".question_title").html(
 			"<strong>第 " + (id+1) + " 题 、</strong>" + question.questionTitle+ htmlpj);
 	$('#showjq').html(question.questionSkills);
@@ -49,7 +49,7 @@ function showQuestion(id) {
 	if(question.questionImg!='无'){
 		$(".question")
 		.append(
-				'<li class="quest-sum"><img class="question-img" alt="" src="../../static/jx/img/xckmy/'+question.questionImg+'"></li>')
+				'<li class="quest-sum"><img class="question-img" alt="" src="'+pathName+'/static/jx/img/xckmy/'+question.questionImg+'"></li>')
 	}
 	for (var i = 0; i < items.length; i++) {
 		item = "<li class='question_info' onclick='clickTrim(this)' id='item"
@@ -67,7 +67,8 @@ function showQuestion(id) {
 					"clickQue");
 		}
 	}
-
+	 $.hideLoading();
+	 iftmsc();
 }
 
 /* 答题卡 */
@@ -93,19 +94,17 @@ function answerCardcw() {
 	}
 }
 /* 选中考题 */
-var Question;
 function clickTrim(source) {
 	var id = source.id;
 	$("#" + id).find("input").prop("checked", "checked");
 	$("#ques" + activeQuestion).removeClass("question_id").addClass("clickQue");
 	var ques = 0;
-	var zqid;
 	// 正确答案
 	var zqda = questions[activeQuestion].questionAnswer;
 	if (zqda == $("#" + id).find("input[name=item]:checked").val()) {
 		$("#" + id).addClass("clickTrim");
 		for (var i = 0; i < checkQues.length; i++) {
-			if (checkQues[i].id == activeQuestion && checkQues[i].item != id) {
+			if (checkQues[i].id == activeQuestion) {
 				ques = checkQues[i].id;
 				checkQues[i].item = id;// 获取当前考题的选项ID
 				checkQues[i].answer = $("#" + id).find(
@@ -114,8 +113,7 @@ function clickTrim(source) {
 			}
 		}
 
-		if (checkQues.length == 0 || Question != activeQuestion
-				&& activeQuestion != ques) {
+		if (checkQues.length == 0 || activeQuestion != ques) {
 			var check = {};
 			check.id = activeQuestion;// 获取当前考题的编号
 			check.item = id;// 获取当前考题的选项ID
@@ -131,7 +129,7 @@ function clickTrim(source) {
 	} else {
 		$("#" + id).addClass("clickTrimcw");
 		for (var i = 0; i < checkQues.length; i++) {
-			if (checkQues[i].id == activeQuestion && checkQues[i].item != id) {
+			if (checkQues[i].id == activeQuestion) {
 				ques = checkQues[i].id;
 				checkQues[i].item = id;// 获取当前考题的选项ID
 				checkQues[i].answer = $("#" + id).find(
@@ -140,8 +138,7 @@ function clickTrim(source) {
 			}
 		}
 
-		if (checkQues.length == 0 || Question != activeQuestion
-				&& activeQuestion != ques) {
+		if (checkQues.length == 0 || activeQuestion != ques) {
 			var check = {};
 			check.id = activeQuestion;// 获取当前考题的编号
 			check.item = id;// 获取当前考题的选项ID
@@ -157,20 +154,19 @@ function clickTrim(source) {
 				$("#" + otherId).addClass("clickTrim");
 			}
 		})
+		cwthisquestion();
 		$('#jqhide').show();
 	}
-
-	$(".question_info").each(function() {
+	/*$(".question_info").each(function() {
 		var otherId = $(this).attr("id");
-		if (otherId != id && otherId != zqid) {
+		if (otherId != id) {
 			$("#" + otherId).find("input").prop("checked", false);
 			$("#" + otherId).removeClass("clickTrim");
 			$("#" + otherId).removeClass("clickTrimcw");
 		}
-	})
+	})*/
 	Question = activeQuestion;
 	showctlv();
-
 }
 
 /* 设置进度条 */
@@ -233,32 +229,61 @@ function musicjqplay(){
 	audio.src = url;
 	audio.play();
 }
-//收藏本题
-function scthisquestion(pa) {
+//判断题目是否已经收藏
+function iftmsc() {
 	 $.ajax({
-         type: "post",
-         dataType: "html",
-         url: pathName+"/kt/scbt", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
-         data:{uuid:questionuuid,sclx:pa},
+         type: "get",
+         url: pathName+"/kt/iftmsc", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+         data:{uuid:questionuuid,cwlx:pa},
          dataType: "json",
          success: function (result) {
-        	
+        	if(result=='1'){
+        		$("#heart").show();
+        		$("#unHeart").hide();
+        	}else{
+        		$("#unHeart").show();
+        		$("#heart").hide();
+        	}
          },
          error: function(data) {
         	 $.toast("网络错误,请稍后再试!", "cancel");
           }  
          });
 }
+//收藏本题
+function scthisquestion() {
+	 $.ajax({
+         type: "post",
+         url: pathName+"/kt/scbt", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+         data:{uuid:questionuuid,sclx:pa},
+         dataType: "text",
+         success: function (result) {
+        	 $.toast(result);
+         },
+         error: function(data) {
+        	 $.toast("网络错误,请稍后再试!", "cancel");
+          }  
+         });
+}
+
+//错误题目入库
+function cwthisquestion() {
+	var res='';
+	 $.ajax({
+         type: "post",
+         url: pathName+"/kt/btcw", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+         data:{uuid:questionuuid,cwlx:pa},
+         dataType: "json",
+         success: function (result) {
+        	 
+         },
+         error: function(data) {
+        	
+          }  
+         });
+}
+
 $(function() {
-/* 收藏按钮的切换 */
-$("#unHeart").click(function() {
-	$(this).hide();
-	$("#heart").show();
-})
-$("#heart").click(function() {
-	$(this).hide();
-	$("#unHeart").show();
-})
 
 /* 答题卡的切换 */
 $("#openCard").click(function() {
@@ -296,15 +321,19 @@ $("#submitQuestions").click(
 			$('#pjsp').removeClass('markedaqua')
 			$('#pjsp').removeClass('markedgreen')
 		if(sum.length<80){
-			$('#mlssimg').html('<img class="tjimg" src="../../static/jx/img/sy/mlss.jpeg"></img>')
+			$('#mlssimg').html('<img class="tjimg" src="'+pathName+'/static/jx/img/sy/mlss.jpeg"></img>')
 			$('#pjsp').html('超级马路杀手');
 			$('#pjsp').addClass('markedred')
-		}else if(sum.length<100 && sum.length>80){
-			$('#mlssimg').html('<img class="tjimg" src="../../static/jx/img/sy/nl.png"></img>')
+		}else if(sum.length<90 && sum.length>80){
+			$('#mlssimg').html('<img class="tjimg" src="'+pathName+'/static/jx/img/sy/nl.png"></img>')
 			$('#pjsp').html('继续加油');
 			$('#pjsp').addClass('markedaqua')
-		}else{
-			$('#mlssimg').html('<img  class="tjimg" src="../../static/jx/img/sy/100.jpeg"></img>')
+		}else if(sum.length<100 && sum.length>90){
+			$('#mlssimg').html('<img  class="tjimg" src="'+pathName+'/static/jx/img/sy/kstg.jpeg"></img>')
+			$('#pjsp').html('通关达人');
+			$('#pjsp').addClass('markedgreen')
+		}else if(sum.length>=100){
+			$('#mlssimg').html('<img  class="tjimg" src="'+pathName+'/static/jx/img/sy/100.jpeg"></img>')
 			$('#pjsp').html('秋名山车神');
 			$('#pjsp').addClass('markedgreen')
 		}

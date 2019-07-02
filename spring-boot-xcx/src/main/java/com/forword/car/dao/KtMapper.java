@@ -6,16 +6,23 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.forword.car.entity.ParaEntity;
+
 @Repository
 public interface KtMapper {
 
-	List<Map<String, Object>> getKmydata(@Param(value = "starNum")int starNum,
-			@Param(value = "endNum") int endNum);
 
-	String selectScdtByuuidandsclx(@Param(value = "sclx")String sclx,
-			@Param(value = "uuid") Integer uuid);
+	String selectScdtByuuidandsclx(ParaEntity pr);
 
-	void insertScdt(String sclx, Integer uuid, String openid);
+	void insertScdt(ParaEntity pr);
+
+	List<Map<String, Object>> getKmydata(ParaEntity pr);
+
+	String selectbtcwByuuidandsclx(ParaEntity pr);
+
+	void inserttkcw(ParaEntity pr);
+
+	void deleteScdtByuuidandsclx(ParaEntity pr);
 
 
 }

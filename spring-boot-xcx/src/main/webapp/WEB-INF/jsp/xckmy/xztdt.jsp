@@ -31,9 +31,23 @@
 	src="${pageContext.request.contextPath}/static/jx/js/Questions.js"></script>
 <script type="text/javascript">
 var pathName='${pageContext.request.contextPath}';
+var cs='${ymcs}';//页面参数
 var questions = [];
+var pa='A';//(收藏类型,本题错误)A为小车科目一，A1为小车科目四，依次类推 
+var tmlx='A'//题型类型,B代表必做题，A代表选做题
 $(function() {
-	getKmydata(1);
+	getKmydata();
+	/* 收藏按钮的切换 */
+	$("#unHeart").click(function() {
+		$(this).hide();
+		scthisquestion()
+		$("#heart").show();
+	})
+	$("#heart").click(function() {
+		$(this).hide();
+		scthisquestion()
+		$("#unHeart").show();
+	})
 })
 </script>
 <style type="text/css">
@@ -210,7 +224,5 @@ $(function() {
     </div>
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
-
-
 </body>
 </html>

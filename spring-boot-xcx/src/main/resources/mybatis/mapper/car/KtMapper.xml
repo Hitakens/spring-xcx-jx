@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.forword.car.dao.KtMapper">
-	<select id="getKmydata" parameterType="int" resultType="map">
+	<select id="getKmydata" parameterType="com.forword.car.entity.ParaEntity" resultType="map">
 		SELECT 
 		t.uuid,t.questionTitle,t.questionItems,t.questionAnswer,t.questionSkills,t.answerAnalysis,t.questionImg
-		FROM xckmy t where t.uuid between #{starNum,jdbcType=INTEGER} and #{endNum,jdbcType=INTEGER};
+		FROM xckmy t where  t.tmlx=#{str1,jdbcType=VARCHAR}  
+		order by t.uuid limit #{int1,jdbcType=INTEGER},#{int2,jdbcType=INTEGER} 
 	</select>
-	<select id="selectScdtByuuidandsclx" parameterType="string">
-	select t.uuid from tk_sc t where t.tkuuid=#{uuid,jdbcType=INTEGER} and t.sclx=#{sclx,jdbcType=VARCHAR}
+	<select id="selectScdtByuuidandsclx" parameterType="com.forword.car.entity.ParaEntity" resultType="string">
+	select t.uuid from tk_sc t where t.tkuuid=#{int1,jdbcType=INTEGER} 
+	and t.sclx=#{str2,jdbcType=VARCHAR}
+	and t.openid=#{str1,jdbcType=VARCHAR}
 	</select>
-	<insert id="insertScdt">
-	insert into tk_sc(openid,tkuuid,sclx) values(#{openid,jdbcType=VARCHAR},#{uuid,jdbcType=INTEGER},#{sclx,jdbcType=VARCHAR})
+	<insert id="insertScdt" parameterType="com.forword.car.entity.ParaEntity">
+	insert into tk_sc(openid,tkuuid,sclx) 
+	values(#{str1,jdbcType=VARCHAR},#{int1,jdbcType=INTEGER},#{str2,jdbcType=VARCHAR})
 	</insert>
+	<select id="selectbtcwByuuidandsclx" resultType="string" parameterType="com.forword.car.entity.ParaEntity">
+		select t.uuid from tk_cw t where t.tkuuid=#{int1,jdbcType=INTEGER} and 
+		t.cwlx=#{str2,jdbcType=VARCHAR}
+		and t.openid=#{str1,jdbcType=VARCHAR}
+	</select>
+	<insert id="inserttkcw" parameterType="com.forword.car.entity.ParaEntity">
+	insert into tk_cw(openid,tkuuid,cwlx) 
+	values(#{str1,jdbcType=VARCHAR},#{int1,jdbcType=INTEGER},#{str2,jdbcType=VARCHAR})
+	</insert>
+	<delete id="deleteScdtByuuidandsclx" parameterType="com.forword.car.entity.ParaEntity">
+		delete from tk_sc t where t.tkuuid=#{int1,jdbcType=INTEGER} 
+	and t.sclx=#{str2,jdbcType=VARCHAR}
+	and t.openid=#{str1,jdbcType=VARCHAR}
+	</delete>
 </mapper>
