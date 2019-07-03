@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.forword.car.entity.ParaEntity;
+import com.forword.car.service.KtService;
 import com.forword.car.service.MainService;
 import com.forword.common.StringUtil;
 import com.forword.main.BasController;
@@ -29,35 +33,57 @@ public class MainController extends BasController {
 	public Logger log = Logger.getLogger(MainController.class);
 	@Autowired
 	private MainService carService;
-
+	@Autowired
+	private KtService ktService;
 	@RequestMapping(value = "/{id}/{id1}", method = RequestMethod.GET)
 	public String yrsSerch(Model model, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String id, @PathVariable String id1) {
+		request.getSession().setAttribute("openid", "oveQN5Ex4tR2carpJaywzuMc3ymk");
 		// this.writeJson(carService.selectmy_user(id), request, response);
+		Map<String, Object> ctsc = ktService.ctsc("xc", "oveQN5Ex4tR2carpJaywzuMc3ymk");
+		request.setAttribute("maps", ctsc);
 		return id + "/" + id1;
 
 	}
+	@RequestMapping(value = "joinpage", method = RequestMethod.GET)
+	public String joinpage(Model model, HttpServletRequest request, HttpServletResponse response,
+			 String sid) {
+		Map<String,Object> ma=ktService.selectOpenidBysessionid(sid);
+		if(ma.isEmpty()) {
+			return "all/bdhyk";
+		}
+		request.getSession().setAttribute("openid", ma.get("openid"));
+		// this.writeJson(carService.selectmy_user(id), request, response);
+		Map<String, Object> ctsc = ktService.ctsc("xc", (String)ma.get("openid"));
+		request.setAttribute("maps", ctsc);
+		request.setAttribute("wxname", ma.get("wxname"));
+		request.setAttribute("avatarurl", ma.get("avatarurl"));
+		return "main/index";
 
+	}
 	@RequestMapping("/getOpenid")
 	@ResponseBody
-	public String getOpenid(HttpServletResponse response, HttpServletRequest request,
+	public Map<String,Object> getOpenid(HttpServletResponse response, HttpServletRequest request,
 			String js_code,String avatarUrl,String nickName) {
-		String result="";
+		Map<String,Object> result=null;
 		try {
 			
 			String res = getOpenid(js_code);
 			String oppenid = StringUtil.StringTojson("openid",res);
-			request.getSession().setAttribute("openid", oppenid);
 			String pdopenid = pdopenid(oppenid);
 			String yhxx=null;
 			if(pdopenid!=null && !pdopenid.equals("")){
 				yhxx= carService.updateYhxx(oppenid,avatarUrl,nickName,StringUtil.StringTojson("session_key",res));
-				result=yhxx;
+				result=new HashMap<>();
+				result.put("code", "1");
+				result.put("stuid", yhxx);
 			}else{
-				result="0";
+				yhxx=carService.insertYhxxyk(oppenid,avatarUrl,nickName,StringUtil.StringTojson("session_key",res));
+				result=new HashMap<>();
+				result.put("code", "0");
+				result.put("stuid", yhxx);
 			}
 		} catch (Exception e) {
-			result="0";
 			log.error("请求小程序openid发生错误",e.fillInStackTrace());
 		}
 			
@@ -75,12 +101,25 @@ public class MainController extends BasController {
 		return carService.getopenidisnull(openid);
 	}
 	//getcz.html
-@RequestMapping("/getcz.html")	
-public String getcz(String js_code,String avatarUrl,String nickName,HttpServletRequest request) {
-	
+@RequestMapping(value = "/getcz.html", method = RequestMethod.GET)
+public String getcz(String stuid,String imgurl,HttpServletRequest request) {
+	request.setAttribute("stuid", stuid);
+	System.out.println(stuid);
+	request.setAttribute("imgurl", imgurl);
 	return "all/bdhyk";
 	}
 
+@RequestMapping(value = "/insertyh", method = RequestMethod.GET)	
+@ResponseBody
+public String insertkm(ParaEntity pa) {
+	String re=null;
+	 try {
+		 re= carService.insertkm(pa);
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
+	 return re;
+	}
 public String getOpenid(String js_code){
 	String result = "";
 	String urlhttp = "https://api.weixin.qq.com/sns/jscode2session?secret=0c7c9c9939a6451ff28e85c3d55738ce"

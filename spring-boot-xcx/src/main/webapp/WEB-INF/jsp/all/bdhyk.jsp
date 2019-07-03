@@ -20,6 +20,7 @@
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript"> 
+var pathName = '${pageContext.request.contextPath}';
 </script>
 <style type="text/css">
 body {
@@ -70,15 +71,13 @@ input {
 
 
 <div class="top">
-    <img class="head" src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJe2v5tzdicP1qDprlbJ3aMdoG47aEE86n7ib8tMlsJVQq0CibZnSeNACIVJdsvgGDXLPHqNBiaslTRLg/132">
-    <p class="">id:273716</p>
+    <img class="head" src="${imgurl}">
     <p class="nickname"></p>
 </div>
 
 <form>
 	
     <div class="weui-cells weui-cells_form" id="bindcard-view">
-    	<input id="stuid" type="hidden" name="stuid" value="273716">
         <div class="weui-cell">
             <div class="weui-cell__hd">
                 <label class="weui-label" style="width:60px">
@@ -86,19 +85,11 @@ input {
                 </label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text" name="number" pattern="[0-14]*" placeholder="请输入卡密" onkeyup="this.value=this.value.replace(/[^0-9]/g,&#39;&#39;)" onafterpaste="this.value=this.value.replace(/[^0-9]/g,&#39;&#39;)">
+                <input class="weui-input" type="text" name="str2" pattern="[0-14]*" placeholder="请输入卡密" onkeyup="this.value=this.value.replace(/[^0-9]/g,&#39;&#39;)" onafterpaste="this.value=this.value.replace(/[^0-9]/g,&#39;&#39;)">
+                <input type="hidden" name="str1" value="${stuid}"/>
             </div>
         </div>
-        <div class="weui-cell" style="display: none;">
-            <div class="weui-cell__hd">
-                <label class="weui-label" style="width:60px">
-                    <img src="${pageContext.request.contextPath}/static/jx/img/gly/pass.svg">
-                </label>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" type="number" name="password" pattern="[0-6]*" placeholder="请输入卡密">
-            </div>
-        </div>
+      
     </div>
     <a href="javascript:;" class="weui-btn weui-btn_dt" style="margin-top: 20px;background-color: #62B900;" id="btnBindCard">立即绑定</a>
 </form>
@@ -124,26 +115,23 @@ function submitBindCard() {
         data_opt[name] = this.value;
     });
     
-    if (data_opt.number == '') {
+    if (data_opt.str2 == '') {
         $.toptip('请输入卡密', 'error');
         return ;
     } 
     
     $.showLoading();
-    ajax().post('/pub/api?op=card.active', data_opt, function (res) {
+    $.get(pathName+'/main/insertyh', data_opt, function (res) {
         $.hideLoading();
-        if (res.status == 201) {
+        if (res == "200") {
             $.toast("操作成功", 960);
             setTimeout(function() {
-                window.location.href = '/student/main.html?stuid='+GetQueryString("stuid");
+                window.location.href = pathName+'/main/joinpage?sid='+$(" input[ name='str1' ] ").val();
             }, 800);
-        }else if (res.status == 202) {
-            $.toast("操作成功", 960);
-            setTimeout(function() {
-                window.location.href = '/student/test-main.jsp';
-            }, 800);
+        }else if (res == "201") {
+            $.toast("卡密无效", "cancel");
         } else {
-            $.toptip(res.data.error, 'error');
+            $.toptip("网络错误", 'error');
         }
     });
 }

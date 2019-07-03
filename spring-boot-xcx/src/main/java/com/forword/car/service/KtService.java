@@ -13,4 +13,8 @@ public interface KtService {
 
 	String iftmsc(String cwlx, Integer uuid, String openid);
 
+	Map<String, Object> ctsc(String clx, String openid);
+
+	Map<String,Object> selectOpenidBysessionid(String sid);
+
 }

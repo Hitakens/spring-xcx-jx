@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.forword.car.service.KtService;
+import com.forword.main.BasController;
 @Controller
 @RequestMapping("kt")
-public class KtController {
+public class KtController extends BasController{
 	public Logger log = Logger.getLogger(KtController.class);
 	@Autowired
 	private KtService ktService;
@@ -71,7 +73,6 @@ public class KtController {
 	@ResponseBody
 	public List<Map<String,Object>> getKmydata(@PathVariable String pa,
 			@PathVariable String tmlx,HttpServletRequest request){
-		request.getSession().setAttribute("openid", "oveQN5Ex4tR2carpJaywzuMc3ymk");
 		List<Map<String,Object>> listdate=null;
 		try {
 			listdate=ktService.getKmydata(pa,tmlx);
@@ -142,5 +143,22 @@ public class KtController {
 			log.error("收藏"+cwlx+"出现异常", e.fillInStackTrace());
 		}
 		return rusel;
+	}
+	/**
+	 * @Description: 算出某个科目下的收藏和错误的题目数
+	 * @param cwlx
+	 * @param re
+	 * @return
+	 */
+	@RequestMapping(value = "ctsc/{clx}", method = RequestMethod.GET)
+	public void ctsc(@PathVariable String clx,HttpServletRequest re,HttpServletResponse rs){
+		String openid = (String) re.getSession().getAttribute("openid");
+		Map<String,Object> rusel=null;
+		try {
+			rusel=ktService.ctsc(clx,openid);
+		} catch (Exception e) {
+			log.error("算出某个科目下的收藏和错误的题目数出现异常", e.fillInStackTrace());
+		}
+		this.writeJson(rusel, re, rs);
 	}
 }

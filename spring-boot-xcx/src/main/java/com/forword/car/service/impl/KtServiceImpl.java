@@ -1,5 +1,6 @@
 package com.forword.car.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -140,5 +141,32 @@ public class KtServiceImpl implements KtService{
 			str="0";
 		}
 		return str;
+	}
+
+	@Override
+	public Map<String, Object> ctsc(String clx, String openid) {
+		 Map<String, Object> ctsc=null;
+		 try {
+			if(clx=="xc" || "xc".equals(clx)) {
+				ctsc=new HashMap<>();
+				Map<String, Object> KmCcount = ktMapper.selectKmyAndKmsScCount(openid);
+				ctsc.put("kmysc",KmCcount.get("kmysc"));
+				ctsc.put("kmssc",KmCcount.get("kmssc"));
+				Map<String, Object> CtCount = ktMapper.selectKmyAndKmsCtCount(openid);
+				ctsc.put("kmyct",CtCount.get("kmyct"));
+				ctsc.put("kmsct",CtCount.get("kmsct"));
+				KmCcount=null;
+				CtCount=null;
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return ctsc;
+	}
+
+	@Override
+	public Map<String,Object> selectOpenidBysessionid(String sid) {
+		// TODO Auto-generated method stub
+		return ktMapper.selectOpenidBysessionid(sid);
 	}
 }

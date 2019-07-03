@@ -24,5 +24,11 @@ public interface KtMapper {
 
 	void deleteScdtByuuidandsclx(ParaEntity pr);
 
+	Map<String, Object> selectKmyAndKmsScCount(String openid);
+
+	Map<String, Object> selectKmyAndKmsCtCount(String openid);
+
+	Map<String,Object> selectOpenidBysessionid(String sid);
+
 
 }

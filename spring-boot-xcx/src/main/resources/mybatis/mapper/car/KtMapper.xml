@@ -30,4 +30,34 @@
 	and t.sclx=#{str2,jdbcType=VARCHAR}
 	and t.openid=#{str1,jdbcType=VARCHAR}
 	</delete>
+	<select id='selectKmyAndKmsScCount' parameterType="string" resultType="map">
+	select sum(CASE 
+	WHEN t.sclx='A' THEN
+		1
+	ELSE
+		0
+END 
+) kmysc,sum(CASE 
+	WHEN t.sclx='A1' THEN
+		1
+	ELSE
+		0
+END 
+) kmssc from tk_sc t where t.openid=#{openid,jdbcType=VARCHAR}
+	</select>
+		<select id='selectKmyAndKmsCtCount' parameterType="string" resultType="map">
+		select sum(CASE 
+	WHEN t.cwlx='A' THEN
+		1
+	ELSE
+		0
+END 
+) kmyct,sum(CASE 
+	WHEN t.cwlx='A1' THEN
+		1
+	ELSE
+		0
+END 
+) kmsct from tk_cw t where t.openid=#{openid,jdbcType=VARCHAR}
+		</select>
 </mapper>
