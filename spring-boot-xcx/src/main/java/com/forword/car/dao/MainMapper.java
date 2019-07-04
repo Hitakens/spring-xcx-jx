@@ -1,5 +1,7 @@
 package com.forword.car.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +24,7 @@ public interface MainMapper {
 	String selectOpen_mybyKey(String str5);
 
 
-	int insertYhxx(String pa);
+	int insertYhxx(ParaEntity p);
 
 
 	void deleteOpen_mybyKey(String minKey);
@@ -38,5 +40,8 @@ public interface MainMapper {
 
 
 	String getopenidyk(String openid);
+
+
+	Map<String,Object> glyLogin(String str1);
 	
 }

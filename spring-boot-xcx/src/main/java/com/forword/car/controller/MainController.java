@@ -35,25 +35,51 @@ public class MainController extends BasController {
 	private MainService carService;
 	@Autowired
 	private KtService ktService;
+	/**
+	 * 
+	 * @Title: yrsSerch 
+	 * @Description: 测试接口，上线以后注释掉
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @param id1
+	 * @return
+	 * @return: String
+	 */
 	@RequestMapping(value = "/{id}/{id1}", method = RequestMethod.GET)
 	public String yrsSerch(Model model, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String id, @PathVariable String id1) {
 		request.getSession().setAttribute("openid", "oveQN5Ex4tR2carpJaywzuMc3ymk");
 		// this.writeJson(carService.selectmy_user(id), request, response);
-		Map<String, Object> ctsc = ktService.ctsc("xc", "oveQN5Ex4tR2carpJaywzuMc3ymk");
-		request.setAttribute("maps", ctsc);
+		/*Map<String, Object> ctsc = ktService.ctsc("xc", "oveQN5Ex4tR2carpJaywzuMc3ymk");
+		request.setAttribute("maps", ctsc);*/
 		return id + "/" + id1;
 
 	}
+	/**
+	 * 
+	 * @Title: joinpage 
+	 * @Description: 进入页面的第一个控制
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param sid
+	 * @return
+	 * @return: String
+	 */
 	@RequestMapping(value = "joinpage", method = RequestMethod.GET)
 	public String joinpage(Model model, HttpServletRequest request, HttpServletResponse response,
 			 String sid) {
+		//通过sessionid查询openid
 		Map<String,Object> ma=ktService.selectOpenidBysessionid(sid);
 		if(ma.isEmpty()) {
 			return "all/bdhyk";
 		}
+		
 		request.getSession().setAttribute("openid", ma.get("openid"));
 		// this.writeJson(carService.selectmy_user(id), request, response);
+		//初始化页面的收藏题目数和错误的题目数
 		Map<String, Object> ctsc = ktService.ctsc("xc", (String)ma.get("openid"));
 		request.setAttribute("maps", ctsc);
 		request.setAttribute("wxname", ma.get("wxname"));
@@ -61,6 +87,17 @@ public class MainController extends BasController {
 		return "main/index";
 
 	}
+	/**
+	 * @Title: getOpenid 
+	 * @Description: 从微信端发出来的请求,把openid存入数据库
+	 * @param response
+	 * @param request
+	 * @param js_code
+	 * @param avatarUrl
+	 * @param nickName
+	 * @return
+	 * @return: Map<String,Object>
+	 */
 	@RequestMapping("/getOpenid")
 	@ResponseBody
 	public Map<String,Object> getOpenid(HttpServletResponse response, HttpServletRequest request,
@@ -101,6 +138,15 @@ public class MainController extends BasController {
 		return carService.getopenidisnull(openid);
 	}
 	//getcz.html
+/**
+ * @Title: getcz 
+ * @Description: 没有注册的用户，跳转到注册页面
+ * @param stuid
+ * @param imgurl
+ * @param request
+ * @return
+ * @return: String
+ */
 @RequestMapping(value = "/getcz.html", method = RequestMethod.GET)
 public String getcz(String stuid,String imgurl,HttpServletRequest request) {
 	request.setAttribute("stuid", stuid);
@@ -108,7 +154,13 @@ public String getcz(String stuid,String imgurl,HttpServletRequest request) {
 	request.setAttribute("imgurl", imgurl);
 	return "all/bdhyk";
 	}
-
+/**
+ * @Title: insertkm 
+ * @Description: 用户填写卡密成功后，把用户的信息存入数据库
+ * @param pa
+ * @return
+ * @return: String
+ */
 @RequestMapping(value = "/insertyh", method = RequestMethod.GET)	
 @ResponseBody
 public String insertkm(ParaEntity pa) {
@@ -120,6 +172,55 @@ public String insertkm(ParaEntity pa) {
 	}
 	 return re;
 	}
+/**
+ * @Title: glyLogin 
+ * @Description: 管理员登陆
+ * @param pa
+ * @return
+ * @return: String
+ */
+@RequestMapping(value = "/admin.html", method = RequestMethod.POST)	
+@ResponseBody
+public String glyLogin(ParaEntity pa) {
+	String re=null;
+	 try {
+		 re= carService.glyLogin(pa);
+	} catch (Exception e) {
+		log.error("管理员登陆失败",e.fillInStackTrace());
+	}
+	 return re;
+	}
+/**
+ * @Title: kmsc 
+ * @Description: 随机生成卡密
+ * @param n
+ * @param mo
+ * @return
+ * @return: String
+ */
+@RequestMapping(value = "admin/kmsc", method = RequestMethod.GET)	
+@ResponseBody
+public String kmsc(int n,Model mo) {
+	String re=null;
+	 try {
+		 re= carService.randomKm(n);
+		 if(re!=null){
+			 mo.addAttribute("cardmi", re);
+		 }
+	} catch (Exception e) {
+		log.error("管理员登陆失败",e.fillInStackTrace());
+	}
+	 return "admin/kmsc";
+	}
+
+
+/**
+ * @Title: getOpenid 
+ * @Description: 通过js_code获取用户微信端的openid
+ * @param js_code
+ * @return
+ * @return: String
+ */
 public String getOpenid(String js_code){
 	String result = "";
 	String urlhttp = "https://api.weixin.qq.com/sns/jscode2session?secret=0c7c9c9939a6451ff28e85c3d55738ce"
@@ -166,4 +267,6 @@ public String getOpenid(String js_code){
 	
 	return result;
 }
+
+
 }

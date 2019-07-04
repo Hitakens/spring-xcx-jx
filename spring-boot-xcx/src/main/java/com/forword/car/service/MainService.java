@@ -12,5 +12,9 @@ public interface MainService {
 
 	String insertYhxxyk(String oppenid, String avatarUrl, String nickName, String stringTojson);
 
+	String glyLogin(ParaEntity pa);
+
+	String randomKm(int n);
+
 
 }

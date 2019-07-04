@@ -4,7 +4,7 @@
 <html
 	class="pixel-ratio-2 retina ios ios-10 ios-10-3 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6">
 <head>
-<title>${param.title}>提交成功</title>
+<title>卡密激活</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -85,7 +85,7 @@ input {
                 </label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text" name="str2" pattern="[0-14]*" placeholder="请输入卡密" onkeyup="this.value=this.value.replace(/[^0-9]/g,&#39;&#39;)" onafterpaste="this.value=this.value.replace(/[^0-9]/g,&#39;&#39;)">
+                <input class="weui-input" type="text" name="str2" pattern="[11-32]*" placeholder="请输入卡密" >
                 <input type="hidden" name="str1" value="${stuid}"/>
             </div>
         </div>

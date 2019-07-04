@@ -1,5 +1,7 @@
 package com.forword.car.service.impl;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.forword.car.dao.MainMapper;
 import com.forword.car.entity.ParaEntity;
 import com.forword.car.service.MainService;
+import com.forword.common.UUIDGenerator;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -29,7 +32,8 @@ public class MainServiceImpl implements MainService {
 		String re=null;
 		String minKey=mxxxMapper.selectOpen_mybyKey(pa.getStr2());
 		if(minKey!=null) {
-			int i = mxxxMapper.insertYhxx(pa.getStr1());
+			pa.setStr2(minKey);
+			int i = mxxxMapper.insertYhxx(pa);
 			if(i>0) {
 				mxxxMapper.deleteOpen_mybyKey(minKey);
 				mxxxMapper.deleteYhxxyk(pa.getStr1());
@@ -57,6 +61,31 @@ public class MainServiceImpl implements MainService {
 	public String getopenidyk(String openid) {
 		// TODO Auto-generated method stub
 		return mxxxMapper.getopenidyk(openid);
+	}
+	@Override
+	public String glyLogin(ParaEntity pa) {
+		String res="";
+		try {
+			Map<String,Object> ma=mxxxMapper.glyLogin(pa.getStr1());
+          if(ma!=null && ma.get("userpass").equals(pa.getStr2())&& 
+        		  "N".equals(ma.get("glybz"))){
+        	  res="200";
+          }else if(ma!=null && ma.get("userpass").equals(pa.getStr2())&& 
+        		  "Y".equals(ma.get("glybz"))){
+        	  res="201";
+          }else{
+        	  res="202";  
+          }
+		} catch (Exception e) {
+			res="201";
+			System.out.println(e.getLocalizedMessage());
+		}
+		return res;
+	}
+	@Override
+	public String randomKm(int n) {
+		String uuid_car = UUIDGenerator.getUUID_car();
+		return uuid_car;
 	}
 
 }

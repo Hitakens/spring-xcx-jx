@@ -43,5 +43,9 @@ public class UUIDGenerator {
 		long millis = System.currentTimeMillis();
 		return "ZH_"+randomUUID.toString().substring(0, 5)+millis;
   }
-
+  public static String getUUID_car(){
+	  UUID randomUUID = UUID.randomUUID();
+		long millis = System.currentTimeMillis();
+		return "Km_"+randomUUID.toString().substring(0, 5)+millis;
+  }
 }

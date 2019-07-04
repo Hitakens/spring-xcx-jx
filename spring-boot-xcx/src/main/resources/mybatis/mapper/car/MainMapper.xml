@@ -14,22 +14,23 @@
  </where>
 </update>
 <select id="selectOpen_mybyKey" parameterType="String" resultType="string">
-select min_key from open_my where min_key=#{key,jdbcType=VARCHAR}
+select min_key from open_my where min_key=#{key,jdbcType=VARCHAR} and yxbz='Y'
 </select>
 <insert id="insertYhxx" parameterType="com.forword.car.entity.ParaEntity">
-  insert into wx_yhxx(openid,avatarurl,wxname,sessionid) 
- SELECT t.openid,t.avatarurl,t.wxname,t.sessionid from wx_yhxx_yk t where t.sessionid=#{pa,jdbcType=VARCHAR}
+	insert into wx_yhxx(openid,avatarurl,wxname,sessionid,min_key)
+	SELECT t.openid,t.avatarurl,t.wxname,t.sessionid,#{str2,jdbcType=VARCHAR} from wx_yhxx_yk t
+	where t.sessionid=#{str1,jdbcType=VARCHAR}
 </insert>
-<delete id="deleteOpen_mybyKey" parameterType="string">
-delete from open_my where min_key=#{key,jdbcType=VARCHAR}
-</delete>
+<update id="deleteOpen_mybyKey" parameterType="string">
+update  open_my set yxbz='N' where min_key=#{key,jdbcType=VARCHAR}
+</update>
 <select id="selectYhxxyk" parameterType="string" resultType="string">
  select t.sessionid from wx_yhxx_yk t where t.openid=#{openid,jdbcType=VARCHAR}
 </select>
 <insert id="insertYhxxyk" parameterType="com.forword.car.entity.ParaEntity">
- insert into wx_yhxx_yk(openid,avatarurl,wxname,sessionid)
+ insert into wx_yhxx_yk(openid,avatarurl,wxname,sessionid,min_key)
  values(#{str1,jdbcType=VARCHAR},#{str2,jdbcType=VARCHAR},
- #{str3,jdbcType=VARCHAR},#{str4,jdbcType=VARCHAR})
+ #{str3,jdbcType=VARCHAR},#{str4,jdbcType=VARCHAR},#{str5,jdbcType=VARCHAR})
 </insert>
 <delete id="deleteYhxxyk" parameterType="string">
 delete from wx_yhxx_yk where sessionid=#{key,jdbcType=VARCHAR}
@@ -39,5 +40,8 @@ delete from wx_yhxx_yk where sessionid=#{key,jdbcType=VARCHAR}
 </select>
 <select id="selectOpenidBysessionid" parameterType="map">
 select t.openid,t.wxname,t.avatarurl from wx_yhxx t where t.sessionid=#{sid,jdbcType=VARCHAR}
+</select>
+<select id="glyLogin" parameterType="string" resultType="map">
+select t.userpass,t.glybz from glydlxx t where t.username=#{str1,jdbcType=VARCHAR} and t.yxbz='Y'
 </select>
 </mapper>
