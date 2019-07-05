@@ -110,12 +110,14 @@ img.wx {
 	width: 100%;
 	bottom: 10px;
 }
-.jkname{
-margin-left: -17px;
+
+.jkname {
+	margin-left: -17px;
 }
-.weui-cell__bd——zdy{
-position: relative;
-right: -70%;
+
+.weui-cell__bd——zdy {
+	position: relative;
+	right: -70%;
 }
 </style>
 
@@ -130,7 +132,7 @@ right: -70%;
 			<p class="jkname">卡密生成</p>
 		</div>
 		<form>
-			
+
 			<div class="weui-cells weui-cells_form" id="loginiptView">
 				<div class="weui-cell">
 					<div class="weui-cell__hd">
@@ -139,23 +141,29 @@ right: -70%;
 						</label>
 					</div>
 					<div class="weui-cell__bd">
-						<input class="weui-input" type="text" minlength="11"  maxlength="32" value="${cardmi}" id="carpass"
-							name="carpass" placeholder="自定义卡密(11-32)">
+						<input type="hidden" name="uname" id="uname" value="${uname}">
+						<input class="weui-input" type="text" minlength="11"
+							maxlength="32" value="${cardmi}" id="carpass" name="carpass"
+							placeholder="自定义卡密(11-32)">
 					</div>
-					 <div class="weui-cell__ft">
-      <a class="weui-vcode-btn">
-      <label class="weui-label" style="width: 32px"> <img style="width: 40px;height: 32px;line-height: 45px;margin-top: 5px;"
-							src="${pageContext.request.contextPath}/static/jx/img/gly/sj.svg"></a>
-						</label>
-    </div>
+					<div class="weui-cell__ft">
+						<a href='javascript:;' onclick="confirmkm();"
+							class="weui-vcode-btn"> <label class="weui-label"
+							style="width: 32px"><img
+								style="width: 40px; height: 32px; line-height: 45px; margin-top: 5px;"
+								src="${pageContext.request.contextPath}/static/jx/img/gly/sj.svg">
+						</label></a>
+					</div>
 				</div>
 
 				<!-- <div class="weui-cell">
 					<div class="weui-cell__bd weui-cell__bd——zdy">随机生成(<span id='job'></span>)</div>
 				</div> -->
 			</div>
-			<a href="javascript:;" class="login weui-btn weui-btn_dt"
-				style="margin-top: 20px;" id="submitLogin">登 录</a>
+			<a href="javascript:;"
+				class="login weui-btn weui-btn_dt" style="margin-top: 20px;"
+				id="submitLogin" data-clipboard-action="copy"
+				data-clipboard-target="#carpass">确认卡密</a>
 
 		</form>
 		<div class="weui-footer">
@@ -177,23 +185,36 @@ right: -70%;
 			FastClick.attach(document.body);
 		});
 	</script>
-
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/static/all/jquery-3.3.1.js"></script>
+		src="${pageContext.request.contextPath}/static/all/clipboard.min.js"></script>
 	<script type="text/javascript">
-	$("#job").select({
-        title: "选择职业",
-        items: ["法官", "医生", "猎人", "学生", "记者", "其他"],
-        onChange: function(d) {
-          console.log(this, d);
-        },
-        onClose: function() {
-          console.log("close");
-        },
-        onOpen: function() {
-          console.log("open");
-        },
-      });
+		function confirmkm() {
+			$.get('/main/admin/ajaxkmsc', {
+				"n" : 1
+			}, function(res) {
+				$('#carpass').val(res);
+			});
+		}
+
+		var btn = document.getElementById('submitLogin');
+		var clipboard = new Clipboard(btn);//实例化
+		clipboard.on('success', function(e) {//复制成功执行的回调，可选
+			$.post('/main/admin/submitinsert', {
+				"str1" : $('#uname').val(),
+				"str2" : $('#carpass').val()
+			}, function(res) {
+				if (res == "200") {
+					$.toast("复制成功")
+				} else if (res == "201") {
+					$.toast("卡密生成失败！", "cancel")
+				} else {
+					$.toptip(res, 'error');
+				}
+			});
+		});
+		clipboard.on('error', function(e) {//复制失败执行的回调，可选
+			$.toast("复制失败", "cancel")
+		});
 	</script>
 
 </body>

@@ -98,7 +98,7 @@ $(function() {
 							<div class="button_sp_area button_sp_area-zdy">
 							<ul style="list-style: none;"><li>
 							 <a onclick="musicjqplay()" href="javascript:;"  class=" weui-btn_default-zdy">
-        <img class='jq-left-img'  src="${pageContext.request.contextPath}/static/jx/img/sy/yy1.png">技巧:</a>
+        <img class='jq-left-img'  src="${pageContext.request.contextPath}/static/jx/img/sy/yy1.png"></a>
         <span id='showjq'></span>
 							</li></ul>
        

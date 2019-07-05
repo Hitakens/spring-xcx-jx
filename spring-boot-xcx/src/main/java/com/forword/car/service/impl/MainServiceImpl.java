@@ -87,5 +87,27 @@ public class MainServiceImpl implements MainService {
 		String uuid_car = UUIDGenerator.getUUID_car();
 		return uuid_car;
 	}
+	@Override
+	public String submitinsert(ParaEntity pa) {
+		String s="";
+		try {
+			if(pa!=null && pa.getStr1()==null){
+				s="登陆状态异常！请重新登陆";
+			}else{
+				int i=mxxxMapper.insertOpen_key(pa);
+				if(i>0){
+					s="200";
+				}else{
+					s="201";
+				}
+			}
+			
+		} catch (Exception e) {
+			s="该卡密已经存在，请重新尝试！";
+			log.error(e.getMessage());
+		}
+		
+		return s;
+	}
 
 }

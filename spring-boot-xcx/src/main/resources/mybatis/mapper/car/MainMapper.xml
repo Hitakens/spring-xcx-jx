@@ -44,4 +44,7 @@ select t.openid,t.wxname,t.avatarurl from wx_yhxx t where t.sessionid=#{sid,jdbc
 <select id="glyLogin" parameterType="string" resultType="map">
 select t.userpass,t.glybz from glydlxx t where t.username=#{str1,jdbcType=VARCHAR} and t.yxbz='Y'
 </select>
+<insert id="insertOpen_key" parameterType="com.forword.car.entity.ParaEntity">
+insert into open_my(lrry,min_key) values(#{str1,jdbcType=VARCHAR},#{str2,jdbcType=VARCHAR})
+</insert>
 </mapper>

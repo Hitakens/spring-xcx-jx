@@ -43,5 +43,8 @@ public interface MainMapper {
 
 
 	Map<String,Object> glyLogin(String str1);
+
+
+	int insertOpen_key(ParaEntity pa);
 	
 }

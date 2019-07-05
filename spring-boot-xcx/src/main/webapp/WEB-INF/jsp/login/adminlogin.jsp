@@ -186,7 +186,7 @@ function loginSuccSaveInfo(){
         $.hideLoading();
         if (res == "200") {
         	loginSuccSaveInfo();
-            window.location.href ='/main/admin/kmsc';
+            window.location.href ='/main/admin/kmsc?uname='+$('#username').val();
         } else if(res=="201"){
         	$.toast("你没有权限！请联系管理员","cancel")
         }else {

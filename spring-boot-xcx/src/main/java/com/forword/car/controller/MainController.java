@@ -199,21 +199,58 @@ public String glyLogin(ParaEntity pa) {
  * @return: String
  */
 @RequestMapping(value = "admin/kmsc", method = RequestMethod.GET)	
-@ResponseBody
-public String kmsc(int n,Model mo) {
+public String kmsc(String uname,Model mo) {
 	String re=null;
 	 try {
-		 re= carService.randomKm(n);
+		 re= carService.randomKm(1);
 		 if(re!=null){
 			 mo.addAttribute("cardmi", re);
+			 mo.addAttribute("uname", uname);
 		 }
 	} catch (Exception e) {
 		log.error("管理员登陆失败",e.fillInStackTrace());
 	}
 	 return "admin/kmsc";
 	}
-
-
+/**
+ * @Title: kmsc 
+ * @Description: 随机生成卡密ajax
+ * @param n
+ * @param mo
+ * @return
+ * @return: String
+ */
+@RequestMapping(value = "admin/ajaxkmsc", method = RequestMethod.GET)	
+@ResponseBody
+public String ajaxkmsc(int n,Model mo) {
+	String re=null;
+	 try {
+		 re= carService.randomKm(n);
+	} catch (Exception e) {
+		log.error("管理员登陆失败",e.fillInStackTrace());
+	}
+	 return re;
+	}
+/**
+ * @Title: submitinsert 
+ * @Description: 生成的卡密往数据库里存
+ * @param pa
+ * @param mo
+ * @return
+ * @return: String
+ */
+@RequestMapping(value = "admin/submitinsert", method = RequestMethod.POST)	
+@ResponseBody
+public String submitinsert(ParaEntity pa,Model mo) {
+	String re=null;
+	 try {
+		 re= carService.submitinsert(pa);
+	} catch (Exception e) {
+		log.error("管理员登陆失败",e.fillInStackTrace());
+		re="卡密已经存在,请重新生成";
+	}
+	 return re;
+	}
 /**
  * @Title: getOpenid 
  * @Description: 通过js_code获取用户微信端的openid

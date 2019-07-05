@@ -16,5 +16,7 @@ public interface MainService {
 
 	String randomKm(int n);
 
+	String submitinsert(ParaEntity pa);
+
 
 }
