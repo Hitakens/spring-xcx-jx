@@ -46,5 +46,8 @@ public interface MainMapper {
 
 
 	int insertOpen_key(ParaEntity pa);
+
+
+	Map<String, Object> selectOpenidBysessionid(String sid);
 	
 }

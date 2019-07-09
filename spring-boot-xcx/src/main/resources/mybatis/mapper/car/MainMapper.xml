@@ -28,9 +28,9 @@ update  open_my set yxbz='N' where min_key=#{key,jdbcType=VARCHAR}
  select t.sessionid from wx_yhxx_yk t where t.openid=#{openid,jdbcType=VARCHAR}
 </select>
 <insert id="insertYhxxyk" parameterType="com.forword.car.entity.ParaEntity">
- insert into wx_yhxx_yk(openid,avatarurl,wxname,sessionid,min_key)
+ insert into wx_yhxx_yk(openid,avatarurl,wxname,sessionid)
  values(#{str1,jdbcType=VARCHAR},#{str2,jdbcType=VARCHAR},
- #{str3,jdbcType=VARCHAR},#{str4,jdbcType=VARCHAR},#{str5,jdbcType=VARCHAR})
+ #{str3,jdbcType=VARCHAR},#{str4,jdbcType=VARCHAR})
 </insert>
 <delete id="deleteYhxxyk" parameterType="string">
 delete from wx_yhxx_yk where sessionid=#{key,jdbcType=VARCHAR}
@@ -38,7 +38,7 @@ delete from wx_yhxx_yk where sessionid=#{key,jdbcType=VARCHAR}
 <select id="getopenidyk" parameterType="string" resultType="string">
     select t.sessionid from wx_yhxx_yk t where t.openid=#{openid,jdbcType=VARCHAR}
 </select>
-<select id="selectOpenidBysessionid" parameterType="map">
+<select id="selectOpenidBysessionid" parameterType="string" resultType="map">
 select t.openid,t.wxname,t.avatarurl from wx_yhxx t where t.sessionid=#{sid,jdbcType=VARCHAR}
 </select>
 <select id="glyLogin" parameterType="string" resultType="map">

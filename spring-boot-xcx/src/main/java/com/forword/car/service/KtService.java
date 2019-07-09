@@ -15,6 +15,7 @@ public interface KtService {
 
 	Map<String, Object> ctsc(String clx, String openid);
 
-	Map<String,Object> selectOpenidBysessionid(String sid);
+
+	List<Map<String, Object>> kmMnks(String kmj);
 
 }

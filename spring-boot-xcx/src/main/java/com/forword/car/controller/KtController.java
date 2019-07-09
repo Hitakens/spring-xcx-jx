@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.forword.car.service.KtService;
+import com.forword.common.StringUtil;
 import com.forword.main.BasController;
 @Controller
 @RequestMapping("kt")
@@ -160,5 +162,30 @@ public class KtController extends BasController{
 			log.error("算出某个科目下的收藏和错误的题目数出现异常", e.fillInStackTrace());
 		}
 		this.writeJson(rusel, re, rs);
+	}
+	/**
+	 * @Title: kmMnks 
+	 * @Description: 跳入模拟考试的页面，初始化页面数据
+	 * @param kmj
+	 * @param mo
+	 * @return
+	 * @return: String
+	 */
+	@RequestMapping(value="kmMnks/{kmj}")
+	public String kmMnks(@PathVariable String kmj,Model mo){
+	List<Map<String,Object>> datas=null;
+	String pathres=null;
+	try {
+		datas=ktService.kmMnks(kmj);
+		if(kmj=="xckmy" || "xckmy".equals(kmj)){
+			pathres="xckmy/mnks";
+		}else if(kmj=="xckms" || "xckms".equals(kmj)){
+			pathres="xckms/mnks";
+		}
+        mo.addAttribute("datas", JSONObject.toJSONString(datas));
+	} catch (Exception e) {
+		log.error("初始化考试页面数据发生错误", e.fillInStackTrace());
+	}
+		return pathres;
 	}
 }

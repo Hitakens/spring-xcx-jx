@@ -142,14 +142,14 @@
 									alt="">
 							</div>
 							<p class="weui-grid__label">选做题</p>
-						</a> <a href="" class="weui-grid js_grid">
+						</a> <a href="${pageContext.request.contextPath}/kt/kmMnks/xckmy" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img
 									src="${pageContext.request.contextPath}/static/jx/img/100.png"
 									alt="">
 							</div>
 							<p class="weui-grid__label">模拟考试</p>
-						</a> <a href="" class="weui-grid js_grid">
+						</a> <a href="${pageContext.request.contextPath}/kt/kmMnks/xckmy" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img
 									src="${pageContext.request.contextPath}/static/jx/img/ct.png"

@@ -250,13 +250,13 @@ footer {
 .top_left {
 	text-align: left;
 	color: white;
-	line-height: 30px;
+	line-height: 40px;
 }
 
 .top_right {
 	text-align: right;
 	color: white;
-	line-height: 30px;
+	line-height: 40px;
 }
 
 .top_right img, .top_left img {
@@ -264,7 +264,10 @@ footer {
 }
 
 .markedred {
-	color: red;
+	
+}
+.markedred1 {
+color: red;	
 }
 .markedgreen {
 	color: green;
@@ -346,8 +349,8 @@ footer {
 }
 
 .jq-left-img {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 }
 
 .weui-btn_default-zdy {

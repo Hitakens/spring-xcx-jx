@@ -6,8 +6,43 @@ var activeQuestion = 0; // 当前操作的考题编号
 var questioned = 0; //
 var checkQues = []; // 已做答的题的集合
 var questionuuid='';//当前题的uuid
-//获取数据
 
+
+/* 实现计时器 */
+function timedjs(isopen) {
+	if(isopen){
+	var time = setInterval(function() {
+		str = "";
+	
+		if (--ss == 0) {
+			//alert($("#timeer").text());
+			if (--mm == 0) {
+				mm = 0;
+			}
+			if($("#timeer").text()=='00:01'){
+				clearInterval(time);
+				$.toast("时间已到，请你停止答题！", "forbidden");
+			}
+			ss = 60;
+		}
+		
+		
+		str += mm < 10 ? "0" + mm : mm;
+		str += ":";
+		str += ss < 10 ? "0" + ss : ss;
+		$("#timeer").text(str);
+		if("0-1:60"==str){
+			$("#timeer").text("00:00");
+		}
+}, 1000);
+	}
+}
+
+	
+
+
+
+//获取数据
 function getKmydata() {
 	 $.showLoading();
 	 $.ajax({
@@ -39,9 +74,9 @@ function showQuestion(id) {
 	$(".question").find(".quest-sum").remove();
 	var question = questions[id];
 	questionuuid=question.uuid;
-	var htmlpj = '<a onclick="musicplay()" href="javascript:;" class=" weui-btn_default-zdy"><img class="jq-left-img"  src="'+pathName+'/static/jx/img/sy/dt.png"></a>'
+	var htmlpj = '<a  onclick="musicplay()" class=" weui-btn_default-zdy"><img class="jq-left-img"  src="'+pathName+'/static/jx/img/sy/dt.png"></a>'
 	$(".question_title").html(
-			"<strong>第 " + (id+1) + " 题 、</strong>" + question.questionTitle+ htmlpj);
+			"<strong> " + question.tmxzlx + " </strong>、" + question.questionTitle+ htmlpj);
 	$('#showjq').html(question.questionSkills);
 	$('.bzda-db').html(question.answerAnalysis)
 	var items = question.questionItems.split(";");
@@ -155,6 +190,7 @@ function clickTrim(source) {
 			}
 		})
 		cwthisquestion();
+		$(".markedred").addClass("markedred1");
 		$('#jqhide').show();
 	}
 	/*$(".question_info").each(function() {
@@ -212,22 +248,32 @@ function showctlv() {
 		$('.questionctl').text(sum.length + '/' + checkQues.length)
 	}
 }
+var audio =null;
+//语音读题
 function musicplay() {
-	var t = $('.question_title').text()
-	var list = $('.question_info').text()
-	var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&text="
-			+ encodeURI(t);
-	var audio = new Audio(url);
-	audio.src = url;
-	audio.play();
+	var text = $('.question_title').text()
+	var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=8&text="
+		+ encodeURI(text);
+	if(audio==null){
+		audio=new Audio(url);
+	     audio.src = url;
+	     audio.play();
+	}
+    audio.src = url;
+    audio.play();
 }
+//语音技巧
 function musicjqplay(){
 	var list = $('#showjq').text()
-	var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&text="
+	var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text="
 			+ encodeURI(list);
-	var audio = new Audio(url);
-	audio.src = url;
-	audio.play();
+	if(audio==null){
+		audio=new Audio(url);
+	     audio.src = url;
+	     audio.play();
+	}
+		audio.src = url;
+	    audio.play();
 }
 //判断题目是否已经收藏
 function iftmsc() {
@@ -282,9 +328,45 @@ function cwthisquestion() {
           }  
          });
 }
+//提交试卷
 
+function submitQuestions() {
+	var sum = [];
+	if (checkQues.length < 1) {
+		$.toast("你还没有答题，不能提交", "cancel");
+		return;
+		} else {
+		for (var i = 0; i < checkQues.length; i++) {
+			if (checkQues[i].zqda == 1) {
+				sum.push(1);
+			}
+		}
+	}
+	$('#pjsp').removeClass('markedred')
+	$('#pjsp').removeClass('markedaqua')
+	$('#pjsp').removeClass('markedgreen')
+if(sum.length<80){
+	$('#mlssimg').html('<img class="tjimg" src="'+pathName+'/static/jx/img/sy/mlss.jpeg"></img>')
+	$('#pjsp').html('超级马路杀手');
+	$('#pjsp').addClass('markedred')
+}else if(sum.length<90 && sum.length>80){
+	$('#mlssimg').html('<img class="tjimg" src="'+pathName+'/static/jx/img/sy/nl.png"></img>')
+	$('#pjsp').html('继续加油');
+	$('#pjsp').addClass('markedaqua')
+}else if(sum.length<100 && sum.length>90){
+	$('#mlssimg').html('<img  class="tjimg" src="'+pathName+'/static/jx/img/sy/kstg.jpeg"></img>')
+	$('#pjsp').html('通关达人');
+	$('#pjsp').addClass('markedgreen')
+}else if(sum.length>=100){
+	$('#mlssimg').html('<img  class="tjimg" src="'+pathName+'/static/jx/img/sy/100.jpeg"></img>')
+	$('#pjsp').html('秋名山车神');
+	$('#pjsp').addClass('markedgreen')
+}
+$('#pjspdesc').html("已做答:" +checkQues.length + "道题,错了"+eval(checkQues.length-sum.length)+"道题,还有"
+		+ (questions.length - checkQues.length)+ "道题未完成");
+	
+}
 $(function() {
-
 /* 答题卡的切换 */
 $("#openCard").click(function() {
 	$("#answerCardcw1").hide();
@@ -304,43 +386,7 @@ $("#closeCard").click(function() {
 	$(this).hide();
 })
 
-// 提交试卷
-$("#submitQuestions").click(
-		function() {
-			var sum = [];
-			if (checkQues.length < 1) {
-				return;
-				} else {
-				for (var i = 0; i < checkQues.length; i++) {
-					if (checkQues[i].zqda == 1) {
-						sum.push(1);
-					}
-				}
-			}
-			$('#pjsp').removeClass('markedred')
-			$('#pjsp').removeClass('markedaqua')
-			$('#pjsp').removeClass('markedgreen')
-		if(sum.length<80){
-			$('#mlssimg').html('<img class="tjimg" src="'+pathName+'/static/jx/img/sy/mlss.jpeg"></img>')
-			$('#pjsp').html('超级马路杀手');
-			$('#pjsp').addClass('markedred')
-		}else if(sum.length<90 && sum.length>80){
-			$('#mlssimg').html('<img class="tjimg" src="'+pathName+'/static/jx/img/sy/nl.png"></img>')
-			$('#pjsp').html('继续加油');
-			$('#pjsp').addClass('markedaqua')
-		}else if(sum.length<100 && sum.length>90){
-			$('#mlssimg').html('<img  class="tjimg" src="'+pathName+'/static/jx/img/sy/kstg.jpeg"></img>')
-			$('#pjsp').html('通关达人');
-			$('#pjsp').addClass('markedgreen')
-		}else if(sum.length>=100){
-			$('#mlssimg').html('<img  class="tjimg" src="'+pathName+'/static/jx/img/sy/100.jpeg"></img>')
-			$('#pjsp').html('秋名山车神');
-			$('#pjsp').addClass('markedgreen')
-		}
-		$('#pjspdesc').html("已做答:" +checkQues.length + "道题,错了"+eval(checkQues.length-sum.length)+"道题,还有"
-				+ (questions.length - checkQues.length)+ "道题未完成");
-			
-		})
+
 // 进入下一题
 $("#nextQuestion").click(function() {
 	if ((activeQuestion + 1) != questions.length) {
@@ -349,7 +395,12 @@ $("#nextQuestion").click(function() {
 	} else {
 		showQuestion(activeQuestion)
 	}
-
+	if(audio!=null){
+		audio.pause();
+	}else{
+		audio==null;
+	}
+	
 })
 
 $("#previousQuestion").click(function() {
@@ -357,6 +408,11 @@ $("#previousQuestion").click(function() {
 		showQuestion(activeQuestion - 1);
 	} else {
 		showQuestion(activeQuestion)
+	}
+	if(audio!=null){
+		audio.pause();
+	}else{
+		audio==null;
 	}
 })
 })

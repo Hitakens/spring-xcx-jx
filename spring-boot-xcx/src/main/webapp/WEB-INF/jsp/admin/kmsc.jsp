@@ -189,7 +189,7 @@ img.wx {
 		src="${pageContext.request.contextPath}/static/all/clipboard.min.js"></script>
 	<script type="text/javascript">
 		function confirmkm() {
-			$.get('/main/admin/ajaxkmsc', {
+			$.get(pathName+'/main/admin/ajaxkmsc', {
 				"n" : 1
 			}, function(res) {
 				$('#carpass').val(res);
@@ -199,7 +199,7 @@ img.wx {
 		var btn = document.getElementById('submitLogin');
 		var clipboard = new Clipboard(btn);//实例化
 		clipboard.on('success', function(e) {//复制成功执行的回调，可选
-			$.post('/main/admin/submitinsert', {
+			$.post(pathName+'/main/admin/submitinsert', {
 				"str1" : $('#uname').val(),
 				"str2" : $('#carpass').val()
 			}, function(res) {

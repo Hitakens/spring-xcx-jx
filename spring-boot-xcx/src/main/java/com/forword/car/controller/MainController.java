@@ -72,7 +72,7 @@ public class MainController extends BasController {
 	public String joinpage(Model model, HttpServletRequest request, HttpServletResponse response,
 			 String sid) {
 		//通过sessionid查询openid
-		Map<String,Object> ma=ktService.selectOpenidBysessionid(sid);
+		Map<String,Object> ma=carService.selectOpenidBysessionid(sid);
 		if(ma.isEmpty()) {
 			return "all/bdhyk";
 		}
@@ -106,6 +106,7 @@ public class MainController extends BasController {
 		try {
 			
 			String res = getOpenid(js_code);
+			log.info(res+"78787878-==============");
 			String oppenid = StringUtil.StringTojson("openid",res);
 			String pdopenid = pdopenid(oppenid);
 			String yhxx=null;

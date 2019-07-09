@@ -28,7 +28,8 @@ public interface KtMapper {
 
 	Map<String, Object> selectKmyAndKmsCtCount(String openid);
 
-	Map<String,Object> selectOpenidBysessionid(String sid);
+
+	List<Map<String, Object>> kmMnks();
 
 
 }

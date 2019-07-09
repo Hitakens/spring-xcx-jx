@@ -1,5 +1,7 @@
 package com.forword.car.service;
 
+import java.util.Map;
+
 import com.forword.car.entity.ParaEntity;
 
 public interface MainService {
@@ -17,6 +19,8 @@ public interface MainService {
 	String randomKm(int n);
 
 	String submitinsert(ParaEntity pa);
+
+	Map<String, Object> selectOpenidBysessionid(String sid);
 
 
 }

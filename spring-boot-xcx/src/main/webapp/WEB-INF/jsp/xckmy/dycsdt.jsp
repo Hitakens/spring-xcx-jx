@@ -29,7 +29,7 @@
 	min-height: 100%;
 	position: relative;
 	overflow: auto;
-	font-size: 13px;
+	font-size: 15px;
 	font-style: normal;
 }
 </style>

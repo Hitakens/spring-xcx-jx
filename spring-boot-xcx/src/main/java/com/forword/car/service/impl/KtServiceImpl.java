@@ -164,9 +164,13 @@ public class KtServiceImpl implements KtService{
 		return ctsc;
 	}
 
+	
 	@Override
-	public Map<String,Object> selectOpenidBysessionid(String sid) {
-		// TODO Auto-generated method stub
-		return ktMapper.selectOpenidBysessionid(sid);
+	public List<Map<String, Object>> kmMnks(String kmj) {
+		List<Map<String, Object>> datas=null;
+		if(kmj=="xckmy" || "xckmy".equals(kmj)){
+			datas=ktMapper.kmMnks();
+		}
+		return datas;
 	}
 }

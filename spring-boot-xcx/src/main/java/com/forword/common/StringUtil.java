@@ -96,7 +96,7 @@ public class StringUtil implements Serializable {
 	 */  
 	public static String replaceSpecStr(String orgStr){  
 	    if (null!=orgStr&&!"".equals(orgStr.trim())) {  
-	        String regEx="[\\s~·`!！@#￥$%^……&*（()）\\-——\\-_=+【\\[\\]】｛{}｝\\|、\\\\；;：:‘'“”\"，,《<。.》>、/？?]";  
+	        String regEx="[\\s~·`!！@#￥$%^……&*（()）\\-——\\-_==++【\\[\\]】｛{}｝\\|、\\\\；;：:‘'“”\"，,《<。.》>、\\//\\？?]";  
 	        Pattern p = Pattern.compile(regEx);  
 	        Matcher m = p.matcher(orgStr);  
 	        return m.replaceAll("");  
@@ -137,7 +137,7 @@ public class StringUtil implements Serializable {
 		}
 	}
 	/**
-	 * 字符串转化为json
+	 * 字符串转化为json,跟据key值来查找
 	 */
 	public static String StringTojson(String key,String json){
 		Object object=null;
@@ -150,4 +150,16 @@ public class StringUtil implements Serializable {
 		
 		return object.toString();
 	}
+	
+	/**
+	 * 字符串转化为json
+	 */
+	public static JSONArray StringTojsonNokey(String json){
+
+		return JSONArray.fromObject(json); 
+	}
+/*	public static void main(String[] args) {
+		String replaceSpecStr = replaceSpecStr("p8gw/tFr/izY+PPY0YbXaQ==");
+		System.out.println(replaceSpecStr);
+	}*/
 }

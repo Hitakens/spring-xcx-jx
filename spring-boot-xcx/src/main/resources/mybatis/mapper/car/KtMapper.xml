@@ -3,19 +3,22 @@
 <mapper namespace="com.forword.car.dao.KtMapper">
 	<select id="getKmydata" parameterType="com.forword.car.entity.ParaEntity"
 		resultType="map">
-		SELECT
+		SELECT t.tmxzlx,
 		t.uuid,t.questionTitle,t.questionItems,t.questionAnswer,t.questionSkills,t.answerAnalysis,t.questionImg
 		FROM xckmy t where t.tmlx=#{str1,jdbcType=VARCHAR}
-		order by t.uuid limit #{int1,jdbcType=INTEGER},#{int2,jdbcType=INTEGER}
+		order by t.uuid
+		limit #{int1,jdbcType=INTEGER},#{int2,jdbcType=INTEGER}
 	</select>
 	<select id="selectScdtByuuidandsclx" parameterType="com.forword.car.entity.ParaEntity"
 		resultType="string">
-		select t.uuid from tk_sc t where t.tkuuid=#{int1,jdbcType=INTEGER}
+		select t.uuid from tk_sc t where
+		t.tkuuid=#{int1,jdbcType=INTEGER}
 		and t.sclx=#{str2,jdbcType=VARCHAR}
 		and t.openid=#{str1,jdbcType=VARCHAR}
 	</select>
 	<insert id="insertScdt" parameterType="com.forword.car.entity.ParaEntity">
-		insert into tk_sc(openid,tkuuid,sclx)
+		insert into
+		tk_sc(openid,tkuuid,sclx)
 		values(#{str1,jdbcType=VARCHAR},#{int1,jdbcType=INTEGER},#{str2,jdbcType=VARCHAR})
 	</insert>
 	<select id="selectbtcwByuuidandsclx" resultType="string"
@@ -26,13 +29,15 @@
 		and t.openid=#{str1,jdbcType=VARCHAR}
 	</select>
 	<insert id="inserttkcw" parameterType="com.forword.car.entity.ParaEntity">
-		insert into tk_cw(openid,tkuuid,cwlx)
+		insert into
+		tk_cw(openid,tkuuid,cwlx)
 		values(#{str1,jdbcType=VARCHAR},#{int1,jdbcType=INTEGER},#{str2,jdbcType=VARCHAR})
 	</insert>
 	<delete id="deleteScdtByuuidandsclx" parameterType="com.forword.car.entity.ParaEntity">
 		delete from
 		tk_sc t where t.tkuuid=#{int1,jdbcType=INTEGER}
-		and t.sclx=#{str2,jdbcType=VARCHAR}
+		and
+		t.sclx=#{str2,jdbcType=VARCHAR}
 		and t.openid=#{str1,jdbcType=VARCHAR}
 	</delete>
 	<select id='selectKmyAndKmsScCount' parameterType="string"
@@ -43,13 +48,15 @@
 		ELSE
 		0
 		END
-		) kmysc,sum(CASE
+		)
+		kmysc,sum(CASE
 		WHEN t.sclx='A1' THEN
 		1
 		ELSE
 		0
 		END
-		) kmssc from tk_sc t where t.openid=#{openid,jdbcType=VARCHAR}
+		) kmssc from tk_sc t where
+		t.openid=#{openid,jdbcType=VARCHAR}
 	</select>
 	<select id='selectKmyAndKmsCtCount' parameterType="string"
 		resultType="map">
@@ -59,12 +66,21 @@
 		ELSE
 		0
 		END
-		) kmyct,sum(CASE
+		)
+		kmyct,sum(CASE
 		WHEN t.cwlx='A1' THEN
 		1
 		ELSE
 		0
 		END
-		) kmsct from tk_cw t where t.openid=#{openid,jdbcType=VARCHAR}
+		) kmsct from tk_cw t where
+		t.openid=#{openid,jdbcType=VARCHAR}
+	</select>
+	<select id="kmMnks" parameterType="string" resultType="map">
+		SELECT t.tmxzlx,
+		t.uuid,t.questionTitle,t.questionItems,t.questionAnswer,t.questionSkills,t.answerAnalysis,t.questionImg
+		from (SELECT * FROM xckmy order by rand() limit 100) t
+		order by
+		LENGTH(t.questionItems) asc
 	</select>
 </mapper>

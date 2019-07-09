@@ -4,7 +4,7 @@
 <html
 	class="pixel-ratio-2 retina ios ios-10 ios-10-3 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6">
 <head>
-<title>科目一>答题</title>
+<title>科目一>选做题练习</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -56,7 +56,7 @@ $(function() {
 	height: 90%;
 	position: relative;
 	overflow: auto;
-	font-size: 13px;
+	font-size: 15px;
 	font-style: normal;
 }
 </style>
@@ -69,13 +69,13 @@ $(function() {
 					<div style="width: 100%;">
 						<div style="width: 100%; margin: 0px auto">
 							<div class="middle-top"
-								style="width: 100%; height: 30px; background: #2D3339; position: relative;">
+								style="width: 100%; height: 40px; background: #2D3339; position: relative;">
 								<a href="">
 									<div class='top_left'>
 										<img alt="" width="30px" height="29px"
 											src="${pageContext.request.contextPath}/static/jx/img/db/cz.png">重做
 									</div>
-								</a> <a id="submitQuestions" href="javascript:void(0)"><div
+								</a> <a onclick="submitQuestions()" href="javascript:void(0)"><div
 										class='top_right open-popup' data-target="#full">
 										提交<img alt="" width="30px" height="29px"
 											src="${pageContext.request.contextPath}/static/jx/img/db/tj.png">
@@ -97,7 +97,7 @@ $(function() {
 							<div id='jqhide' style="display: none;">
 							<div class="button_sp_area button_sp_area-zdy">
 							<ul style="list-style: none;"><li>
-							 <a onclick="musicjqplay()" href="javascript:;"  class=" weui-btn_default-zdy">
+							 <a onclick="musicjqplay()"   class=" weui-btn_default-zdy">
         <img class='jq-left-img'  src="${pageContext.request.contextPath}/static/jx/img/sy/yy1.png"></a>
         <span id='showjq'></span>
 							</li></ul>

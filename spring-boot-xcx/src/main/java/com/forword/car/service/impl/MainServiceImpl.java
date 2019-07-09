@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.forword.car.dao.MainMapper;
 import com.forword.car.entity.ParaEntity;
 import com.forword.car.service.MainService;
+import com.forword.common.StringUtil;
 import com.forword.common.UUIDGenerator;
 
 @Service
@@ -24,8 +25,8 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public String updateYhxx(String oppenid, String avatarUrl,
 			String nickName,String sesionnid) {
-		mxxxMapper.updateYhxx(oppenid,avatarUrl,nickName,sesionnid);
-		return sesionnid;
+		mxxxMapper.updateYhxx(oppenid,avatarUrl,nickName,StringUtil.replaceSpecStr(sesionnid));
+		return StringUtil.replaceSpecStr(sesionnid);
 	}
 	@Override
 	public String insertkm(ParaEntity pa) {
@@ -52,7 +53,7 @@ public class MainServiceImpl implements MainService {
 			p.setStr1(oppenid);
 			p.setStr2(avatarUrl);
 			p.setStr3(nickName);
-			p.setStr4(stringTojson);
+			p.setStr4(StringUtil.replaceSpecStr(stringTojson));
 			mxxxMapper.insertYhxxyk(p);
 		}
 		return getopenidyk(oppenid);
@@ -108,6 +109,11 @@ public class MainServiceImpl implements MainService {
 		}
 		
 		return s;
+	}
+	@Override
+	public Map<String, Object> selectOpenidBysessionid(String sid) {
+		// TODO Auto-generated method stub
+		return mxxxMapper.selectOpenidBysessionid(sid);
 	}
 
 }
