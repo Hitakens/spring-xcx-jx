@@ -31,5 +31,15 @@ public interface KtMapper {
 
 	List<Map<String, Object>> kmMnks();
 
+	List<Map<String, Object>> getKmyDycsdata(ParaEntity pr);
+
+	List<Map<String, Object>> getkmySclist(ParaEntity pa);
+
+	List<Map<String, Object>> getkmyCwlist(ParaEntity pa);
+
+	int deleteByOPenidSc(ParaEntity pa);
+
+	int deleteByOPenidCw(ParaEntity pa);
+
 
 }

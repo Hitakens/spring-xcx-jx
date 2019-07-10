@@ -4,7 +4,7 @@
 <html
 	class="pixel-ratio-2 retina ios ios-10 ios-10-3 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6">
 <head>
-<title>科目一>答题</title>
+<title>科目一>单元测试</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -14,6 +14,12 @@
 	content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/static/all/weui/css/weui.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/static/all/weui/css/jquery-weui.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/static/all/weui/css/demos.css">
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/jx/css/jqlxdt.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/jx/css/bootstrap.css">
@@ -21,16 +27,56 @@
 	src="${pageContext.request.contextPath}/static/jx/js/jquery-1.9.1.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/bootstrap.js"></script>
-	<script
-	src="${pageContext.request.contextPath}/static/jx/js/Questions.js"></script>
+<script
+	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy.js"></script>
+<script type="text/javascript">
+	var pathName = '${pageContext.request.contextPath}';
+	var questionData = '${dycsdata}';//考试题目数据
+	var questions = [];
+	var pa = 'A';//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推 
+	var mm = 44;// 分
+	var ss = 60;// 秒
+	var timeopen=true;
+	$(function() {
+		questions = JSON.parse(questionData);
+		showQuestion(0);
+		answerCard();
+		showctlv();
+		timedjs(timeopen);
+		/* 收藏按钮的切换 */
+		$("#unHeart").click(function() {
+			$(this).hide();
+			scthisquestion()
+			$("#heart").show();
+		})
+		$("#heart").click(function() {
+			$(this).hide();
+			scthisquestion()
+			$("#unHeart").show();
+		})
+	})
+</script>
 <style type="text/css">
 .warp {
-	height: 100%;
-	min-height: 100%;
+	width: 100%;
+	height: 90%;
 	position: relative;
 	overflow: auto;
-	font-size: 15px;
+	font-size: 13px;
 	font-style: normal;
+}
+.top_left_zdy{
+width: 40%;
+}
+.top_right_zdy{
+width: 40%;
+}
+.tom_midel{
+float: left;
+width: 20%;
+color: white;
+line-height: 40px;
+text-align: center;
 }
 </style>
 </head>
@@ -38,117 +84,162 @@
 	<div class="warp">
 		<div class="col-md-10">
 			<div class="content">
-				
-
-				<div
-					style="width: 100%; height: auto; display: inline-block;">
+				<div style="width: 100%; height: auto; display: inline-block;">
 					<div style="width: 100%;">
 						<div style="width: 100%; margin: 0px auto">
-							<div
-								style="width: 100%; height: 100px; border-bottom: none; background: #FFF;">
-								<div class="middle-top"
-									style="width: 100%; height: 51px;  background: #2D3339; position: relative;">
-									<div class="middle-top-left pull-left"
-										style="height: 100%; background: #232C31; color: #FFF;width: 60%;">
-										<div class="pull-left"
-											style="width: 135px; line-height: 20px; height: 20px; margin: 15px; font-size: 15px;">
-											<!--已做答的数量和考题总数-->
-											当前第<span class="questioned"></span>题/共<span
-												class="question_sum"></span>题
-										</div>
+							<div class="middle-top">
+								<a href="">
+									<div class='top_left top_left_zdy'>
+										<img alt="" width="30px" height="29px"
+											src="${pageContext.request.contextPath}/static/jx/img/db/cz.png">重做
 									</div>
-									<div class="middle-top-right text-center pull-left"
-										style="width: 40%; height: 100%; border-left: 1px solid red; position: absolute; right: 0px; ">
-										<div class="stop pull-left"
-											style="width: 50px; height: 100%; padding: 10px;">
-											<a href="javascript:void(0);" class="text-center"
-												style="color: #FE6547;">
-												<div class="time-stop glyphicon glyphicon-pause" title="暂停"
-													style="width: 30px; height: 30px; line-height: 30px; border-radius: 15px; border: 1px solid #FE6547;"></div>
-												<div class="time-start glyphicon glyphicon-play" title="开始"
-													style="width: 30px; height: 30px; line-height: 30px; border-radius: 15px; border: 1px solid #FE6547; display: none;"></div>
-											</a>
-										</div>
-										<div class="pull-left"
-											style="width: 50px; height: 100%; padding: 10px 0px 10px 0px;">
-											<div class="time"
-												style="width: 50px; height: 30px; line-height: 30px; border-radius: 15px; font-size: 15px; color: #FFF;">
-											</div>
-										</div>
-									</div>
-								</div>
-								<div
-									style="width: 100%; height: 50px; font-size: 15px; color: #000; line-height: 50px; padding-left: 20px;">
-									<div
-										style="color: #FFF; background: red; width: 22px; height: 22px; border-radius: 11px; line-height: 22px; font-size: 13px; text-align: center;"
-										class="glyphicon glyphicon-map-marker"></div>
-									[单选题]
-								</div>
+								</a>
+								<div class="tom_midel"><span id="timeer">计时开始</span></div> 
+								<a onclick="submitQuestions();" href="javascript:void(0)"><div
+										class='top_right open-popup top_right_zdy' data-target="#full">
+										提交<img alt="" width="30px" height="29px"
+											src="${pageContext.request.contextPath}/static/jx/img/db/tj.png">
+									</div></a>
 							</div>
+
 							<div
-								style="width: 100%; height: auto; display: inline-block; border-bottom: 1px dashed #CCC; background: #FFF;">
+								style="width: 100%; height: auto; display: inline-block; background: #FFF;">
 								<div
-									style="width: 100%; height: 90%; padding: 20px 20px 0px 20px;">
+									style="width: 100%; height: 90%; padding: 10px 20px 0px 20px;">
 									<!--试题区域-->
 									<ul class="list-unstyled question" id="" name="">
 										<li class="question_title"></li>
 									</ul>
-									<!--考题的操作区域-->
-									<div class="operation" style="margin-top: 20px;">
-										<div class="text-left"
-											style="margin-left: 20px; font-size: 15px; float: left; line-height: 30px;">
-											<div id="unHeart" style="color: #999999;">
-												<span class="glyphicon glyphicon-heart-empty"></span> <span>收藏本题</span>
-											</div>
-											<div id="heart" style="color: #C40000; display: none;">
-												<span class="glyphicon glyphicon-heart"></span> <span>已收藏</span>
-											</div>
-										</div>
-										<div class="text-right" style="margin-right: 20px;">
-											<div class="form-group" style="color: #FFF;">
-												<button class="btn btn-success" id="submitQuestions">提交试卷</button>
-												<button class="btn btn-info" id="nextQuestion">下一题</button>
-											</div>
-										</div>
-									</div>
+
 								</div>
 							</div>
-							<div
-								style="width: 100%; height: auto; display: inline-block; border: 1px solid #CCC; border-top: none; background: #FFF;">
-								<div style="width: 100%; padding: 20px;">
-									<div class="panel-default">
-										<div class="panel-heading" class="panel-heading"
-											id="closeCard"
-											style="color: #DCE4EC; font-size: 15px; display: none; background: none;">
-											<span>收起答题卡</span> <span
-												class="glyphicon glyphicon-chevron-up"></span>
-										</div>
-										<div class="panel-heading" id="openCard"
-											style="font-size: 15px; background: none;">
-											<span>展开答题卡</span> <span
-												class="glyphicon glyphicon-chevron-down"></span>
-										</div>
-										<div id="answerCard" style="display: none;">
-											<div class="panel-body form-horizontal" style="padding: 0px;">
-												<ul class="list-unstyled">
-												</ul>
-											</div>
-										</div>
-									</div>
+							<!-- 技巧 -->
+							<div id='jqhide' style="display: none;">
+								<div class="button_sp_area button_sp_area-zdy">
+									<ul style="list-style: none;">
+										<li><a onclick="musicjqplay()" 
+											class=" weui-btn_default-zdy"> <img class='jq-left-img'
+												src="${pageContext.request.contextPath}/static/jx/img/sy/yy1.png"></a>
+											<span id='showjq'></span></li>
+									</ul>
+
 								</div>
+
+								<div class="personal-mybuluo-head">
+									<div class="personal-mybuluo-wording">试题详解</div>
+									<div class="personal-border jmu-border-1px border-bottom"></div>
+								</div>
+								<span class='bzda-db'></span>
 							</div>
+							<!-- 技巧 -->
 						</div>
 					</div>
 				</div>
-				<div
-					style="width: 100%; height: auto; display: inline-block; border: 1px solid white;">
-					<div class="text-center" style="width: 100%;">底部</div>
+
+				<!-- 底部 -->
+
+			</div>
+		</div>
+	</div>
+	<div class="weui-tabbar weui-tabbar-zdy">
+		<a id='previousQuestion' href="javascript:void(0)"
+			class="weui-tabbar__item weui-bar__item--on">
+			<div class="weui-tabbar__icon">
+				<img
+					src="${pageContext.request.contextPath}/static/jx/img/db/syt.png"
+					alt="">
+			</div>
+			<p class="weui-tabbar__label">上一题</p>
+		</a> <a id="unHeart" href="javascript:void(0)" class="weui-tabbar__item">
+			<div class="weui-tabbar__icon">
+				<img
+					src="${pageContext.request.contextPath}/static/jx/img/db/sc.png"
+					alt="">
+			</div>
+			<p class="weui-tabbar__label">收藏</p>
+		</a> <a id="heart" href="javascript:void(0)" class="weui-tabbar__item"
+			style="color: #C40000; display: none;">
+			<div class="weui-tabbar__icon">
+				<img
+					src="${pageContext.request.contextPath}/static/jx/img/db/bsc.png"
+					alt="">
+			</div>
+			<p class="weui-tabbar__label">已收藏</p>
+		</a> <a id='openCardcw' href="javascript:void(0)"
+			class="weui-tabbar__item open-popup" data-target="#half">
+			<div class="weui-tabbar__icon">
+				<img
+					src="${pageContext.request.contextPath}/static/jx/img/db/ct.png"
+					alt="">
+			</div>
+			<p class="weui-tabbar__label">
+				<span class='questionctl'></span>
+			</p>
+		</a> <a id='openCard' href="javascript:void(0)"
+			class="weui-tabbar__item open-popup" data-target="#half">
+			<div class="weui-tabbar__icon">
+				<img
+					src="${pageContext.request.contextPath}/static/jx/img/db/sl.png"
+					alt="">
+			</div>
+			<p class="weui-tabbar__label">
+				<span class="questioned"></span>/<span class="question_sum"></span>
+			</p>
+		</a> <a id='nextQuestion' href="javascript:void(0)"
+			class="weui-tabbar__item">
+			<div class="weui-tabbar__icon">
+				<img
+					src="${pageContext.request.contextPath}/static/jx/img/db/xyt.png"
+					alt="">
+			</div>
+			<p class="weui-tabbar__label">下一题</p>
+		</a>
+	</div>
+	<div id="half" class='weui-popup__container popup-bottom'>
+		<div class="weui-popup__overlay"></div>
+		<div class="weui-popup__modal">
+			<div class="toolbar">
+				<div class="toolbar-inner">
+					<a href="javascript:;" class="picker-button close-popup">关闭</a>
+
+				</div>
+			</div>
+			<div class="modal-content">
+				<!-- 展示答题卡 -->
+				<div id="answerCard" style="display: none;">
+					<div class="panel-body form-horizontal" style="padding: 0px;">
+						<ul class="list-unstyled">
+						</ul>
+					</div>
+				</div>
+				<!-- 展示错误的答题卡 -->
+				<div id="answerCardcw1" style="display: none;">
+					<div class="panel-body form-horizontal" style="padding: 0px;">
+						<ul class="list-unstyled list-unstyled-zdy">
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>
+	<!-- 显示提交结果 -->
+	<div id="full" class='weui-popup__container'>
+		<div class="weui-popup__overlay"></div>
+		<div class="weui-popup__modal">
+			<div class="warp">
+				<div class="weui-msg">
+					<div id='mlssimg' class="weui-msg__icon-area"></div>
+					<div class="weui-msg__text-area">
+						<h2 class="weui-msg__title" id='pjsp'></h2>
+						<p class="weui-msg__desc" id='pjspdesc'></p>
+					</div>
+				</div>
+			</div>
 
-
+			<a href="javascript:;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+		</div>
+	</div>
+	<script
+		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
 </body>
 </html>

@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.forword.car.entity.ParaEntity;
 import com.forword.car.service.KtService;
-import com.forword.common.StringUtil;
 import com.forword.main.BasController;
 @Controller
-@RequestMapping("kt")
+@RequestMapping("xc")
 public class KtController extends BasController{
 	public Logger log = Logger.getLogger(KtController.class);
 	@Autowired
@@ -66,7 +66,7 @@ public class KtController extends BasController{
 		}
 	/**
 	 * @Title: getKmydata 
-	 * @Description:  题目展示
+	 * @Description:  科目一题目展示
 	 * @param pa
 	 * @return
 	 * @return: List<Map<String,Object>>
@@ -187,5 +187,88 @@ public class KtController extends BasController{
 		log.error("初始化考试页面数据发生错误", e.fillInStackTrace());
 	}
 		return pathres;
+	}
+	/**
+	 * @Title: carkmdycs 
+	 * @Description: 科目一单元测试
+	 * @param tmlx
+	 * @param ymcs
+	 * @param mo
+	 * @return
+	 * @return: String
+	 */
+	@RequestMapping(value="kmyMnks/{tmlx}/{ymcs}")
+	public String carkmdycs(@PathVariable String tmlx,@PathVariable String ymcs,
+			Model mo){
+	List<Map<String,Object>> datas=null;
+	try {
+		datas=ktService.carkmdycs(tmlx,ymcs);
+        mo.addAttribute("dycsdata", JSONObject.toJSONString(datas));
+	} catch (Exception e) {
+		log.error("初始化考试页面数据发生错误", e.fillInStackTrace());
+	}
+		return "xckmy/dycsdt";
+	}
+	/**
+	 * @Title: showcwsc 
+	 * @Description: 展示我的收藏和错误
+	 * @param lx
+	 * @param mo
+	 * @return
+	 * @return: String
+	 */
+	@RequestMapping(value="cwsc/{lx}/{kmj}")
+	public String showcwsc(@PathVariable String lx,@PathVariable String kmj,
+			Model mo,HttpServletRequest re){
+	List<Map<String,Object>> datas=null;
+	String ymparam="";
+	String openid = (String) re.getSession().getAttribute("openid");
+	try {
+		if(lx=="sc" || "sc".equals(lx)){
+			mo.addAttribute("cwsc", "我的收藏");
+		}else if(lx=="cw" || "cw".equals(lx)){
+			mo.addAttribute("cwsc", "我的错误");
+		}
+		if(kmj=="kmy" || "kmy".equals(kmj)){
+			mo.addAttribute("palx", "A");
+			datas=ktService.showcwsc(lx,openid,"A");
+			ymparam="xckmy/cwscdt";
+		}else if(kmj=="kms" || "kms".equals(kmj)){
+			mo.addAttribute("palx", "A1");
+			datas=ktService.showcwsc(lx,openid,"A1");
+			ymparam="xckms/cwscdt";
+		}
+		mo.addAttribute("lx", lx);
+        mo.addAttribute("cwscdata", JSONObject.toJSONString(datas));
+	} catch (Exception e) {
+		log.error("初始化考试页面数据发生错误", e.fillInStackTrace());
+	}
+		return ymparam;
+	}
+	/**
+	 * @Title: deletebt 
+	 * @Description: 删除收藏或者错误
+	 * @param re
+	 * @param pa
+	 * @return
+	 * @return: String
+	 */
+	@RequestMapping(value = "deletebt", method = RequestMethod.POST)
+	@ResponseBody
+	public String deletebt(HttpServletRequest re,ParaEntity pa){
+		String openid = (String) re.getSession().getAttribute("openid");
+		String rusel=null;
+		try {
+			if(pa!=null){
+				pa.setStr4(openid);
+				rusel=ktService.deletebt(pa);
+			}else{
+				rusel="201";	
+			}
+		} catch (Exception e) {
+			rusel="201";
+			log.error("算出某个科目下的收藏和错误的题目数出现异常", e.fillInStackTrace());
+		}
+		return rusel;
 	}
 }

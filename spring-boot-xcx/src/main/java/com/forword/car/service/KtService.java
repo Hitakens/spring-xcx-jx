@@ -3,6 +3,8 @@ package com.forword.car.service;
 import java.util.List;
 import java.util.Map;
 
+import com.forword.car.entity.ParaEntity;
+
 public interface KtService {
 
 	List<Map<String, Object>> getKmydata(String pa,String tmlx);
@@ -17,5 +19,11 @@ public interface KtService {
 
 
 	List<Map<String, Object>> kmMnks(String kmj);
+
+	List<Map<String, Object>> carkmdycs(String tmlx, String ymcs);
+
+	List<Map<String, Object>> showcwsc(String lx, String openid,String kmlx);
+
+	String deletebt(ParaEntity pa);
 
 }

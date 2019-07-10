@@ -28,7 +28,7 @@
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/bootstrap.js"></script>
 <script
-	src="${pageContext.request.contextPath}/static/jx/js/Questions.js"></script>
+	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy.js"></script>
 <script type="text/javascript">
 	var pathName = '${pageContext.request.contextPath}';
 	var questionData = '${datas}';//考试题目数据
@@ -36,7 +36,7 @@
 	var pa = 'A';//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推 
 	var mm = 44;// 分
 	var ss = 60;// 秒
-	var timeopen=true;
+	var timeopen = true;
 	$(function() {
 		questions = JSON.parse(questionData);
 		showQuestion(0);
@@ -65,18 +65,21 @@
 	font-size: 13px;
 	font-style: normal;
 }
-.top_left_zdy{
-width: 40%;
+
+.top_left_zdy {
+	width: 40%;
 }
-.top_right_zdy{
-width: 40%;
+
+.top_right_zdy {
+	width: 40%;
 }
-.tom_midel{
-float: left;
-width: 20%;
-color: white;
-line-height: 30px;
-text-align: center;
+
+.tom_midel {
+	float: left;
+	width: 20%;
+	color: white;
+	line-height: 40px;
+	text-align: center;
 }
 </style>
 </head>
@@ -87,15 +90,16 @@ text-align: center;
 				<div style="width: 100%; height: auto; display: inline-block;">
 					<div style="width: 100%;">
 						<div style="width: 100%; margin: 0px auto">
-							<div class="middle-top"
-								style="width: 100%; height: 30px; background: #2D3339; position: relative;">
+							<div class="middle-top">
 								<a href="">
 									<div class='top_left top_left_zdy'>
 										<img alt="" width="30px" height="29px"
 											src="${pageContext.request.contextPath}/static/jx/img/db/cz.png">重做
 									</div>
 								</a>
-								<div class="tom_midel"><span id="timeer">计时开始</span></div> 
+								<div class="tom_midel">
+									<span id="timeer">计时开始</span>
+								</div>
 								<a onclick="submitQuestions();" href="javascript:void(0)"><div
 										class='top_right open-popup top_right_zdy' data-target="#full">
 										提交<img alt="" width="30px" height="29px"
@@ -118,7 +122,7 @@ text-align: center;
 							<div id='jqhide' style="display: none;">
 								<div class="button_sp_area button_sp_area-zdy">
 									<ul style="list-style: none;">
-										<li><a onclick="musicjqplay()" 
+										<li><a onclick="musicjqplay()"
 											class=" weui-btn_default-zdy"> <img class='jq-left-img'
 												src="${pageContext.request.contextPath}/static/jx/img/sy/yy1.png"></a>
 											<span id='showjq'></span></li>

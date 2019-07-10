@@ -173,4 +173,102 @@ public class KtServiceImpl implements KtService{
 		}
 		return datas;
 	}
+
+	@Override
+	public List<Map<String, Object>> carkmdycs(String tmlx, String pa) {
+		List<Map<String, Object>> listData=null;
+		ParaEntity pr=new ParaEntity();
+		if(pa=="1" || "1".equals(pa)){
+			pr.setInt1(0);
+			pr.setInt2(100);
+			pr.setStr1(tmlx);
+			listData = ktMapper.getKmyDycsdata(pr);
+			for(int i=0;i<listData.size();i++){
+				listData.get(i).put("id", i);
+			}
+		}else if(pa=="2" || "2".equals(pa)){
+			pr.setInt1(100);
+			pr.setInt2(100);
+			pr.setStr1(tmlx);
+			listData = ktMapper.getKmyDycsdata(pr);
+			for(int i=0;i<listData.size();i++){
+				listData.get(i).put("id", i);
+			}
+		}
+		else if (pa == "3" || "3".equals(pa)) {
+			pr.setInt1(200);
+			pr.setInt2(100);
+			pr.setStr1(tmlx);
+			listData = ktMapper.getKmyDycsdata(pr);
+			for (int i = 0; i < listData.size(); i++) {
+				listData.get(i).put("id", i);
+			}
+		}else if (pa == "4" || "4".equals(pa)) {
+			pr.setInt1(300);
+			pr.setInt2(100);
+			pr.setStr1(tmlx);
+			listData = ktMapper.getKmyDycsdata(pr);
+			for (int i = 0; i < listData.size(); i++) {
+				listData.get(i).put("id", i);
+			}
+		}else if (pa == "5" || "5".equals(pa)) {
+			pr.setInt1(400);
+			pr.setInt2(100);
+			pr.setStr1(tmlx);
+			listData = ktMapper.getKmyDycsdata(pr);
+			for (int i = 0; i < listData.size(); i++) {
+				listData.get(i).put("id", i);
+			}
+		}else if (pa == "6" || "6".equals(pa)) {
+			pr.setInt1(500);
+			pr.setInt2(100);
+			pr.setStr1(tmlx);
+			listData = ktMapper.getKmyDycsdata(pr);
+			for (int i = 0; i < listData.size(); i++) {
+				listData.get(i).put("id", i);
+			}
+		}
+		return listData;
+	}
+
+	@Override
+	public List<Map<String, Object>> showcwsc(String lx, String openid,String kmlx) {
+		List<Map<String, Object>> listData=null;
+		ParaEntity pa=null;
+	  if(lx=="sc" || "sc".equals(lx)){
+		  pa=new ParaEntity();
+		  pa.setStr1(openid);
+		  pa.setStr2(kmlx);
+		  listData=ktMapper.getkmySclist(pa);
+	  }else if(lx=="cw" || "cw".equals(lx)){
+		  pa=new ParaEntity();
+		  pa.setStr1(openid);
+		  pa.setStr2(kmlx);
+		  listData=ktMapper.getkmyCwlist(pa);
+	  }
+		return listData;
+	}
+
+	@Override
+	public String deletebt(ParaEntity pa) {
+		String res="201";
+		try {
+			if(pa.getStr2()=="cw" || "cw".equals(pa.getStr2())){
+				int i =ktMapper.deleteByOPenidCw(pa);
+				if(i>0){
+					res="200";
+				}
+			}else if(pa.getStr2()=="sc" || "sc".equals(pa.getStr2())){
+				int i =ktMapper.deleteByOPenidSc(pa);
+				if(i>0){
+					res="200";
+				}
+			}
+		} catch (Exception e) {
+			res="201";
+			e.getMessage();
+		}
+		return res;
+	}
+	
 }

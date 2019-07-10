@@ -33,7 +33,6 @@
 	font-size: 13px;
 	font-style: normal;
 }
-
 .top_bt {
 	width: 100%;
 	height: 36.2px;

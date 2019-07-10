@@ -4,7 +4,7 @@
 <html
 	class="pixel-ratio-2 retina ios ios-10 ios-10-3 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6">
 <head>
-<title>科目一>选做题练习</title>
+<title>科目一>${cwsc}</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -31,12 +31,17 @@
 	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy.js"></script>
 <script type="text/javascript">
 	var pathName = '${pageContext.request.contextPath}';
-	var cs = '${ymcs}';//页面参数
+	var lx = '${lx}';//页面参数
 	var questions = [];
-	var pa = 'A';//(收藏类型,本题错误)A为小车科目一，A1为小车科目四，依次类推 
-	var tmlx = 'A'//题型类型,B代表必做题，A代表选做题
+	var mm = 44;// 分
+	var ss = 60;// 秒
+	var pa = ${palx};//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推
+	var questionData = '${cwscdata}';//错误或者收藏的题目数
 	$(function() {
-		getKmydata();
+		questions = JSON.parse(questionData);
+		showQuestion(0);
+		answerCard();
+		showctlv();
 		/* 收藏按钮的切换 */
 		$("#unHeart").click(function() {
 			$(this).hide();
@@ -74,10 +79,10 @@
 										<img alt="" width="30px" height="29px"
 											src="${pageContext.request.contextPath}/static/jx/img/db/cz.png">重做
 									</div>
-								</a> <a onclick="submitQuestions()" href="javascript:void(0)"><div
+								</a> <a onclick="deletebt()"><div
 										class='top_right open-popup' data-target="#full">
-										提交<img alt="" width="30px" height="29px"
-											src="${pageContext.request.contextPath}/static/jx/img/db/tj.png">
+										删除<img alt="" width="30px" height="29px"
+											src="${pageContext.request.contextPath}/static/jx/img/db/dele.png">
 									</div></a>
 							</div>
 
@@ -129,22 +134,7 @@
 					alt="">
 			</div>
 			<p class="weui-tabbar__label">上一题</p>
-		</a> <a id="unHeart" href="javascript:void(0)" class="weui-tabbar__item">
-			<div class="weui-tabbar__icon">
-				<img
-					src="${pageContext.request.contextPath}/static/jx/img/db/sc.png"
-					alt="">
-			</div>
-			<p class="weui-tabbar__label">收藏</p>
-		</a> <a id="heart" href="javascript:void(0)" class="weui-tabbar__item"
-			style="color: #C40000; display: none;">
-			<div class="weui-tabbar__icon">
-				<img
-					src="${pageContext.request.contextPath}/static/jx/img/db/bsc.png"
-					alt="">
-			</div>
-			<p class="weui-tabbar__label">已收藏</p>
-		</a> <a id='openCardcw' href="javascript:void(0)"
+		</a>  <a id='openCardcw' href="javascript:void(0)"
 			class="weui-tabbar__item open-popup" data-target="#half">
 			<div class="weui-tabbar__icon">
 				<img

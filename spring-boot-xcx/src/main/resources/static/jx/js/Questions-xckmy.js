@@ -25,8 +25,6 @@ function timedjs(isopen) {
 			}
 			ss = 60;
 		}
-		
-		
 		str += mm < 10 ? "0" + mm : mm;
 		str += ":";
 		str += ss < 10 ? "0" + ss : ss;
@@ -48,7 +46,7 @@ function getKmydata() {
 	 $.ajax({
          type: "get",
          dataType: "html",
-         url: pathName+"/kt/getKmydata/"+cs+"/"+tmlx, //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+         url: pathName+"/xc/getKmydata/"+cs+"/"+tmlx, //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
          success: function (result) {
         	 questions=eval(result);
         	    showQuestion(0);
@@ -104,6 +102,7 @@ function showQuestion(id) {
 	}
 	 $.hideLoading();
 	 iftmsc();
+	 $('.button_sp_area-zdy').show();
 }
 
 /* 答题卡 */
@@ -191,6 +190,9 @@ function clickTrim(source) {
 		})
 		cwthisquestion();
 		$(".markedred").addClass("markedred1");
+		if($('#showjq').text().length<1){
+			$('.button_sp_area-zdy').hide();
+		}
 		$('#jqhide').show();
 	}
 	/*$(".question_info").each(function() {
@@ -252,7 +254,7 @@ var audio =null;
 //语音读题
 function musicplay() {
 	var text = $('.question_title').text()
-	var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=8&text="
+	var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text="
 		+ encodeURI(text);
 	if(audio==null){
 		audio=new Audio(url);
@@ -279,7 +281,7 @@ function musicjqplay(){
 function iftmsc() {
 	 $.ajax({
          type: "get",
-         url: pathName+"/kt/iftmsc", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+         url: pathName+"/xc/iftmsc", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
          data:{uuid:questionuuid,cwlx:pa},
          dataType: "json",
          success: function (result) {
@@ -300,7 +302,7 @@ function iftmsc() {
 function scthisquestion() {
 	 $.ajax({
          type: "post",
-         url: pathName+"/kt/scbt", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+         url: pathName+"/xc/scbt", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
          data:{uuid:questionuuid,sclx:pa},
          dataType: "text",
          success: function (result) {
@@ -317,7 +319,7 @@ function cwthisquestion() {
 	var res='';
 	 $.ajax({
          type: "post",
-         url: pathName+"/kt/btcw", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+         url: pathName+"/xc/btcw", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
          data:{uuid:questionuuid,cwlx:pa},
          dataType: "json",
          success: function (result) {
@@ -365,6 +367,27 @@ if(sum.length<80){
 $('#pjspdesc').html("已做答:" +checkQues.length + "道题,错了"+eval(checkQues.length-sum.length)+"道题,还有"
 		+ (questions.length - checkQues.length)+ "道题未完成");
 	
+}
+
+//删除本题
+function deletebt() {
+	 $.ajax({
+         type: "post",
+         url: pathName+"/xc/deletebt", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+         data:{str1:questionuuid,str2:lx,str3:pa},
+         dataType: "json",
+         success: function (result) {
+        	 if(result=="200"){
+        		 $.toast("删除成功！"); 
+        	 }else{
+        		 $.toast("删除失败！"); 
+        	 }
+        	 
+         },
+         error: function(data) {
+        	 $.toast("网络错误","cancel");
+          }  
+         });
 }
 $(function() {
 /* 答题卡的切换 */

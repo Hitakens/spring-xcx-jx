@@ -28,27 +28,27 @@
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/bootstrap.js"></script>
 <script
-	src="${pageContext.request.contextPath}/static/jx/js/Questions.js"></script>
+	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy.js"></script>
 <script type="text/javascript">
-var pathName='${pageContext.request.contextPath}';
-var cs='${ymcs}';//页面参数
-var questions = [];
-var pa='A';//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推 
-var tmlx='B'//题型类型,B代表必做题，A代表选做题
-$(function() {
-	getKmydata();
-	/* 收藏按钮的切换 */
-	$("#unHeart").click(function() {
-		$(this).hide();
-		scthisquestion()
-		$("#heart").show();
+	var pathName = '${pageContext.request.contextPath}';
+	var cs = '${ymcs}';//页面参数
+	var questions = [];
+	var pa = 'A';//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推 
+	var tmlx = 'B'//题型类型,B代表必做题，A代表选做题
+	$(function() {
+		getKmydata();
+		/* 收藏按钮的切换 */
+		$("#unHeart").click(function() {
+			$(this).hide();
+			scthisquestion()
+			$("#heart").show();
+		})
+		$("#heart").click(function() {
+			$(this).hide();
+			scthisquestion()
+			$("#unHeart").show();
+		})
 	})
-	$("#heart").click(function() {
-		$(this).hide();
-		scthisquestion()
-		$("#unHeart").show();
-	})
-})
 </script>
 <style type="text/css">
 .warp {
@@ -68,8 +68,7 @@ $(function() {
 				<div style="width: 100%; height: auto; display: inline-block;">
 					<div style="width: 100%;">
 						<div style="width: 100%; margin: 0px auto">
-							<div class="middle-top"
-								style="width: 100%; height: 40px; background: #2D3339; position: relative;">
+							<div class="middle-top">
 								<a href="">
 									<div class='top_left'>
 										<img alt="" width="30px" height="29px"
@@ -95,15 +94,16 @@ $(function() {
 							</div>
 							<!-- 技巧 -->
 							<div id='jqhide' style="display: none;">
-							<div class="button_sp_area button_sp_area-zdy">
-							<ul style="list-style: none;"><li>
-							 <a onclick="musicjqplay()"   class=" weui-btn_default-zdy">
-        <img class='jq-left-img'  src="${pageContext.request.contextPath}/static/jx/img/sy/yy1.png"></a>
-        <span id='showjq'></span>
-							</li></ul>
-       
-      </div>
-							
+								<div class="button_sp_area button_sp_area-zdy">
+									<ul style="list-style: none;">
+										<li><a onclick="musicjqplay()"
+											class=" weui-btn_default-zdy"> <img class='jq-left-img'
+												src="${pageContext.request.contextPath}/static/jx/img/sy/yy1.png"></a>
+											<span id='showjq'></span></li>
+									</ul>
+
+								</div>
+
 								<div class="personal-mybuluo-head">
 									<div class="personal-mybuluo-wording">试题详解</div>
 									<div class="personal-border jmu-border-1px border-bottom"></div>
@@ -203,25 +203,21 @@ $(function() {
 	</div>
 	<!-- 显示提交结果 -->
 	<div id="full" class='weui-popup__container'>
-      <div class="weui-popup__overlay"></div>
-      <div class="weui-popup__modal">
-       <div class="warp">
-		<div class="weui-msg">
-			<div id='mlssimg' class="weui-msg__icon-area">
-				
+		<div class="weui-popup__overlay"></div>
+		<div class="weui-popup__modal">
+			<div class="warp">
+				<div class="weui-msg">
+					<div id='mlssimg' class="weui-msg__icon-area"></div>
+					<div class="weui-msg__text-area">
+						<h2 class="weui-msg__title" id='pjsp'></h2>
+						<p class="weui-msg__desc" id='pjspdesc'></p>
+					</div>
+				</div>
 			</div>
-			<div class="weui-msg__text-area">
-				<h2 class="weui-msg__title" id='pjsp'></h2>
-				<p class="weui-msg__desc" id='pjspdesc'>
-				
-				</p>
-			</div>
+
+			<a href="javascript:;" class="weui-btn weui-btn_primary close-popup">关闭</a>
 		</div>
 	</div>
-      
-        <a href="javascript:;" class="weui-btn weui-btn_primary close-popup">关闭</a>
-      </div>
-    </div>
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
 </body>
