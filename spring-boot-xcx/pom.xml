@@ -39,7 +39,15 @@
             <scope>true</scope>
         </dependency>
         <!-- devtools热部署 -->
+<dependency>
 
+<groupId>net.sf.jacob-project</groupId>
+
+<artifactId>jacob</artifactId>
+
+<version>1.14.3</version>
+
+</dependency>
         <!-- web支持: 1、web mvc; 2、restful; 3、jackjson支持; 4、aop ........ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

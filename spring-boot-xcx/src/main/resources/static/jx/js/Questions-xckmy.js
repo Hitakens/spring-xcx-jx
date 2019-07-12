@@ -254,8 +254,8 @@ var audio =null;
 //语音读题
 function musicplay() {
 	var text = $('.question_title').text()
-	var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text="
-		+ encodeURI(text);
+	var url = "http://tsn.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&pit=9&per=4&text="
+		+ encodeURIComponent(text);
 	if(audio==null){
 		audio=new Audio(url);
 	     audio.src = url;
@@ -266,9 +266,9 @@ function musicplay() {
 }
 //语音技巧
 function musicjqplay(){
-	var list = $('#showjq').text()
+	var text = $('#showjq').text()
 	var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text="
-			+ encodeURI(list);
+			+ encodeURIComponent(text);
 	if(audio==null){
 		audio=new Audio(url);
 	     audio.src = url;
@@ -279,6 +279,7 @@ function musicjqplay(){
 }
 //判断题目是否已经收藏
 function iftmsc() {
+	if(lx==null || lx.length<=0){
 	 $.ajax({
          type: "get",
          url: pathName+"/xc/iftmsc", //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
@@ -297,6 +298,7 @@ function iftmsc() {
         	 $.toast("网络错误,请稍后再试!", "cancel");
           }  
          });
+	}
 }
 //收藏本题
 function scthisquestion() {
@@ -378,7 +380,8 @@ function deletebt() {
          dataType: "json",
          success: function (result) {
         	 if(result=="200"){
-        		 $.toast("删除成功！"); 
+        		 $.toast("删除成功！");
+        		 window.location.href =pathName+'/xc/cwsc/'+lx+'/kmy';
         	 }else{
         		 $.toast("删除失败！"); 
         	 }

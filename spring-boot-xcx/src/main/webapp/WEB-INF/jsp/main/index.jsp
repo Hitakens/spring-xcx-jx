@@ -39,7 +39,6 @@
 	function tztab(p) {
 		$.showLoading();
 		if (p == '1') {
-    
 			btztab('xc')
             if(re.length<1){
             	$.hideLoading();
@@ -61,7 +60,7 @@
 
 		$.ajax({
 			type : "get",
-			url : pathName + "/kt/ctsc/" + clx, //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
+			url : pathName + "/xc/ctsc/" + clx, //后台文件的url 就是form的action,用ajax提交表单就不需要给form写action了
 			dataType : "text",
 			success : function(da1) {
 				da1 = eval('(' + da1 + ')')
@@ -168,7 +167,7 @@
 							<p class="weui-grid__label">
 								我的收藏<span id="xckmywdsc">(${maps.kmysc})</span>
 							</p>
-						</a> <a href="" class="weui-grid js_grid">
+						</a> <%-- <a href="" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img
 									src="${pageContext.request.contextPath}/static/jx/img/hj.png"
@@ -176,7 +175,7 @@
 							</div>
 							<p class="weui-grid__label">快板技巧</p>
 						</a>
-
+ --%>
 
 
 					</div>

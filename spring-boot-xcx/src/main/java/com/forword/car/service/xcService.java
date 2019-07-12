@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.forword.car.entity.ParaEntity;
 
-public interface KtService {
+public interface xcService {
 
 	List<Map<String, Object>> getKmydata(String pa,String tmlx);
 

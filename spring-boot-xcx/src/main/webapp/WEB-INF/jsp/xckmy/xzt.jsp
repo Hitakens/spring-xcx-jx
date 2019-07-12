@@ -150,7 +150,13 @@ margin-top: -61%;
 
 
 	<!-- 基础补充结束 -->
-
+<script
+		src="${pageContext.request.contextPath}/static/all/weui/js/fastclick.js"></script>
+	<script>
+		$(function() {
+			FastClick.attach(document.body);
+		});
+	</script>
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-2.1.4.js"></script>
 	<script

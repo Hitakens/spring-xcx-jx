@@ -32,6 +32,7 @@
 <script type="text/javascript">
 	var pathName = '${pageContext.request.contextPath}';
 	var cs = '${ymcs}';//页面参数
+	var lx=null;//只有在展示收藏和错误的时候才能赋值
 	var questions = [];
 	var pa = 'A';//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推 
 	var tmlx = 'B'//题型类型,B代表必做题，A代表选做题
@@ -218,6 +219,13 @@
 			<a href="javascript:;" class="weui-btn weui-btn_primary close-popup">关闭</a>
 		</div>
 	</div>
+	<script
+		src="${pageContext.request.contextPath}/static/all/weui/js/fastclick.js"></script>
+	<script>
+		$(function() {
+			FastClick.attach(document.body);
+		});
+	</script>
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
 </body>

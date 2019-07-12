@@ -7,13 +7,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.forword.car.dao.KtMapper;
+import com.forword.car.dao.xcMapper;
 import com.forword.car.entity.ParaEntity;
-import com.forword.car.service.KtService;
+import com.forword.car.service.xcService;
 @Service
-public class KtServiceImpl implements KtService{
+public class xcServiceImpl implements xcService{
 	@Autowired
-    private KtMapper ktMapper;
+    private xcMapper ktMapper;
 	@Override
 	public List<Map<String, Object>> getKmydata(String pa,String tmlx) {
 		List<Map<String, Object>> listData=null;
@@ -107,7 +107,8 @@ public class KtServiceImpl implements KtService{
 		try {
 			pr=new ParaEntity();
 			pr.setInt1(uuid);
-			pr.setStr1(cwlx);
+			pr.setStr1(openid);
+			pr.setStr2(cwlx);
 			String suuid= ktMapper.selectbtcwByuuidandsclx(pr);
 			if(suuid!=null) {
 				msg="1";

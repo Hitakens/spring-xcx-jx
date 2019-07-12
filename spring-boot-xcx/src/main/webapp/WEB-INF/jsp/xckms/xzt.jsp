@@ -68,7 +68,7 @@
 	height: 50px;
 	width: 50px;
 	display: inline-block;
-	background: #f30303;
+	background: blue;
 	vertical-align: middle;
 }
 
@@ -94,20 +94,20 @@ margin-top: -61%;
 <body ontouchstart>
 	<div class="warp">
 	<div class='top_bt'>
-			<font color="white">必做题(必做题并不包含所有题目)</font>
+			<font color="white">选做题(选做题并不包含所有题目)</font>
 		</div>
 		<div class='first-weiui'>
 			<div class='left-div'>
 				<span class='lx-radius'> <span class='lx-num'>1</span>
-					<h5 class='lx-h5'>必做题一</h5>
+					<h5 class='lx-h5'>选做题一</h5>
 				</span>
 			</div>
 			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/1"
-					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
+				<a href="${pageContext.request.contextPath}/xc/xzt/kmy/1"
+					class="weui-btn weui-btn_primary weui-btn_primary-zdy">选做练习</a>
 			</div>
 			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/1"
+				<a href="${pageContext.request.contextPath}/xc/kmyMnks/A/1"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
 			</div>
 		</div>
@@ -116,15 +116,15 @@ margin-top: -61%;
 			<div class='left-div'>
 				<span class='lx-radius'>
 					<span class='lx-num'>2</span>
-					<h5 class='lx-h5'>必做题二</h5>
+					<h5 class='lx-h5'>选做题二</h5>
 				</span>
 			</div>
 			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/2"
-					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
+				<a href="${pageContext.request.contextPath}/xc/xzt/kmy/2"
+					class="weui-btn weui-btn_primary weui-btn_primary-zdy">选做练习</a>
 			</div>
 			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/2"
+				<a href="${pageContext.request.contextPath}/xc/kmyMnks/A/2"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
 			</div>
 		</div>
@@ -133,81 +133,24 @@ margin-top: -61%;
 			<div class='left-div'>
 				<span class='lx-radius'>
 					<span class='lx-num'>3</span>
-					<h5 class='lx-h5'>必做题三</h5>
+					<h5 class='lx-h5'>选做题三</h5>
 				</span>
 			</div>
 			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/3"
-					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
+				<a href="${pageContext.request.contextPath}/xc/xzt/kmy/3"
+					class="weui-btn weui-btn_primary weui-btn_primary-zdy">选做练习</a>
 			</div>
 			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/3"
+				<a href="${pageContext.request.contextPath}/xc/kmyMnks/A/3"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
 			</div>
 		</div>
 		<!-- 练习三结束 -->
-		<div class='first-weiui'>
-			<div class='left-div'>
-				<span class='lx-radius'>
-					<span class='lx-num'>4</span>
-					<h5 class='lx-h5'>必做题四</h5>
-				</span>
-			</div>
-			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/4"
-					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
-			</div>
-			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/4"
-					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
-			</div>
-		</div>
-		<!-- 练习四结束 -->
-		<div class='first-weiui'>
-			<div class='left-div'>
-				<span class='lx-radius'>
-					<span class='lx-num'>5</span>
-					<h5 class='lx-h5'>必做题五</h5>
-				</span>
-			</div>
-			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/5"
-					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
-			</div>
-			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/5"
-					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
-			</div>
-		</div>
-		<!-- 练习五结束 -->
-		<div class='first-weiui'>
-			<div class='left-div'>
-				<span class='lx-radius'>
-					<span class='lx-num'>6</span>
-					<h5 class='lx-h5'>必做题六</h5>
-				</span>
-			</div>
-			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/6"
-					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
-			</div>
-			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/6"
-					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
-			</div>
-		</div>
-		<!-- 练习六结束 -->
 	</div>
 
 
 	<!-- 基础补充结束 -->
-<script
-		src="${pageContext.request.contextPath}/static/all/weui/js/fastclick.js"></script>
-	<script>
-		$(function() {
-			FastClick.attach(document.body);
-		});
-	</script>
+
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-2.1.4.js"></script>
 	<script

@@ -79,13 +79,11 @@
 										<img alt="" width="30px" height="29px"
 											src="${pageContext.request.contextPath}/static/jx/img/db/cz.png">重做
 									</div>
-								</a>
-								<div class='top_right'>
-									<a onclick="deletebt()"> 删除<img alt="" width="30px"
-										height="29px"
-										src="${pageContext.request.contextPath}/static/jx/img/db/dele.png">
-									</a>
-								</div>
+								</a> <a onclick="deletebt()"><div
+										class='top_right'>
+										删除<img alt="" width="30px" height="29px"
+											src="${pageContext.request.contextPath}/static/jx/img/db/dele.png">
+									</div></a>
 							</div>
 
 							<div
@@ -136,7 +134,7 @@
 					alt="">
 			</div>
 			<p class="weui-tabbar__label">上一题</p>
-		</a> <a id='openCardcw' href="javascript:void(0)"
+		</a>  <a id='openCardcw' href="javascript:void(0)"
 			class="weui-tabbar__item open-popup" data-target="#half">
 			<div class="weui-tabbar__icon">
 				<img
@@ -193,13 +191,6 @@
 			</div>
 		</div>
 	</div>
-	<script
-		src="${pageContext.request.contextPath}/static/all/weui/js/fastclick.js"></script>
-	<script>
-		$(function() {
-			FastClick.attach(document.body);
-		});
-	</script>
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
 </body>

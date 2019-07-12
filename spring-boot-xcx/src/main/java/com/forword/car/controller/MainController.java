@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.forword.car.entity.ParaEntity;
-import com.forword.car.service.KtService;
+import com.forword.car.service.xcService;
 import com.forword.car.service.MainService;
 import com.forword.common.StringUtil;
 import com.forword.main.BasController;
@@ -34,7 +34,7 @@ public class MainController extends BasController {
 	@Autowired
 	private MainService carService;
 	@Autowired
-	private KtService ktService;
+	private xcService ktService;
 	/**
 	 * 
 	 * @Title: yrsSerch 

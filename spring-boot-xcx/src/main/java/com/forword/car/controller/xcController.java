@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.forword.car.entity.ParaEntity;
-import com.forword.car.service.KtService;
+import com.forword.car.service.xcService;
 import com.forword.main.BasController;
 @Controller
 @RequestMapping("xc")
-public class KtController extends BasController{
-	public Logger log = Logger.getLogger(KtController.class);
+public class xcController extends BasController{
+	public Logger log = Logger.getLogger(xcController.class);
 	@Autowired
-	private KtService ktService;
+	private xcService ktService;
 	
 /**
  * @Title: bzt 
@@ -237,6 +237,9 @@ public class KtController extends BasController{
 			mo.addAttribute("palx", "A1");
 			datas=ktService.showcwsc(lx,openid,"A1");
 			ymparam="xckms/cwscdt";
+		}
+		if(datas.isEmpty()){
+			ymparam="main/index";
 		}
 		mo.addAttribute("lx", lx);
         mo.addAttribute("cwscdata", JSONObject.toJSONString(datas));

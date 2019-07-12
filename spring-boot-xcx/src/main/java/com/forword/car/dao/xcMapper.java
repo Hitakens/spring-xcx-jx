@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.forword.car.entity.ParaEntity;
 
 @Repository
-public interface KtMapper {
+public interface xcMapper {
 
 
 	String selectScdtByuuidandsclx(ParaEntity pr);

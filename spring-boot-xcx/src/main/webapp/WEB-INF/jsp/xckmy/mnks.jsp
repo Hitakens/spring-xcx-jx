@@ -245,6 +245,13 @@
 		</div>
 	</div>
 	<script
+		src="${pageContext.request.contextPath}/static/all/weui/js/fastclick.js"></script>
+	<script>
+		$(function() {
+			FastClick.attach(document.body);
+		});
+	</script>
+	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
 </body>
 </html>
