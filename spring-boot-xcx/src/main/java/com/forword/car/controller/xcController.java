@@ -84,6 +84,24 @@ public class xcController extends BasController{
 		return listdate;
 	}
 	/**
+	 * @Title: getKmydata 
+	 * @Description:  科目四题目展示
+	 * @param pa
+	 * @return
+	 * @return: List<Map<String,Object>>
+	 */
+	@RequestMapping(value = "getKmsdata/{pa}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> getKmsdata(@PathVariable String pa){
+		List<Map<String,Object>> listdate=null;
+		try {
+			listdate=ktService.getKmsdata(pa);
+		} catch (Exception e) {
+			log.error("请求"+pa+"出现异常", e.fillInStackTrace());
+		}
+		return listdate;
+	}
+	/**
 	 * 
 	 * @Title: scbt 
 	 * @Description: 收藏本题
@@ -210,6 +228,27 @@ public class xcController extends BasController{
 		return "xckmy/dycsdt";
 	}
 	/**
+	 * @Title: carkmdycs 
+	 * @Description: 科目四单元测试
+	 * @param tmlx
+	 * @param ymcs
+	 * @param mo
+	 * @return
+	 * @return: String
+	 */
+	@RequestMapping(value="kmsMnks/{ymcs}")
+	public String carkmsdycs(@PathVariable String ymcs,
+			Model mo){
+	List<Map<String,Object>> datas=null;
+	try {
+		datas=ktService.carkmsdycs(ymcs);
+        mo.addAttribute("dycsdata", JSONObject.toJSONString(datas));
+	} catch (Exception e) {
+		log.error("初始化考试页面数据发生错误", e.fillInStackTrace());
+	}
+		return "xckms/dycsdt";
+	}
+	/**
 	 * @Title: showcwsc 
 	 * @Description: 展示我的收藏和错误
 	 * @param lx
@@ -231,15 +270,12 @@ public class xcController extends BasController{
 		}
 		if(kmj=="kmy" || "kmy".equals(kmj)){
 			mo.addAttribute("palx", "A");
-			datas=ktService.showcwsc(lx,openid,"A");
+			datas=ktService.showcwsckmy(lx,openid,"A");
 			ymparam="xckmy/cwscdt";
 		}else if(kmj=="kms" || "kms".equals(kmj)){
 			mo.addAttribute("palx", "A1");
-			datas=ktService.showcwsc(lx,openid,"A1");
+			datas=ktService.showcwsckms(lx,openid,"A1");
 			ymparam="xckms/cwscdt";
-		}
-		if(datas.isEmpty()){
-			ymparam="main/index";
 		}
 		mo.addAttribute("lx", lx);
         mo.addAttribute("cwscdata", JSONObject.toJSONString(datas));

@@ -254,21 +254,23 @@ var audio =null;
 //语音读题
 function musicplay() {
 	var text = $('.question_title').text()
-	var url = "http://tsn.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&pit=9&per=4&text="
-		+ encodeURIComponent(text);
+	ar url =  "https://tsn.baidu.com/text2audio?cuid="+Math.random().toString(36).substr(2)+"&ctp=1&lan=zh&ie=UTF-8&spd=" +
+	"5&pit=9&per=0&tok=24.3aa5be899a4c0f0fe6051bf141e24d5f.2592000.1565708745.282335-15821559" +
+	"&vol=9&text="+ encodeURI(encodeURI(text));
 	if(audio==null){
 		audio=new Audio(url);
 	     audio.src = url;
 	     audio.play();
 	}
-    audio.src = url;
+   audio.src = url;
     audio.play();
 }
 //语音技巧
 function musicjqplay(){
 	var text = $('#showjq').text()
-	var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text="
-			+ encodeURIComponent(text);
+	ar url =  "https://tsn.baidu.com/text2audio?cuid="+Math.random().toString(36).substr(2)+"&ctp=1&lan=zh&ie=UTF-8&spd=" +
+	"5&pit=9&per=0&tok=24.3aa5be899a4c0f0fe6051bf141e24d5f.2592000.1565708745.282335-15821559" +
+	"&vol=9&text="+ encodeURI(encodeURI(text));
 	if(audio==null){
 		audio=new Audio(url);
 	     audio.src = url;

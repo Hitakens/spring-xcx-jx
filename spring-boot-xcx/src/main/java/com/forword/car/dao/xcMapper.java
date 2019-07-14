@@ -29,17 +29,26 @@ public interface xcMapper {
 	Map<String, Object> selectKmyAndKmsCtCount(String openid);
 
 
-	List<Map<String, Object>> kmMnks();
+	List<Map<String, Object>> kmyMnks();
 
 	List<Map<String, Object>> getKmyDycsdata(ParaEntity pr);
 
 	List<Map<String, Object>> getkmySclist(ParaEntity pa);
 
 	List<Map<String, Object>> getkmyCwlist(ParaEntity pa);
+	List<Map<String, Object>> getkmsSclist(ParaEntity pa);
+
+	List<Map<String, Object>> getkmsCwlist(ParaEntity pa);
 
 	int deleteByOPenidSc(ParaEntity pa);
 
 	int deleteByOPenidCw(ParaEntity pa);
+
+	List<Map<String, Object>> getKmsDycsdata(ParaEntity pr);
+
+	List<Map<String, Object>> getKmsdata(ParaEntity pr);
+
+	List<Map<String, Object>> kmsMnks();
 
 
 }

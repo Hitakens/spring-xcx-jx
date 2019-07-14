@@ -4,7 +4,7 @@
 <html
 	class="pixel-ratio-2 retina ios ios-10 ios-10-3 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6">
 <head>
-<title>科目一>练习</title>
+<title>科目四>练习</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -103,11 +103,11 @@ margin-top: -61%;
 				</span>
 			</div>
 			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/1"
+				<a href="${pageContext.request.contextPath}/xc/bzt/kms/1"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
 			</div>
 			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/1"
+				<a href="${pageContext.request.contextPath}/xc/kmsMnks/1"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
 			</div>
 		</div>
@@ -120,11 +120,11 @@ margin-top: -61%;
 				</span>
 			</div>
 			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/2"
+				<a href="${pageContext.request.contextPath}/xc/bzt/kms/2"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
 			</div>
 			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/2"
+				<a href="${pageContext.request.contextPath}/xc/kmsMnks/2"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
 			</div>
 		</div>
@@ -137,11 +137,11 @@ margin-top: -61%;
 				</span>
 			</div>
 			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/3"
+				<a href="${pageContext.request.contextPath}/xc/bzt/kms/3"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
 			</div>
 			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/3"
+				<a href="${pageContext.request.contextPath}/xc/kmsMnks/3"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
 			</div>
 		</div>
@@ -154,11 +154,11 @@ margin-top: -61%;
 				</span>
 			</div>
 			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/4"
+				<a href="${pageContext.request.contextPath}/xc/bzt/kms/4"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
 			</div>
 			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/4"
+				<a href="${pageContext.request.contextPath}/xc/kmsMnks/4"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
 			</div>
 		</div>
@@ -171,11 +171,11 @@ margin-top: -61%;
 				</span>
 			</div>
 			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/5"
+				<a href="${pageContext.request.contextPath}/xc/bzt/kms/5"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
 			</div>
 			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/5"
+				<a href="${pageContext.request.contextPath}/xc/kmsMnks/5"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
 			</div>
 		</div>
@@ -188,11 +188,11 @@ margin-top: -61%;
 				</span>
 			</div>
 			<div class='midel-div'>
-				<a href="${pageContext.request.contextPath}/xc/bzt/kmy/6"
+				<a href="${pageContext.request.contextPath}/xc/bzt/kms/6"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">必做练习</a>
 			</div>
 			<div class='right-div'>
-				<a href="${pageContext.request.contextPath}/xc/kmyMnks/B/6"
+				<a href="${pageContext.request.contextPath}/xc/kmsMnks/6"
 					class="weui-btn weui-btn_primary weui-btn_primary-zdy">单元测试</a>
 			</div>
 		</div>
@@ -201,7 +201,13 @@ margin-top: -61%;
 
 
 	<!-- 基础补充结束 -->
-
+<script
+		src="${pageContext.request.contextPath}/static/all/weui/js/fastclick.js"></script>
+	<script>
+		$(function() {
+			FastClick.attach(document.body);
+		});
+	</script>
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-2.1.4.js"></script>
 	<script

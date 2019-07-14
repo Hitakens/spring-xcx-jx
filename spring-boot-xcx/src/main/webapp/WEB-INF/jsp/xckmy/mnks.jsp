@@ -33,6 +33,7 @@
 	var pathName = '${pageContext.request.contextPath}';
 	var questionData = '${datas}';//考试题目数据
 	var questions = [];
+	var lx =null;
 	var pa = 'A';//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推 
 	var mm = 44;// 分
 	var ss = 60;// 秒

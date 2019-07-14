@@ -183,7 +183,7 @@
 					<!-- 科目四开始 -->
 					<h4 class="demos-title">科目四</h4>
 					<div class="weui-grids">
-						<a href="${pageContext.request.contextPath}/main/xckms/jqlx"
+						<a href="${pageContext.request.contextPath}/main/xckms/bzt"
 							class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img
@@ -191,7 +191,7 @@
 									alt="">
 							</div>
 							<p class="weui-grid__label">必做题</p>
-						</a> <a href="${pageContext.request.contextPath}/main/xckms/fllx"
+						</a> <%-- <a href="${pageContext.request.contextPath}/main/xckms/fllx"
 							class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img
@@ -199,14 +199,14 @@
 									alt="">
 							</div>
 							<p class="weui-grid__label">选做题</p>
-						</a> <a href="" class="weui-grid js_grid">
+						</a> --%> <a href="${pageContext.request.contextPath}/xc/kmMnks/xckms" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img
 									src="${pageContext.request.contextPath}/static/jx/img/100.png"
 									alt="">
 							</div>
 							<p class="weui-grid__label">模拟考试</p>
-						</a> <a href="" class="weui-grid js_grid">
+						</a> <a href="${pageContext.request.contextPath}/xc/cwsc/cw/kms" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img
 									src="${pageContext.request.contextPath}/static/jx/img/ct.png"
@@ -215,7 +215,7 @@
 							<p class='weui-grid__label'>
 								错题库<span id='xckmswdctk'>(${maps.kmsct})</span>
 							</p>
-						</a> <a href="" class="weui-grid js_grid">
+						</a> <a href="${pageContext.request.contextPath}/xc/cwsc/sc/kms" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img
 									src="${pageContext.request.contextPath}/static/jx/img/wdsc.png"

@@ -9,6 +9,14 @@
 		order by t.uuid
 		limit #{int1,jdbcType=INTEGER},#{int2,jdbcType=INTEGER}
 	</select>
+	<select id="getKmsdata" parameterType="com.forword.car.entity.ParaEntity"
+		resultType="map">
+		SELECT t.tmxzlx,
+		t.uuid,t.questionTitle,t.questionItems,t.questionAnswer,t.questionSkills,t.answerAnalysis,t.questionImg
+		FROM xckms t where 1=1
+		order by t.uuid
+		limit #{int1,jdbcType=INTEGER},#{int2,jdbcType=INTEGER}
+	</select>
 	<select id="selectScdtByuuidandsclx" parameterType="com.forword.car.entity.ParaEntity"
 		resultType="string">
 		select t.uuid from tk_sc t where
@@ -76,11 +84,19 @@
 		) kmsct from tk_cw t where
 		t.openid=#{openid,jdbcType=VARCHAR}
 	</select>
-	<select id="kmMnks" parameterType="string" resultType="map">
+	<select id="kmyMnks" parameterType="string" resultType="map">
 		SELECT
 		t.tmxzlx,
 		t.uuid,t.questionTitle,t.questionItems,t.questionAnswer,t.questionSkills,t.answerAnalysis,t.questionImg
 		from (SELECT * FROM xckmy order by rand() limit 100) t
+		order by
+		LENGTH(t.questionItems) asc
+	</select>
+	<select id="kmsMnks" parameterType="string" resultType="map">
+		SELECT
+		t.tmxzlx,
+		t.uuid,t.questionTitle,t.questionItems,t.questionAnswer,t.questionSkills,t.answerAnalysis,t.questionImg
+		from (SELECT * FROM xckms order by rand() limit 100) t
 		order by
 		LENGTH(t.questionItems) asc
 	</select>
@@ -93,6 +109,15 @@
 		order by
 		LENGTH(t.questionItems) asc
 	</select>
+		<select id="getKmsDycsdata" parameterType="com.forword.car.entity.ParaEntity"
+		resultType="map">
+		SELECT t.tmxzlx,
+		t.uuid,t.questionTitle,t.questionItems,t.questionAnswer,t.questionSkills,t.answerAnalysis,t.questionImg
+		from (SELECT * FROM xckms where 1=1 order by
+		rand() limit #{int1,jdbcType=INTEGER},#{int2,jdbcType=INTEGER}) t
+		order by
+		LENGTH(t.questionItems) asc
+	</select>
 	<select id="getkmySclist" parameterType="com.forword.car.entity.ParaEntity"
 		resultType="map">
 		select t.* from xckmy t,tk_sc t1 where t.uuid=t1.tkuuid and
@@ -101,9 +126,25 @@
 		order by
 		LENGTH(t.questionItems) asc
 	</select>
+	<select id="getkmsSclist" parameterType="com.forword.car.entity.ParaEntity"
+		resultType="map">
+		select t.* from xckms t,tk_sc t1 where t.uuid=t1.tkuuid and
+		t1.openid=#{str1,jdbcType=VARCHAR}
+		and t1.sclx=#{str2,jdbcType=VARCHAR}
+		order by
+		LENGTH(t.questionItems) asc
+	</select>
 	<select id="getkmyCwlist" parameterType="com.forword.car.entity.ParaEntity"
 		resultType="map">
 		select t.* from xckmy t,tk_cw t1 where t.uuid=t1.tkuuid and
+		t1.openid=#{str1,jdbcType=VARCHAR}
+		and t1.cwlx=#{str2,jdbcType=VARCHAR}
+		order by
+		LENGTH(t.questionItems) asc
+	</select>
+		<select id="getkmsCwlist" parameterType="com.forword.car.entity.ParaEntity"
+		resultType="map">
+		select t.* from xckms t,tk_cw t1 where t.uuid=t1.tkuuid and
 		t1.openid=#{str1,jdbcType=VARCHAR}
 		and t1.cwlx=#{str2,jdbcType=VARCHAR}
 		order by

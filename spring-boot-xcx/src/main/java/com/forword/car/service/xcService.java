@@ -22,8 +22,14 @@ public interface xcService {
 
 	List<Map<String, Object>> carkmdycs(String tmlx, String ymcs);
 
-	List<Map<String, Object>> showcwsc(String lx, String openid,String kmlx);
+	List<Map<String, Object>> showcwsckmy(String lx, String openid,String kmlx);
 
 	String deletebt(ParaEntity pa);
+
+	List<Map<String, Object>> carkmsdycs(String ymcs);
+
+	List<Map<String, Object>> getKmsdata(String pa);
+
+	List<Map<String, Object>> showcwsckms(String lx, String openid, String kmlx);
 
 }

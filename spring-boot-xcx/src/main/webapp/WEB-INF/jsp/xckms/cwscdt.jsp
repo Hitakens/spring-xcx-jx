@@ -4,7 +4,7 @@
 <html
 	class="pixel-ratio-2 retina ios ios-10 ios-10-3 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6">
 <head>
-<title>科目一>${cwsc}</title>
+<title>科目四>${cwsc}</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -28,7 +28,7 @@
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/bootstrap.js"></script>
 <script
-	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy.js"></script>
+	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckms.js"></script>
 <script type="text/javascript">
 	var pathName = '${pageContext.request.contextPath}';
 	var lx = '${lx}';//页面参数 //只有在展示收藏和错误的时候才能赋值
@@ -79,11 +79,13 @@
 										<img alt="" width="30px" height="29px"
 											src="${pageContext.request.contextPath}/static/jx/img/db/cz.png">重做
 									</div>
-								</a> <a onclick="deletebt()"><div
-										class='top_right'>
-										删除<img alt="" width="30px" height="29px"
-											src="${pageContext.request.contextPath}/static/jx/img/db/dele.png">
-									</div></a>
+								</a>
+								<div class='top_right'>
+									<a onclick="deletebt()"> 删除<img alt="" width="30px"
+										height="29px"
+										src="${pageContext.request.contextPath}/static/jx/img/db/dele.png">
+									</a>
+								</div>
 							</div>
 
 							<div
@@ -134,7 +136,7 @@
 					alt="">
 			</div>
 			<p class="weui-tabbar__label">上一题</p>
-		</a>  <a id='openCardcw' href="javascript:void(0)"
+		</a> <a id='openCardcw' href="javascript:void(0)"
 			class="weui-tabbar__item open-popup" data-target="#half">
 			<div class="weui-tabbar__icon">
 				<img
@@ -191,6 +193,13 @@
 			</div>
 		</div>
 	</div>
+	<script
+		src="${pageContext.request.contextPath}/static/all/weui/js/fastclick.js"></script>
+	<script>
+		$(function() {
+			FastClick.attach(document.body);
+		});
+	</script>
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
 </body>

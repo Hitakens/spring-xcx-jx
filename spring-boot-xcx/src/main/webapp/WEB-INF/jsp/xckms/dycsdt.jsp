@@ -4,7 +4,7 @@
 <html
 	class="pixel-ratio-2 retina ios ios-10 ios-10-3 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6">
 <head>
-<title>科目一>单元测试</title>
+<title>科目四>单元测试</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -28,13 +28,13 @@
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/bootstrap.js"></script>
 <script
-	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy.js"></script>
+	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckms.js"></script>
 <script type="text/javascript">
 	var pathName = '${pageContext.request.contextPath}';
 	var questionData = '${dycsdata}';//考试题目数据
 	var questions = [];
 	var lx=null;//只有在展示收藏和错误的时候才能赋值
-	var pa = 'A';//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推 
+	var pa = 'A1';//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推 
 	var mm = 44;// 分
 	var ss = 60;// 秒
 	var timeopen=true;
@@ -240,6 +240,13 @@ text-align: center;
 			<a href="javascript:;" class="weui-btn weui-btn_primary close-popup">关闭</a>
 		</div>
 	</div>
+	<script
+		src="${pageContext.request.contextPath}/static/all/weui/js/fastclick.js"></script>
+	<script>
+		$(function() {
+			FastClick.attach(document.body);
+		});
+	</script>
 	<script
 		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
 </body>
