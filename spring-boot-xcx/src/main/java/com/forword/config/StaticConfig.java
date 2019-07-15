@@ -24,7 +24,7 @@ public class StaticConfig extends WebMvcConfigurerAdapter{
 	    p.setProperty("offsetAsPageNum", "true");
 	    p.setProperty("rowBoundsWithCount", "true");
 	    p.setProperty("reasonable", "true");
-	    p.setProperty("dialect", "oracle");
+	    p.setProperty("dialect", "mysql");
 	    p.setProperty("supportMethodsArguments", "false");
 	     p.setProperty("pageSizeZero", "true");
 	    pageHelper.setProperties(p);

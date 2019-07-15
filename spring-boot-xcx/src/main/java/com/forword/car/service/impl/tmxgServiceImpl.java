@@ -27,8 +27,14 @@ public class tmxgServiceImpl implements tmxgService{
 		List<Map<String,Object>> docs=null;
 		PageInfo<Map<String,Object>> pageInfo =null;
 		try {
+			limit = limit == null?1:limit;
+			page = page == null?10:page;
 			PageHelper.startPage(limit, page);
-			docs = tmxgMapper.selectZbyMapJg(pa);
+			
+			if(pa!=null && (pa.getStr1()=="xckmy" || "xckmy".equals(pa.getStr1()))) {
+				docs = tmxgMapper.selectTMall(pa.getStr1());
+			}
+			
 			pageInfo = new PageInfo<>(docs);
 			Integer total = (int) pageInfo.getTotal();
 	        data = Layui.data(total,pageInfo.getList());
