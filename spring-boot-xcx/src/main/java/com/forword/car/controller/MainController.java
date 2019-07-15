@@ -83,7 +83,7 @@ public class MainController extends BasController {
 		Map<String, Object> ctsc = ktService.ctsc("xc", (String)ma.get("openid"));
 		request.setAttribute("maps", ctsc);
 		request.setAttribute("wxname", ma.get("wxname"));
-		request.setAttribute("avatarurl", ma.get("avatarurl"));
+		request.setAttribute("imgurl", ma.get("avatarurl"));
 		return "main/index";
 
 	}
@@ -151,9 +151,10 @@ public class MainController extends BasController {
 @RequestMapping(value = "/getcz.html", method = RequestMethod.GET)
 public String getcz(String stuid,String imgurl,HttpServletRequest request) {
 	request.setAttribute("stuid", stuid);
-	System.out.println(stuid);
 	request.setAttribute("imgurl", imgurl);
-	return "all/bdhyk";
+	request.setAttribute("wxname", Math.random());//上线时注销
+	return "main/index";
+	//return "all/bdhyk";//上线时放开
 	}
 /**
  * @Title: insertkm 

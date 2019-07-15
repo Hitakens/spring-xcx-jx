@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta name="description"
 	content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
@@ -27,13 +27,14 @@
 	src="${pageContext.request.contextPath}/static/jx/js/jquery-1.9.1.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/bootstrap.js"></script>
+
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy.js"></script>
 <script type="text/javascript">
 	var pathName = '${pageContext.request.contextPath}';
 	var questionData = '${datas}';//考试题目数据
 	var questions = [];
-	var lx =null;
+	var lx = null;
 	var pa = 'A';//(收藏类型,本题错误)A为小车科目一，A1为 小车科目四，依次类推 
 	var mm = 44;// 分
 	var ss = 60;// 秒
@@ -85,6 +86,7 @@
 </style>
 </head>
 <body ontouchstart>
+    <audio id="bgmusic" autoplay="autoplay"></audio>
 	<div class="warp">
 		<div class="col-md-10">
 			<div class="content">

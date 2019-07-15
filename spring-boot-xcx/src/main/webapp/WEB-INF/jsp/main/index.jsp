@@ -98,7 +98,7 @@
 	<div class="warp">
 		<div class="top">
 			<img class="top_img" align="middle"
-				src="${avatarurl}">
+				src="${imgurl}">
 			<span>学员姓名:${wxname}(永久VIP会员)</span>
 		</div>
 		<div class="weui-tab">
