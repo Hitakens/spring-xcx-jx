@@ -138,7 +138,7 @@ public class MainController extends BasController {
 		
 		return carService.getopenidisnull(openid);
 	}
-	//getcz.html
+
 /**
  * @Title: getcz 
  * @Description: 没有注册的用户，跳转到注册页面
@@ -152,9 +152,9 @@ public class MainController extends BasController {
 public String getcz(String stuid,String imgurl,HttpServletRequest request) {
 	request.setAttribute("stuid", stuid);
 	request.setAttribute("imgurl", imgurl);
-	request.setAttribute("wxname", Math.random());//上线时注销
-	return "main/index";
-	//return "all/bdhyk";//上线时放开
+	//request.setAttribute("wxname", Math.random());//上线时注销
+	//return "main/index";
+	return "all/bdhyk";//上线时放开
 	}
 /**
  * @Title: insertkm 

@@ -18,7 +18,8 @@ public class tmxgController extends BasController {
 	@Autowired
 	private tmxgService tmxgService;
 
-	@RequestMapping("selectTMall")
+	@RequestMapping("/selectTMall")
+	@ResponseBody
 	public Layui selectTMall(ParaEntity pa, Integer limit, Integer page) {
 		Layui selecttm=null;
 		try {

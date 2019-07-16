@@ -27,12 +27,13 @@ public class tmxgServiceImpl implements tmxgService{
 		List<Map<String,Object>> docs=null;
 		PageInfo<Map<String,Object>> pageInfo =null;
 		try {
-			limit = limit == null?1:limit;
-			page = page == null?10:page;
-			PageHelper.startPage(limit, page);
+			limit = limit == null?50:limit;
+			page = page == null?1:page;
+			PageHelper.startPage(page,limit);
 			
 			if(pa!=null && (pa.getStr1()=="xckmy" || "xckmy".equals(pa.getStr1()))) {
-				docs = tmxgMapper.selectTMall(pa.getStr1());
+				String p=pa.getStr2()==null?"":"%"+pa.getStr2()+"%";
+				docs = tmxgMapper.selectTMall(p);
 			}
 			
 			pageInfo = new PageInfo<>(docs);

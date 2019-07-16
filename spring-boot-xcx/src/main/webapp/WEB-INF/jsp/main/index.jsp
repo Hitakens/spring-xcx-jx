@@ -115,7 +115,7 @@
 					class="weui-navbar__item  weui-navbar__item-zdy"
 					onclick="tztab(3);" href="#tab3"><img class='icon-img'
 					src="${pageContext.request.contextPath}/static/jx/img/kc.png">
-					<span class="img-midel">货车(A1/B1/A3)</span></a>
+					<span class="img-midel">客车(A1/B1/A3)</span></a>
 			</div>
 			<div class="weui-tab__bd">
 				<div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
