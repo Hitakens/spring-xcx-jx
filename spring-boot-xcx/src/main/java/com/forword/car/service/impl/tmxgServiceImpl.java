@@ -14,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import com.forword.car.dao.tmxgMapper;
 import com.forword.car.entity.Layui;
 import com.forword.car.entity.ParaEntity;
+import com.forword.car.entity.kmtmEntity;
 @Service
 public class tmxgServiceImpl implements tmxgService{
     public Logger log = Logger.getLogger(this.getClass());
@@ -43,6 +44,25 @@ public class tmxgServiceImpl implements tmxgService{
 			log.info(e);
 		}
 		return data;
+	}
+
+	@Override
+	public String insertKm(kmtmEntity pa) {
+		String msg=null;
+		try {
+			if(pa!=null && (pa.getKmlx()=="xckmy" || "xckmy".equals(pa.getKmlx()))) {
+				int i=tmxgMapper.insertKm(pa);
+				if(i>0) {
+					msg="修改成功！";
+				}else {
+					msg="修改失败";
+				}
+			}
+		} catch (Exception e) {
+			msg="修改失败";
+			log.info(e);
+		}
+		return msg;
 	}
 	
 }

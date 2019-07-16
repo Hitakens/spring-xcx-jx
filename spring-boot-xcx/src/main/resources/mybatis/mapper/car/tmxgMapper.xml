@@ -5,4 +5,14 @@
 	  SELECT * FROM  xckmy t where t.questionTitle like 
 	  #{str1,jdbcType=VARCHAR} order by t.uuid
 	</select>
+	<update id="insertKm" parameterType="com.forword.car.entity.kmtmEntity">
+	    update xckmy t set 
+	    t.questionTitle= #{questionTitle,jdbcType=VARCHAR},
+	    t.questionItems= #{questionItems,jdbcType=VARCHAR},
+	    t.questionAnswer= #{questionAnswer,jdbcType=VARCHAR},
+	    t.questionSkills= #{questionSkills,jdbcType=VARCHAR},
+	    t.answerAnalysis= #{answerAnalysis,jdbcType=VARCHAR},
+	    t.tmxzlx= #{tmxzlx,jdbcType=VARCHAR}
+	    where t.uuid=#{uuid,jdbcType=INTEGER}
+	</update>
 </mapper>
