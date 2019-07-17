@@ -1,15 +1,26 @@
 package com.forword.car.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.alibaba.fastjson.JSONObject;
 import com.forword.car.entity.Layui;
 import com.forword.car.entity.ParaEntity;
 import com.forword.car.entity.kmtmEntity;
 import com.forword.car.service.tmxgService;
+import com.forword.common.UUIDGenerator;
 import com.forword.main.BasController;
 
 @Controller
@@ -41,5 +52,56 @@ public class tmxgController extends BasController {
 			log.error("修改错误", e.fillInStackTrace());
 		}
 		return selecttm;
+	}
+	/**
+	 * 提交报销
+	 * 
+	 * @param request
+	 * @param bxen
+	 * @return
+	 */
+	@PostMapping("uploadtp")
+	@ResponseBody
+	public JSONObject  multiUpload(HttpServletRequest request,ParaEntity pa) {
+		String msg = "";
+		JSONObject resObj = new JSONObject();
+		List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
+		// D:/develop/file   "/home/apache-tomcat-8.5.40/webapps/develop/"+pa.getStr2()+"/";
+
+		if (files != null && files.size() > 0) {
+			String filePath = null;
+			if(pa!=null){
+				filePath= "/home/apache-tomcat-8.5.40/webapps/develop/"+pa.getStr2()+"/";
+			}
+			File f = new File(filePath);
+			if (!f.exists()) {
+				f.mkdirs();
+			}
+			for (int i = 0; i < files.size(); i++) {
+				MultipartFile file = files.get(i);
+				if (file.isEmpty()) {
+					continue;
+				}
+				String fileName = file.getOriginalFilename();
+				// 获取文件后缀
+				String uuidName = UUIDGenerator.getImgUUID() + fileName;
+				File dest = new File(filePath + uuidName);
+				try {
+					file.transferTo(dest);
+					pa.setStr3("https://www.jaiy.online/develop/"+pa.getStr2()+"/" + uuidName);
+					msg=tmxgService.updatekmimg(pa);
+					
+					log.info("第" + (i + 1) + "个文件上传成功" + filePath + uuidName);
+
+				} catch (IOException e) {
+					log.error("上传第" + (i++) + "个文件失败", e);
+				}
+			}
+		} else {
+			pa.setStr3("无");
+			msg=tmxgService.updatekmimg(pa);
+		}
+		resObj.put("msg", msg);
+		return resObj;
 	}
 }

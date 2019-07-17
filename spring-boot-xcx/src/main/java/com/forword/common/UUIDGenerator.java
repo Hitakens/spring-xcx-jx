@@ -1,5 +1,7 @@
 package com.forword.common;
 
+import java.time.Instant;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -47,5 +49,12 @@ public class UUIDGenerator {
 	  UUID randomUUID = UUID.randomUUID();
 		long millis = System.currentTimeMillis();
 		return "Km_"+randomUUID.toString().substring(0, 5)+millis;
+  }
+  public static String getImgUUID(){
+  	Random r=new Random();
+  	Instant now = Instant.now();
+  	String asInt = "_"+r.ints(0, (999999999 + 1)).limit(1).findAny().getAsInt();
+  	String u=now.toString()+asInt;
+		return u.replace(":", "-");
   }
 }

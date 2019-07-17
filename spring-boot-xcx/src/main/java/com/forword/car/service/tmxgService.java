@@ -10,5 +10,7 @@ public interface tmxgService {
 
 	String insertKm(kmtmEntity pa);
 
+	String updatekmimg(ParaEntity pa);
+
 
 }

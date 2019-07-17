@@ -4,7 +4,7 @@
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8" />
-<title>小车题目查询</title>
+<title>客车题目查询</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta content="FairTech" name="author" />
@@ -44,8 +44,8 @@
 				<div class="demoTable">
 					<div class="layui-inline layui-input-inline_zdy">
 						<select id="kmlx">
-							<option value='xckmy'>科目一题目</option>
-							<option value='xckms'>科目四题目</option>
+							<option value='kckmy'>科目一题目</option>
+							<option value='kckms'>科目四题目</option>
 						</select>
 					</div>
 					<div class="layui-inline">

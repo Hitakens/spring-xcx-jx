@@ -1,18 +1,168 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.forword.car.dao.tmxgMapper">
-	<select id="selectTMall" parameterType="string" resultType="map">
-	  SELECT * FROM  xckmy t where t.questionTitle like 
-	  #{str1,jdbcType=VARCHAR} order by t.uuid
+	<select id="selectxckmy" parameterType="string" resultType="map">
+		SELECT * FROM xckmy t where t.questionTitle like
+		#{str1,jdbcType=VARCHAR} order by t.uuid
 	</select>
-	<update id="insertKm" parameterType="com.forword.car.entity.kmtmEntity">
-	    update xckmy t set 
-	    t.questionTitle= #{questionTitle,jdbcType=VARCHAR},
-	    t.questionItems= #{questionItems,jdbcType=VARCHAR},
-	    t.questionAnswer= #{questionAnswer,jdbcType=VARCHAR},
-	    t.questionSkills= #{questionSkills,jdbcType=VARCHAR},
-	    t.answerAnalysis= #{answerAnalysis,jdbcType=VARCHAR},
-	    t.tmxzlx= #{tmxzlx,jdbcType=VARCHAR}
-	    where t.uuid=#{uuid,jdbcType=INTEGER}
+	<update id="insertxckmy" parameterType="com.forword.car.entity.kmtmEntity">
+		update xckmy t set
+		t.questionTitle= #{questionTitle,jdbcType=VARCHAR},
+		t.questionItems=
+		#{questionItems,jdbcType=VARCHAR},
+		t.questionAnswer=
+		#{questionAnswer,jdbcType=VARCHAR},
+		t.questionSkills=
+		#{questionSkills,jdbcType=VARCHAR},
+		t.answerAnalysis=
+		#{answerAnalysis,jdbcType=VARCHAR},
+		t.tmxzlx=
+		#{tmxzlx,jdbcType=VARCHAR},
+		t.questionImg=
+		#{questionImg,jdbcType=VARCHAR}
+		where t.uuid=#{uuid,jdbcType=INTEGER}
 	</update>
+
+	<select id="selectxckms" parameterType="string" resultType="map">
+		SELECT * FROM xckms t where t.questionTitle like
+		#{str1,jdbcType=VARCHAR} order by t.uuid
+	</select>
+	<update id="insertxckms" parameterType="com.forword.car.entity.kmtmEntity">
+		update xckms t set
+		t.questionTitle= #{questionTitle,jdbcType=VARCHAR},
+		t.questionItems=
+		#{questionItems,jdbcType=VARCHAR},
+		t.questionAnswer=
+		#{questionAnswer,jdbcType=VARCHAR},
+		t.questionSkills=
+		#{questionSkills,jdbcType=VARCHAR},
+		t.answerAnalysis=
+		#{answerAnalysis,jdbcType=VARCHAR},
+		t.tmxzlx=
+		#{tmxzlx,jdbcType=VARCHAR},
+		t.questionImg=
+		#{questionImg,jdbcType=VARCHAR}
+		where t.uuid=#{uuid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selecthckmy" parameterType="string" resultType="map">
+		SELECT * FROM hckmy t where t.questionTitle like
+		#{str1,jdbcType=VARCHAR} order by t.uuid
+	</select>
+	<update id="inserthckmy" parameterType="com.forword.car.entity.kmtmEntity">
+		update hckmy t set
+		t.questionTitle= #{questionTitle,jdbcType=VARCHAR},
+		t.questionItems=
+		#{questionItems,jdbcType=VARCHAR},
+		t.questionAnswer=
+		#{questionAnswer,jdbcType=VARCHAR},
+		t.questionSkills=
+		#{questionSkills,jdbcType=VARCHAR},
+		t.answerAnalysis=
+		#{answerAnalysis,jdbcType=VARCHAR},
+		t.tmxzlx=
+		#{tmxzlx,jdbcType=VARCHAR},
+		t.questionImg=
+		#{questionImg,jdbcType=VARCHAR}
+		where t.uuid=#{uuid,jdbcType=INTEGER}
+	</update>
+
+
+	<select id="selecthckms" parameterType="string" resultType="map">
+		SELECT * FROM hckms t where t.questionTitle like
+		#{str1,jdbcType=VARCHAR} order by t.uuid
+	</select>
+	<update id="inserthckms" parameterType="com.forword.car.entity.kmtmEntity">
+		update hckms t set
+		t.questionTitle= #{questionTitle,jdbcType=VARCHAR},
+		t.questionItems=
+		#{questionItems,jdbcType=VARCHAR},
+		t.questionAnswer=
+		#{questionAnswer,jdbcType=VARCHAR},
+		t.questionSkills=
+		#{questionSkills,jdbcType=VARCHAR},
+		t.answerAnalysis=
+		#{answerAnalysis,jdbcType=VARCHAR},
+		t.tmxzlx=
+		#{tmxzlx,jdbcType=VARCHAR},
+		t.questionImg=
+		#{questionImg,jdbcType=VARCHAR}
+		where t.uuid=#{uuid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectkckms" parameterType="string" resultType="map">
+		SELECT * FROM kckms t where t.questionTitle like
+		#{str1,jdbcType=VARCHAR} order by t.uuid
+	</select>
+	<update id="insertkckms" parameterType="com.forword.car.entity.kmtmEntity">
+		update kckms t set
+		t.questionTitle= #{questionTitle,jdbcType=VARCHAR},
+		t.questionItems=
+		#{questionItems,jdbcType=VARCHAR},
+		t.questionAnswer=
+		#{questionAnswer,jdbcType=VARCHAR},
+		t.questionSkills=
+		#{questionSkills,jdbcType=VARCHAR},
+		t.answerAnalysis=
+		#{answerAnalysis,jdbcType=VARCHAR},
+		t.tmxzlx=
+		#{tmxzlx,jdbcType=VARCHAR},
+		t.questionImg=
+		#{questionImg,jdbcType=VARCHAR}
+		where t.uuid=#{uuid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectkckmy" parameterType="string" resultType="map">
+		SELECT * FROM kckmy t where t.questionTitle like
+		#{str1,jdbcType=VARCHAR} order by t.uuid
+	</select>
+	<update id="insertkckmy" parameterType="com.forword.car.entity.kmtmEntity">
+		update kckmy t set
+		t.questionTitle= #{questionTitle,jdbcType=VARCHAR},
+		t.questionItems=
+		#{questionItems,jdbcType=VARCHAR},
+		t.questionAnswer=
+		#{questionAnswer,jdbcType=VARCHAR},
+		t.questionSkills=
+		#{questionSkills,jdbcType=VARCHAR},
+		t.answerAnalysis=
+		#{answerAnalysis,jdbcType=VARCHAR},
+		t.tmxzlx=
+		#{tmxzlx,jdbcType=VARCHAR},
+		t.questionImg=
+		#{questionImg,jdbcType=VARCHAR}
+		where t.uuid=#{uuid,jdbcType=INTEGER}
+	</update>
+
+	<update id="updatekmimgxckmy" parameterType="com.forword.car.entity.ParaEntity">
+		update xckmy t set
+		t.questionImg=#{str3,jdbcType=VARCHAR} where
+		t.uuid=#{int1,jdbcType=INTEGER}
+	</update>
+	<update id="updatekmimgxckms" parameterType="com.forword.car.entity.ParaEntity">
+		update xckms t set
+		t.questionImg=#{str3,jdbcType=VARCHAR} where
+		t.uuid=#{int1,jdbcType=INTEGER}
+	</update>
+	<update id="updatekmimghckmy" parameterType="com.forword.car.entity.ParaEntity">
+		update hckmy t set
+		t.questionImg=#{str3,jdbcType=VARCHAR} where
+		t.uuid=#{int1,jdbcType=INTEGER}
+	</update>
+	<update id="updatekmimghckms" parameterType="com.forword.car.entity.ParaEntity">
+		update hckms t set
+		t.questionImg=#{str3,jdbcType=VARCHAR} where
+		t.uuid=#{int1,jdbcType=INTEGER}
+	</update>
+	<update id="updatekmimgkckmy" parameterType="com.forword.car.entity.ParaEntity">
+		update kckmy t set
+		t.questionImg=#{str3,jdbcType=VARCHAR} where
+		t.uuid=#{int1,jdbcType=INTEGER}
+	</update>
+	<update id="updatekmimgkckms" parameterType="com.forword.car.entity.ParaEntity">
+		update kckms t set
+		t.questionImg=#{str3,jdbcType=VARCHAR} where
+		t.uuid=#{int1,jdbcType=INTEGER}
+	</update>
+	
 </mapper>

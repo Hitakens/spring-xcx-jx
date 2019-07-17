@@ -10,6 +10,13 @@ public class kmtmEntity {
 	private String questionAnswer;
 	private String questionSkills;
 	private String answerAnalysis;
+	private String questionImg;
+	public String getQuestionImg() {
+		return questionImg;
+	}
+	public void setQuestionImg(String questionImg) {
+		this.questionImg = questionImg;
+	}
 	private String tmxzlx;
 	private String kmlx;
 	private String uuid;

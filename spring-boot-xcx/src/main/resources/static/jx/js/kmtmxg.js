@@ -1,12 +1,14 @@
-layui.use([ 'form', 'layedit', 'laydate', 'table' ],
+layui.use([ 'form', 'layedit', 'laydate', 'table' ,'upload'],
 		function() {
 			var form = layui.form,
 			layer = layui.layer,
 			layedit = layui.layedit,
 			laydate = layui.laydate, 
 			table = layui.table,
+			upload = layui.upload,
 			 $ = layui.$
 			$('#opengz').hide();
+			$('#opentp').hide();
 		     table.render({
 				elem : '#right_table',
 				url : pathName + '/tm/selectTMall', // 数据接口
@@ -68,11 +70,20 @@ layui.use([ 'form', 'layedit', 'laydate', 'table' ],
 			  });
 		  table.on('toolbar(right_table)', function(obj){
 			    var checkStatus = table.checkStatus(obj.config.id); // 获取选中行状态
+			    if(checkStatus.data[0]==undefined){
+			    	 layer.msg('请选择一行进行操作！', {time:2000 });
+			    	 return;
+			    }
 			    switch(obj.event){
 			      case 'getCheckData':
-			        var data = checkStatus.data[0];  // 获取选中行数据
-			        opengz(data);
-			      break;
+			    	  var data = checkStatus.data[0];  // 获取选中行数据
+			    	  opengz(data);
+			    	  break;
+			      case 'sctpData':
+				       var data = checkStatus.data[0];  // 获取选中行数据
+				       opentp(data,upload);
+				       break;
+				  break;
 			    };
 			  });
 
@@ -85,6 +96,7 @@ function opengz(data){
 	$('#questionSkills').val(data.questionSkills);
 	$('#answerAnalysis').val(data.answerAnalysis);
 	$("select[name='tmxzlx']").val(data.tmxzlx);
+	$('#questionImg').val(data.questionImg);
 	layui.form.render('select');
 		layer.open({
 			  type: 1,
@@ -104,6 +116,7 @@ function opengz(data){
 			    	 			answerAnalysis:$('#answerAnalysis').val(),
 			    	 			tmxzlx:$('#tmxzlx').val(),
 			    	 			kmlx:$('#kmlx').val(),
+			    	 			questionImg:$('#questionImg').val(),
 			    	 			uuid:data.uuid
 			                },// 将该表单序列化
 			                async:false,// 设置成true，这标志着在请求开始后，其他代码依然能够执行。如果把这个选项设置成false，这意味着所有的请求都不再是异步的了，这也会导致浏览器被锁死
@@ -111,12 +124,43 @@ function opengz(data){
 			                	layer.msg('网络错误')
 			                },
 			                success:function(data){// 请求成功之后的操作
-			                    
+			                	layer.msg(data)
 			                }
 			            });
 			    layer.close(index);
 			    },
 			  content:$('#opengz')
+			});
+		
+	}
+
+
+function opentp(data,upload){
+	//普通图片上传
+	  var uploadInst = upload.render({
+	    elem: '#test1'
+	    ,url: pathName + '/tm/uploadtp'
+	    ,auto:false
+	     ,data:{int1:data.uuid,str2:$('#kmlx').val()}
+	    ,bindAction: '#test9'	
+	    ,choose: function(obj){
+	      //预读本地文件示例，不支持ie8
+	      obj.preview(function(index, file, result){
+	        $('#demo1').attr('src', result); //图片链接（base64）
+	      });
+	    }
+	    ,done: function(res){
+	        layer.msg(res.msg);
+	    }
+	    ,error: function(){
+	     layer.msg("上传失败，请检查网络！");	
+	    }
+	  });
+		layer.open({
+			  type: 1,
+			  title:'题目编号:'+data.uuid,
+			  area: ['520px', '400px'],
+			  content:$('#opentp')
 			});
 		
 	}

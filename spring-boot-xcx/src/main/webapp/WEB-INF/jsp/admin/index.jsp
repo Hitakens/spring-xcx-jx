@@ -96,12 +96,12 @@ text-align: center;
 						</a></li>
 					</ul>
 					<ul class="sub-menu">
-						<li><a _href="order-list.html"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="${pageContext.request.contextPath}/main/admin/hcgl"> <i class="iconfont">&#xe6a7;</i>
 								<cite>货车管理</cite>
 						</a></li>
 					</ul>
 					<ul class="sub-menu">
-						<li><a _href="order-list.html"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="${pageContext.request.contextPath}/main/admin/kcgl"> <i class="iconfont">&#xe6a7;</i>
 								<cite>客车管理</cite>
 						</a></li>
 					</ul>
