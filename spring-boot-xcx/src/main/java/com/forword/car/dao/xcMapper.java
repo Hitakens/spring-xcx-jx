@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.forword.car.entity.ParaEntity;
 
-@Repository
+
 public interface xcMapper {
 
 
