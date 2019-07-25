@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.forword.car.entity.ParaEntity;
 import com.forword.car.service.xcService;
 import com.forword.car.service.MainService;
+import com.forword.common.ParamConfig;
 import com.forword.common.StringUtil;
 import com.forword.main.BasController;
 
@@ -36,7 +37,6 @@ public class MainController extends BasController {
 	@Autowired
 	private xcService ktService;
 	/**
-	 * 
 	 * @Title: yrsSerch 
 	 * @Description: 测试接口，上线以后注释掉
 	 * @param model
@@ -50,6 +50,7 @@ public class MainController extends BasController {
 	@RequestMapping(value = "/{id}/{id1}", method = RequestMethod.GET)
 	public String yrsSerch(Model model, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String id, @PathVariable String id1) {
+		//request.getSession().setAttribute("tok",ParamConfig.TOK);
 		request.getSession().setAttribute("openid", "oveQN5Ex4tR2carpJaywzuMc3ymk");
 		// this.writeJson(carService.selectmy_user(id), request, response);
 		/*Map<String, Object> ctsc = ktService.ctsc("xc", "oveQN5Ex4tR2carpJaywzuMc3ymk");
@@ -78,6 +79,7 @@ public class MainController extends BasController {
 		}
 		
 		request.getSession().setAttribute("openid", ma.get("openid"));
+		request.getSession().setAttribute("tok",ParamConfig.TOK);
 		// this.writeJson(carService.selectmy_user(id), request, response);
 		//初始化页面的收藏题目数和错误的题目数
 		Map<String, Object> ctsc = ktService.ctsc("xc", (String)ma.get("openid"));

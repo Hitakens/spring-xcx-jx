@@ -31,6 +31,7 @@
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy.js"></script>
 <script type="text/javascript">
+var tokcs='${tok}';
 	var pathName = '${pageContext.request.contextPath}';
 	var questionData = '${datas}';//考试题目数据
 	var questions = [];

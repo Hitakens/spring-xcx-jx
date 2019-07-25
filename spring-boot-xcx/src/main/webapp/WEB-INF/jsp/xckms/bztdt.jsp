@@ -30,6 +30,7 @@
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckms.js"></script>
 <script type="text/javascript">
+var tokcs='${tok}';
 	var pathName = '${pageContext.request.contextPath}';
 	var cs = '${ymcs}';//页面参数
 	var lx=null;//只有在展示收藏和错误的时候才能赋值

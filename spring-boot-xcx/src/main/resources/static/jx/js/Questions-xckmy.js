@@ -246,9 +246,10 @@ function showctlv() {
 // 语音读题
 function musicplay() {
 	var text = $('.question_title').text()
-	var url =  "https://tsn.baidu.com/text2audio?cuid="+Math.random().toString(36).substr(2)+"&ctp=1&lan=zh&ie=UTF-8&spd=" +
-	"5&pit=9&per=0&tok=24.3aa5be899a4c0f0fe6051bf141e24d5f.2592000.1565708745.282335-15821559" +
-	"&vol=9&text="+ encodeURI(encodeURI(text));
+	var url='http://tsn.baidu.com/text2audio?lan=zh&ctp=1&'
+	+'cuid='+Math.random().toString(36).substr(2)
+	+'&tok='+tokcs
+	+'&vol=12&per=0&spd=5&pit=12&aue=3&tex='+encodeURIComponent(encodeURIComponent(text));
 	if(audio==null){
 		audio=new Audio(url);
 	     audio.src = url;
@@ -260,11 +261,10 @@ function musicplay() {
 // 语音技巧
 function musicjqplay() {
 	var text = $('#showjq').text()
-	var url = "https://tsn.baidu.com/text2audio?cuid="
-			+ Math.random().toString(36).substr(2)
-			+ "&ctp=1&lan=zh&ie=UTF-8&spd="
-			+ "5&pit=9&per=0&tok=24.3aa5be899a4c0f0fe6051bf141e24d5f.2592000.1565708745.282335-15821559"
-			+ "&vol=9&text=" + encodeURIComponent(encodeURIComponent(text));
+	var url='http://tsn.baidu.com/text2audio?lan=zh&ctp=1&'
+	+'cuid='+Math.random().toString(36).substr(2)
+	+'&tok='+tokcs
+	+'&vol=12&per=0&spd=5&pit=12&aue=3&tex='+encodeURIComponent(encodeURIComponent(text));
 	if(audio==null){
 		audio=new Audio(url);
 	     audio.src = url;
