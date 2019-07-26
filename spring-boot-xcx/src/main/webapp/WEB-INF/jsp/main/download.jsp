@@ -4,7 +4,7 @@
 <html
 	class="pixel-ratio-2 retina ios ios-10 ios-10-3 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6">
 <head>
-<title>${tok}</title>
+<title>下载</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -19,37 +19,65 @@
 	href="${pageContext.request.contextPath}/static/all/weui/css/jquery-weui.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/all/weui/css/demos.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/jx/css/index.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/all/css/global.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/jx/css/iconfont.css">
-<script
-	src="${pageContext.request.contextPath}/static/jx/js/iconfont.js"></script>
 <script
 	src="${pageContext.request.contextPath}/static/all/weui/js/jquery-2.1.4.js"></script>
-<script
-	src="${pageContext.request.contextPath}/static/all/speek/speakClient.js"></script>
-
 <script>
-var pathName='${pageContext.request.contextPath}';
-$(document).on("click", "#show-confirm", function() {
-    $.confirm("该APP17M,你确定下载吗?", function() {
-    	window.location.href = pathName+'/xz/downbrowser?fwqlj=/develop/file/红色筑梦延安行.apk';
-    }, function() {
-      //取消操作
-    });
+//引入jQuery版本
+function is_weixin() {
+  var ua = navigator.userAgent.toLowerCase();
+  if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      return true;
+  } else {
+      return false;
+  }
+}// 这个实现是否是在微信打开的，如果是返回true，如果不是，返回false
+$(function(){
+  var isWeixin = is_weixin();//调用is_weixin函数；获取到值
+  var winHeight = typeof window.innerHeight != 'undefined' ?
+  window.innerHeight : document.documentElement.clientHeight;
+  var weixinTip = $('<div id="weixinTip"><div class="test"><img src="../../static/jx/img/ydxz.png"/></div></div>');
+  if(isWeixin){
+      $("body").append(weixinTip);
+  }
+  $("#weixinTip").css({
+      "position":"fixed",
+      "left":"0",
+      "top":"0",
+      "height":"100%",
+      "width":"100%",
+      "z-index":"1000",
+      "background-color":"rgba(0,0,0,0.8)",
+      "filter":"alpha(opacity=80)",
+      "float":"left"
   });
+ 
+  $("#weixinTip div").css({
+      "display":"flex",
+      "justify-content": "space-around",
+      "align-items":"center",
+      "padding-left":"4%",
+      "padding-right":"4%" 
+
+  })
+  $("#weixinTip div img").css({
+     
+      "width":"100%",
+      "height":"100%",
+      "background-size":"100%"
+     /*  "margin-top":"7%",
+      "padding-left":"4%",
+      "padding-right":"4%" */
+  })
+})
 
 </script>
-
 </head>
-<body ontouchstart>
+<style>
+ 
 
-    <div class="weui-msg">
+</style>
+<body ontouchstart>
+	 <div class="weui-msg">
       <div class="weui-msg__icon-area"><img width="200px" height="200px" src="${pageContext.request.contextPath}/static/jx/img/hklogo.png"></div>
       <div class="weui-msg__text-area">
         <h2 class="weui-msg__title">APP下载</h2>
@@ -57,7 +85,7 @@ $(document).on("click", "#show-confirm", function() {
       </div>
       <div class="weui-msg__opr-area">
         <p class="weui-btn-area">
-          <a href="javascript:;" id='show-confirm' class="weui-btn weui-btn_primary">下载</a>
+          <a href="${pageContext.request.contextPath}/xz/downbrowser?fwqlj=/develop/file/红色筑梦延安行.apk"  class="weui-btn weui-btn_primary">下载</a>
         </p>
       </div>
       <div class="weui-msg__extra-area">
@@ -66,17 +94,6 @@ $(document).on("click", "#show-confirm", function() {
         </div>
       </div>
     </div>
-	
-	<script
-		src="${pageContext.request.contextPath}/static/all/weui/js/fastclick.js"></script>
-	<script>
-		$(function() {
-			FastClick.attach(document.body);
-		});
-	</script>
-	<script
-		src="${pageContext.request.contextPath}/static/all/weui/js/jquery-weui.js"></script>
-
 
 </body>
 </html>
