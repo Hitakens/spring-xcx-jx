@@ -73,35 +73,28 @@ text-align: center;
 						<cite>会员管理</cite> <i class="iconfont nav_right">&#xe697;</i>
 				</a>
 					<ul class="sub-menu">
-						<li date-refresh="1"><a _href="member-list.html"> <i
-								class="iconfont">&#xe6a7;</i> <cite>管理员列表</cite>
+						<li date-refresh="1"><a _href="${pageContext.request.contextPath}/main/admin/admin/glygl"> <i
+								class="iconfont">&#xe6a7;</i> <cite>管理员管理</cite>
 
 						</a></li>
-						<li><a _href="member-list1.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>管理员添加</cite>
-
-						</a></li>
-						<li date-refresh="1"><a _href="member-del.html"> <i
-								class="iconfont">&#xe6a7;</i> <cite>管理员删除</cite>
-
-						</a></li>
+						
 						
 					</ul></li>
 				<li><a href="javascript:;"> <i class="iconfont">&#xe723;</i>
 						<cite>题目管理</cite> <i class="iconfont nav_right">&#xe697;</i>
 				</a>
 					<ul class="sub-menu">
-						<li><a _href="${pageContext.request.contextPath}/main/admin/xcgl"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="${pageContext.request.contextPath}/main/admin/admin/xcgl"> <i class="iconfont">&#xe6a7;</i>
 								<cite>小车管理</cite>
 						</a></li>
 					</ul>
 					<ul class="sub-menu">
-						<li><a _href="${pageContext.request.contextPath}/main/admin/hcgl"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="${pageContext.request.contextPath}/main/admin/admin/hcgl"> <i class="iconfont">&#xe6a7;</i>
 								<cite>货车管理</cite>
 						</a></li>
 					</ul>
 					<ul class="sub-menu">
-						<li><a _href="${pageContext.request.contextPath}/main/admin/kcgl"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="${pageContext.request.contextPath}/main/admin/admin/kcgl"> <i class="iconfont">&#xe6a7;</i>
 								<cite>客车管理</cite>
 						</a></li>
 					</ul>
@@ -127,7 +120,7 @@ text-align: center;
 			</div>
 			<div class="layui-tab-content">
 				<div class="layui-tab-item layui-show">
-					<iframe src='${pageContext.request.contextPath}/main/admin/welcome' frameborder="0" scrolling="yes"
+					<iframe src='${pageContext.request.contextPath}/main/admin/admin/welcome' frameborder="0" scrolling="yes"
 						class="x-iframe"></iframe>
 				</div>
 			</div>

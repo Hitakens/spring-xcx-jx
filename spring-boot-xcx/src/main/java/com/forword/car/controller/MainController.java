@@ -69,7 +69,23 @@ public class MainController extends BasController {
 		 * "oveQN5Ex4tR2carpJaywzuMc3ymk"); request.setAttribute("maps", ctsc);
 		 */
 	}
-
+	/**
+	 * @Title: adminIndex 
+	 * @Description: 管理员进入页面
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @param id1
+	 * @return
+	 * @return: String
+	 */
+	@RequestMapping(value = "/admin/{id}/{id1}", method = RequestMethod.GET)
+	public String adminIndex(Model model, HttpServletRequest request, HttpServletResponse response,
+			@PathVariable String id, @PathVariable String id1) {
+			return id + "/" + id1;
+	
+	}
 	/**
 	 * 
 	 * @Title: joinpage

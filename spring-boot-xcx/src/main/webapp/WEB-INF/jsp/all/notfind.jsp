@@ -30,7 +30,7 @@ body {
 
 .top {
     width: 100%;
-   margin-left:7%;
+    text-align:center;
    margin-top: 20%;
 }
 
@@ -39,7 +39,7 @@ body {
 </head>
 <body ontouchstart="">
 
-
+<h2>请用微信端访问</h2>
 <div class="top">
     <img src="${pageContext.request.contextPath}/static/jx/img/gly/404.png">
     <p class="nickname"></p>
