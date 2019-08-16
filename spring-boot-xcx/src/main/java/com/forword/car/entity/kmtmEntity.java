@@ -1,9 +1,11 @@
 package com.forword.car.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 
-public class kmtmEntity {
+public class kmtmEntity implements Serializable{
 
 	private String questionTitle;
 	private String questionItems;

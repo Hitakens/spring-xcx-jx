@@ -53,13 +53,13 @@ text-align: center;
 					<!-- 二级菜单 -->
 					
 					<dd>
-						<a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a>
+						<a onclick="x_admin_show('切换帐号','https://www.jaiy.online/spring-xcx-jx/main/admin/login/adminlogin')">切换帐号</a>
 					</dd>
 					<dd>
-						<a href="./login.html">退出</a>
+						<a href="${pageContext.request.contextPath}/main/logout">退出</a>
 					</dd>
 				</dl></li>
-			<li class="layui-nav-item to-index"><a href="#">前台首页</a></li>
+			<!-- <li class="layui-nav-item to-index"><a href="#">前台首页</a></li> -->
 		</ul>
 
 	</div>
@@ -73,13 +73,22 @@ text-align: center;
 						<cite>会员管理</cite> <i class="iconfont nav_right">&#xe697;</i>
 				</a>
 					<ul class="sub-menu">
-						<li date-refresh="1"><a _href="${pageContext.request.contextPath}/main/admin/admin/glygl"> <i
-								class="iconfont">&#xe6a7;</i> <cite>管理员管理</cite>
-
+						<li date-refresh="1"><a
+							_href="${pageContext.request.contextPath}/main/admin/admin/glygl">
+								<i class="iconfont">&#xe6a7;</i> <cite>管理员管理</cite>
 						</a></li>
-						
-						
-					</ul></li>
+					</ul>
+					<ul class="sub-menu">
+						<li date-refresh="2"><a _href="${pageContext.request.contextPath}/main/admin/admin/usergl"> <i class="iconfont">&#xe6a7;</i>
+								<cite>用户管理</cite>
+						</a></li>
+					</ul>
+					<ul class="sub-menu">
+						<li date-refresh="2"><a _href="${pageContext.request.contextPath}/main/admin/admin/userkm"> <i class="iconfont">&#xe6a7;</i>
+								<cite>用户卡密管理</cite>
+						</a></li>
+					</ul>
+					</li>
 				<li><a href="javascript:;"> <i class="iconfont">&#xe723;</i>
 						<cite>题目管理</cite> <i class="iconfont nav_right">&#xe697;</i>
 				</a>

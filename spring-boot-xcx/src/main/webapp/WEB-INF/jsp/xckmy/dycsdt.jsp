@@ -28,7 +28,7 @@
 <script
 	src="${pageContext.request.contextPath}/static/jx/js/bootstrap.js"></script>
 <script
-	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy.js"></script>
+	src="${pageContext.request.contextPath}/static/jx/js/Questions-xckmy-nosc.js"></script>
 <script type="text/javascript">
     var tokcs='${tok}';
 	var pathName = '${pageContext.request.contextPath}';
@@ -47,14 +47,8 @@
 		timedjs(timeopen);
 		/* 收藏按钮的切换 */
 		$("#unHeart").click(function() {
-			$(this).hide();
-			scthisquestion()
-			$("#heart").show();
-		})
-		$("#heart").click(function() {
-			$(this).hide();
-			scthisquestion()
-			$("#unHeart").show();
+			$('#jqhide').show();
+			musicjqplay();
 		})
 	})
 </script>
@@ -155,18 +149,10 @@ text-align: center;
 		</a> <a id="unHeart" href="javascript:void(0)" class="weui-tabbar__item">
 			<div class="weui-tabbar__icon">
 				<img
-					src="${pageContext.request.contextPath}/static/jx/img/db/sc.png"
+					src="${pageContext.request.contextPath}/static/jx/img/sy/yy1.png"
 					alt="">
 			</div>
-			<p class="weui-tabbar__label">收藏</p>
-		</a> <a id="heart" href="javascript:void(0)" class="weui-tabbar__item"
-			style="color: #C40000; display: none;">
-			<div class="weui-tabbar__icon">
-				<img
-					src="${pageContext.request.contextPath}/static/jx/img/db/bsc.png"
-					alt="">
-			</div>
-			<p class="weui-tabbar__label">已收藏</p>
+			<p class="weui-tabbar__label">技巧</p>
 		</a> <a id='openCardcw' href="javascript:void(0)"
 			class="weui-tabbar__item open-popup" data-target="#half">
 			<div class="weui-tabbar__icon">

@@ -167,7 +167,7 @@ img.wx {
 
 		</form>
 		<div class="weui-footer">
-			<p class="weui-footer__text">Copyright © 2019 通关驾考</p>
+			<p class="weui-footer__text">Copyright © 2019新星驾考</p>
 		</div>
 	</div>
 
@@ -204,7 +204,7 @@ img.wx {
 				"str2" : $('#carpass').val()
 			}, function(res) {
 				if (res == "200") {
-					$.toast("复制成功")
+					$.toast("生成并复制成功")
 				} else if (res == "201") {
 					$.toast("卡密生成失败！", "cancel")
 				} else {

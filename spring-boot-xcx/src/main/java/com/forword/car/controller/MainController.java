@@ -232,10 +232,11 @@ public class MainController extends BasController {
 	 */
 	@RequestMapping(value = "/admin.html", method = RequestMethod.POST)
 	@ResponseBody
-	public String glyLogin(ParaEntity pa) {
+	public String glyLogin(ParaEntity pa,HttpServletRequest re1) {
 		String re = null;
 		try {
 			re = carService.glyLogin(pa);
+	        re1.getSession().setAttribute("user", pa.getStr1());
 		} catch (Exception e) {
 			log.error("管理员登陆失败", e.fillInStackTrace());
 		}
@@ -304,6 +305,16 @@ public class MainController extends BasController {
 			re = "卡密已经存在,请重新生成";
 		}
 		return re;
+	}
+	/**
+	 * 退出
+	 * @return
+	 */
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest re){
+		re.getSession().setAttribute("user", null);
+		return "login/adminlogin";
+		
 	}
 
 	/**

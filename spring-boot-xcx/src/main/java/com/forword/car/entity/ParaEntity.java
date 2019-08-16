@@ -1,9 +1,11 @@
 package com.forword.car.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 
-public class ParaEntity {
+public class ParaEntity implements Serializable{
 private String str1;
 private String str2;
 private String str3;

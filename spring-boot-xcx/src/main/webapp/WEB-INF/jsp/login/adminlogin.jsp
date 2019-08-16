@@ -77,7 +77,7 @@ img.wx { width: 64px;height: 64px;vertical-align: middle; }
 <div class="warp">
 	<div class="top">
         <img class="logo" src="${pageContext.request.contextPath}/static/jx/img/logo.png">
-        <p class="jkname">通关驾考</p>
+        <p class="jkname">新星驾考</p>
     </div>
     <form>
    
@@ -89,7 +89,7 @@ img.wx { width: 64px;height: 64px;vertical-align: middle; }
                     </label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" value="" id="username" pattern="[0-11]*" name="str1" placeholder="请输入手机号码">
+                    <input class="weui-input" type="text" value="" id="username" pattern="[0-11]*" name="str1" placeholder="请输入手机号码">
                 </div>
             </div>
             <div class="weui-cell">
@@ -188,9 +188,10 @@ function loginSuccSaveInfo(){
         	loginSuccSaveInfo();
             window.location.href =pathName+'/main/admin/kmsc?uname='+$('#username').val();
         } else if(res=="201"){
-        	$.toast("你没有权限！请联系管理员","cancel")
+        	loginSuccSaveInfo();
+            window.location.href =pathName+'/main/admin/admin/index';
         }else {
-        	$.toptip('网络错误,请稍后再试', 'error');
+        	$.toptip('网络或者密码错误,请稍后再试', 'error');
         }
     }
 </script>

@@ -471,7 +471,7 @@ function submitQuestions() {
 	$('#pjspdesc').html(
 			"已做答:" + checkQues.length + "道题,错了"
 					+ eval(checkQues.length - sum.length) + "道题,还有"
-					+ (questions.length - checkQues.length) + "道题未完成");
+					+ (questions.length - checkQues.length) + "道题未完成,你得了"+sum.length+"分");
 
 }
 

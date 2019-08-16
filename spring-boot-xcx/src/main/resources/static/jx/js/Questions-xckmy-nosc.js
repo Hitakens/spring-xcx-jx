@@ -98,7 +98,7 @@ function showQuestion(id) {
 		}
 	}
 	$.hideLoading();
-	iftmsc();
+
 	$('.button_sp_area-zdy').show();
 }
 
@@ -201,6 +201,7 @@ function clickTrim(source) {
 	 */
 	Question = activeQuestion;
 	showctlv();
+	$('#jqhide').hide();
 }
 
 /* 设置进度条 */
@@ -273,33 +274,7 @@ function musicjqplay() {
    audio.src = url;
     audio.play();
 }
-// 判断题目是否已经收藏
-function iftmsc() {
-	if (lx == null || lx.length <= 0) {
-		$.ajax({
-			type : "get",
-			url : pathName + "/xc/iftmsc", // 后台文件的url
-			// 就是form的action,用ajax提交表单就不需要给form写action了
-			data : {
-				uuid : questionuuid,
-				cwlx : pa
-			},
-			dataType : "json",
-			success : function(result) {
-				if (result == '1') {
-					$("#heart").show();
-					$("#unHeart").hide();
-				} else {
-					$("#unHeart").show();
-					$("#heart").hide();
-				}
-			},
-			error : function(data) {
-				$.toast("网络错误,请稍后再试!", "cancel");
-			}
-		});
-	}
-}
+
 // 收藏本题
 function scthisquestion() {
 	$.ajax({

@@ -1,8 +1,8 @@
 package com.forword.car.entity;
 
+import java.io.Serializable;
 
-
-public class MsgYrs {
+public class MsgYrs implements Serializable{
 
 	private boolean success = true;
 	private String msg;

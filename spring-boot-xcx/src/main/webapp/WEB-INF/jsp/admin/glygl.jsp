@@ -30,12 +30,27 @@
 <script type="text/javascript">
 	var pathName = '${pageContext.request.contextPath}';
 </script>
+<style>
+.layui-form-item-zdy{
+margin-left: 10px;
+width: 300px;
+}
+.layui-form-item-zdy input{
+width: 200px;
+}
+</style>
 <script type="text/html" id="toolbarDemo">
   <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">修改选中行数据</button>
-    <button class="layui-btn layui-btn-sm" lay-event="sctpData">上传图片</button>
+    <button class="layui-btn layui-btn-sm" lay-event="add"><i class="layui-icon layui-icon-add-circle"></i>添加</button>
+    <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="update"><i class="layui-icon layui-icon-edit"></i>修改</button>
+    <button class="layui-btn layui-btn-sm  layui-btn-danger" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</button>
   </div>
 </script>
+<script type="text/html" id="checkboxTpl">
+  <!-- 这里的 checked 的状态只是演示 -->
+  <input type="checkbox"  name="{{d.username}}" value="{{d.yxbz}}" title="可用" lay-filter="lockDemo" {{ d.yxbz == 'Y' ? 'checked' : '' }}>
+</script>
+
 <body>
 	<div class="warp">
 		<div class="cx_top">
@@ -57,72 +72,62 @@
 		<table id="right_table" class="layui-table" lay-filter="right_table"></table>
 	</div>
 	<!-- 底部结束 -->
-
-	<div id='opengz'>
-		<div class="layui-form-item layui-form-item-zdy">
-			<label class="layui-form-label">题目:</label>
+    <!-- 添加 -->
+	<div id='add'>
+	<div class="layui-form-item layui-form-item-zdy">
+			<label class="layui-form-label">用户账号:</label>
 			<div class="layui-input-block">
-				<input type="text" name="questionTitle" id="questionTitle"
+				<input type="text"  name="questionTitle" id="username"
 					lay-verify="title" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item layui-form-item-zdy">
-			<label class="layui-form-label">选项:</label>
+			<label class="layui-form-label">用户密码:</label>
+			<div class="layui-input-block">
+				<input type="text" name="questionItems" id="userpass"
+					lay-verify="title" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item layui-form-item-zdy">
+			<label class="layui-form-label">用户备注:</label>
+			<div class="layui-input-block">
+				<input type="text" name="questionSkills" id="bz"
+					lay-verify="title" class="layui-input">
+			</div>
+		</div>
+		<form class="layui-form" action="">
+		<div class="layui-form-item layui-form-item-zdy">
+    <label class="layui-form-label">管理员:</label>
+    <div class="layui-input-block" id="IsPurchased">
+      <input type="radio" name="sfgly" value="Y" title="是">
+      <input type="radio" name="sfgly" value="N" title="否"  checked="">
+    </div>
+  </div>
+  </form>
+	</div>
+	<!-- 修改 -->
+	<div id='upd'>
+	 	<div class="layui-form-item layui-form-item-zdy">
+			<label class="layui-form-label">用户账号:</label>
+			<div class="layui-input-block">
+				<input type="text" readonly readonly name="questionTitle" id="questionTitle"
+					lay-verify="title" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item layui-form-item-zdy">
+			<label class="layui-form-label">用户密码:</label>
 			<div class="layui-input-block">
 				<input type="text" name="questionItems" id="questionItems"
 					lay-verify="title" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item layui-form-item-zdy">
-			<label class="layui-form-label">正确答案:</label>
-			<div class="layui-input-block">
-				<input type="text" name="questionAnswer" id="questionAnswer"
-					lay-verify="title" class="layui-input">
-			</div>
-		</div>
-		<div class="layui-form-item layui-form-item-zdy">
-			<label class="layui-form-label">技巧:</label>
+			<label class="layui-form-label">用户备注:</label>
 			<div class="layui-input-block">
 				<input type="text" name="questionSkills" id="questionSkills"
 					lay-verify="title" class="layui-input">
 			</div>
 		</div>
-		<div class="layui-form-item layui-form-item-zdy">
-			<label class="layui-form-label">答案解析:</label>
-			<div class="layui-input-block">
-				<input type="text" name="answerAnalysis" id="answerAnalysis"
-					lay-verify="title" class="layui-input">
-			</div>
-		</div>
-		<form class="layui-form" action="">
-			<div class="layui-form-item layui-form-item-zdy">
-				<label class="layui-form-label">题目类型</label>
-				<div class="layui-input-block">
-					<select name="tmxzlx" id="tmxzlx" lay-filter="aihao">
-						<option value="单选题">单选题</option>
-						<option value="多选题">多选题</option>
-						<option value="判断题">判断题</option>
-					</select>
-				</div>
-			</div>
-		</form>
-		<div class="layui-form-item layui-form-item-zdy">
-			<label class="layui-form-label">图片路径:</label>
-			<div class="layui-input-block">
-				<input type="text" name="questionImg" id="questionImg"
-					lay-verify="title" class="layui-input">
-			</div>
-		</div>
-	</div>
-	<div id='opentp'>
-	 	<div class="layui-upload layui-upload-zdy">
-  <button type="button" class="layui-btn" id="test1">上传图片</button>
-  <div class="layui-upload-list">
-    <img class="layui-upload-img layui-upload-img_zdy" id="demo1">
-    <p id="demoText"></p>
-  </div>
-  	<button type="button" class="layui-btn" id="test9">上传</button>
-</div>   
 	</div>
 </body>
 <!-- END BODY -->

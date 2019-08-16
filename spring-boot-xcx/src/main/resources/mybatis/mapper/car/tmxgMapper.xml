@@ -164,5 +164,42 @@
 		t.questionImg=#{str3,jdbcType=VARCHAR} where
 		t.uuid=#{int1,jdbcType=INTEGER}
 	</update>
+		<select id="selectUserByusername" parameterType="string" resultType="map">
+		SELECT * FROM glydlxx t where t.username like
+		#{username,jdbcType=VARCHAR} order by t.sjsj desc
+	</select>
 	
+	<update id="updateGlyzt" parameterType="com.forword.car.entity.userEntity">
+		 update glydlxx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userpass != null  ">userpass = #{userpass},</if>
+            <if test="yxbz != null  ">yxbz = #{yxbz},</if>
+            <if test="glybz != null  ">glybz = #{glybz},</if>
+            <if test="bz != null  ">bz = #{bz},</if>
+        </trim>
+        where username = #{username}
+	</update>
+	<insert id="insertUser" parameterType="com.forword.car.entity.userEntity">
+		insert into glydlxx(username,userpass,glybz,bz,sjsj) 
+		values(#{username,jdbcType=VARCHAR},
+		#{userpass,jdbcType=VARCHAR},
+		#{glybz,jdbcType=VARCHAR},
+		#{bz,jdbcType=VARCHAR},#{sjsj})
+	</insert>
+	<delete id="deleteByUserName" parameterType="string">
+	delete from glydlxx where username=#{username,jdbcType=VARCHAR}
+	</delete>
+		<select id="selectUserqdByusername" parameterType="string" resultType="map">
+		SELECT t.*,t1.lrry,t.yxbz yxbz1 FROM wx_yhxx t LEFT JOIN open_my t1 on  t.min_key=t1.min_key where t.wxname like
+		#{username,jdbcType=VARCHAR} order by t.sjsj desc
+	</select>
+	<update id="updateYhxxbyopenid" parameterType="string">
+	 update wx_yhxx set yxbz=#{yxbz,jdbcType=VARCHAR} where openid=#{opneid,jdbcType=VARCHAR} 	
+	 </update>
+	 <select id="selectUserKm" parameterType="string" resultType="map">
+	 select * from open_my t where t.lrry like #{username,jdbcType=VARCHAR} order by sjsj desc
+	 </select>
+	 <delete id="deleteOpenByKm" parameterType="string">
+	 delete from open_my where min_key=#{min_key,jdbcType=VARCHAR}
+	 </delete>
 </mapper>

@@ -1,6 +1,9 @@
 package com.forword.car.service.impl;
 
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +18,12 @@ import com.forword.car.dao.tmxgMapper;
 import com.forword.car.entity.Layui;
 import com.forword.car.entity.ParaEntity;
 import com.forword.car.entity.kmtmEntity;
+import com.forword.car.entity.userEntity;
 @Service
 public class tmxgServiceImpl implements tmxgService{
     public Logger log = Logger.getLogger(this.getClass());
-   final String REMSGTRUE="修改成功！";
-   final String REMSGFALSE="修改失败";
+   final String REMSGTRUE="操作成功！";
+   final String REMSGFALSE="操作失败";
 	@Autowired
     private tmxgMapper tmxgMapper;
 
@@ -143,5 +147,122 @@ public class tmxgServiceImpl implements tmxgService{
 		}
 		return msg;
 	}
+
+	@Override
+	public Layui selectUserByusername(ParaEntity pa, Integer limit, Integer page) {
+		Layui data =null;
+		List<Map<String,Object>> docs=null;
+		PageInfo<Map<String,Object>> pageInfo =null;
+		try {
+			limit = limit == null?50:limit;
+			page = page == null?1:page;
+			PageHelper.startPage(page,limit);
+			String p=pa.getStr1()==null?"%%":"%"+pa.getStr1()+"%";
+			docs = tmxgMapper.selectUserByusername(p);
+			pageInfo = new PageInfo<>(docs);
+			Integer total = (int) pageInfo.getTotal();
+	        data = Layui.data(total,pageInfo.getList());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return data;
+	}
+
+	@Override
+	public String updateGlyzt(userEntity pa) {
+		int i=tmxgMapper.updateGlyzt(pa);
+		if(i>0){
+			return REMSGTRUE;
+		}else{
+			return REMSGFALSE;
+		}
+	}
+
+	@Override
+	public String insertUser(userEntity pa) {
+		pa.setSjsj(new Date());
+		int i=tmxgMapper.insertUser(pa);
+		if(i>0){
+			return REMSGTRUE;
+		}else{
+			return REMSGFALSE;
+		}
+	}
+
+	@Override
+	public String deleteByUserName(String pa) {
+		int i=tmxgMapper.deleteByUserName(pa);
+		if(i>0){
+			return REMSGTRUE;
+		}else{
+			return REMSGFALSE;
+		}
+	}
+
+	@Override
+	public Layui selectUserqdByusername(ParaEntity pa, Integer limit, Integer page) {
+		Layui data =null;
+		List<Map<String,Object>> docs=null;
+		PageInfo<Map<String,Object>> pageInfo =null;
+		try {
+			limit = limit == null?50:limit;
+			page = page == null?1:page;
+			PageHelper.startPage(page,limit);
+			String str1 = pa.getStr1();
+			str1=URLEncoder.encode(str1,"utf-8");
+			String p=str1==null?"%%":"%"+str1+"%";
+			docs = tmxgMapper.selectUserqdByusername(p);
+			for (Map<String, Object> map : docs) {
+				map.replace("wxname", URLDecoder.decode(map.get("wxname").toString(),"utf-8"));
+			}
+			pageInfo = new PageInfo<>(docs);
+			Integer total = (int) pageInfo.getTotal();
+	        data = Layui.data(total,pageInfo.getList());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return data;
+	}
+
+	@Override
+	public String updateYhxxbyopenid(String opneid1, String yxbz) {
+		int i=tmxgMapper.updateYhxxbyopenid(opneid1,yxbz);
+		if(i>0){
+			return REMSGTRUE;
+		}else{
+			return REMSGFALSE;
+		}
+	}
+
+	@Override
+	public Layui selectUserKm(ParaEntity pa, Integer limit, Integer page) {
+		Layui data =null;
+		List<Map<String,Object>> docs=null;
+		PageInfo<Map<String,Object>> pageInfo =null;
+		try {
+			limit = limit == null?10:limit;
+			page = page == null?1:page;
+			PageHelper.startPage(page,limit);
+			String p=pa.getStr1()==null?"%%":"%"+pa.getStr1()+"%";
+			docs = tmxgMapper.selectUserKm(p);
+			pageInfo = new PageInfo<>(docs);
+			Integer total = (int) pageInfo.getTotal();
+	        data = Layui.data(total,pageInfo.getList());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return data;
+	}
+
+	@Override
+	public String deleteOpenByKm(String min_key) {
+		int i=tmxgMapper.deleteOpenByKm(min_key);
+		if(i>0){
+			return REMSGTRUE;
+		}else{
+			return REMSGFALSE;
+		}
+	}
+	
 	
 }

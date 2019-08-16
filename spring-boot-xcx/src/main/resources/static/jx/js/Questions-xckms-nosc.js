@@ -36,12 +36,12 @@ function timedjs(isopen) {
 }
 
 // 获取数据
-function getKmydata() {
+function getKmsdata() {
 	$.showLoading();
 	$.ajax({
 		type : "get",
 		dataType : "html",
-		url : pathName + "/xc/getKmydata/" + cs + "/" + tmlx, // 后台文件的url
+		url : pathName + "/xc/getKmsdata/" + cs, // 后台文件的url
 		// 就是form的action,用ajax提交表单就不需要给form写action了
 		success : function(result) {
 			questions = eval(result);
@@ -83,8 +83,9 @@ function showQuestion(id) {
 	}
 	for (var i = 0; i < items.length; i++) {
 		item = "<li class='question_info' onclick='clickTrim(this)' id='item"
-				+ i + "'><input type='radio' name='item' value='" + itemList[i]
-				+ "'>&nbsp;" + itemList[i] + "." + items[i] + "</li>";
+				+ i + "'><input type='checkbox' name='item' value='"
+				+ itemList[i] + "'>&nbsp;" + itemList[i] + "." + items[i]
+				+ "</li>";
 		$(".question").append(item);
 	}
 	$(".question").attr("id", "question" + id);
@@ -98,7 +99,7 @@ function showQuestion(id) {
 		}
 	}
 	$.hideLoading();
-	iftmsc();
+	/*iftmsc();*/
 	$('.button_sp_area-zdy').show();
 }
 
@@ -128,79 +129,165 @@ function answerCardcw() {
 /* 选中考题 */
 function clickTrim(source) {
 	var id = source.id;
-	$("#" + id).find("input").prop("checked", "checked");
+	if ($("#" + id).find("input").prop("checked")) {
+		$("#" + id).find("input").prop("checked", "");
+	} else {
+		$("#" + id).find("input").prop("checked", "checked");
+	}
 	$("#ques" + activeQuestion).removeClass("question_id").addClass("clickQue");
 	var ques = 0;
 	// 正确答案
 	var zqda = questions[activeQuestion].questionAnswer;
-	if (zqda == $("#" + id).find("input[name=item]:checked").val()) {
-		$("#" + id).addClass("clickTrim");
-		for (var i = 0; i < checkQues.length; i++) {
-			if (checkQues[i].id == activeQuestion) {
-				ques = checkQues[i].id;
-				checkQues[i].item = id;// 获取当前考题的选项ID
-				checkQues[i].answer = $("#" + id).find(
-						"input[name=item]:checked").val();// 获取当前考题的选项值
-				checkQues[i].zqda = 1;
+	// 判断答案是不是多选
+	if (zqda.length == 1) {
+		if (zqda == $("#" + id).find("input[name=item]:checked").val()) {
+			$("#" + id).addClass("clickTrim");
+			for (var i = 0; i < checkQues.length; i++) {
+				if (checkQues[i].id == activeQuestion) {
+					ques = checkQues[i].id;
+					checkQues[i].item = id;// 获取当前考题的选项ID
+					checkQues[i].answer = $("#" + id).find(
+							"input[name=item]:checked").val();// 获取当前考题的选项值
+					checkQues[i].zqda = 1;
+				}
 			}
-		}
 
-		if (checkQues.length == 0 || activeQuestion != ques) {
-			var check = {};
-			check.id = activeQuestion;// 获取当前考题的编号
-			check.item = id;// 获取当前考题的选项ID
-			check.answer = $("#" + id).find("input[name=item]:checked").val();// 获取当前考题的选项值
-			check.zqda = 1;
-			checkQues.push(check);
-		}
-		if ((activeQuestion + 1) != questions.length) {
-			showQuestion(activeQuestion + 1);
+			if (checkQues.length == 0 || activeQuestion != ques) {
+				var check = {};
+				check.id = activeQuestion;// 获取当前考题的编号
+				check.item = id;// 获取当前考题的选项ID
+				check.answer = $("#" + id).find("input[name=item]:checked")
+						.val();// 获取当前考题的选项值
+				check.zqda = 1;
+				checkQues.push(check);
+			}
+			if ((activeQuestion + 1) != questions.length) {
+				showQuestion(activeQuestion + 1);
+			} else {
+				showQuestion(activeQuestion)
+			}
 		} else {
-			showQuestion(activeQuestion)
+			$("#" + id).addClass("clickTrimcw");
+			for (var i = 0; i < checkQues.length; i++) {
+				if (checkQues[i].id == activeQuestion) {
+					ques = checkQues[i].id;
+					checkQues[i].item = id;// 获取当前考题的选项ID
+					checkQues[i].answer = $("#" + id).find(
+							"input[name=item]:checked").val();// 获取当前考题的选项值
+					checkQues[i].zqda = 0;
+				}
+			}
+			if (checkQues.length == 0 || activeQuestion != ques) {
+				var check = {};
+				check.id = activeQuestion;// 获取当前考题的编号
+				check.item = id;// 获取当前考题的选项ID
+				check.answer = $("#" + id).find("input[name=item]:checked")
+						.val();// 获取当前考题的选项值
+				check.zqda = 0;
+				checkQues.push(check);
+			}
+			// 把正确的答案显示出来
+			$(".question_info").each(function() {
+				var otherId = $(this).attr("id");
+				if (zqda == $("#" + otherId).find("input[name=item]").val()) {
+					zqid = otherId;
+					$("#" + otherId).addClass("clickTrim");
+				}
+			})
+			cwthisquestion();
+			$(".markedred").addClass("markedred1");
+			if ($('#showjq').text().length < 1) {
+				$('.button_sp_area-zdy').hide();
+			}
+			$('#jqhide').show();
 		}
 	} else {
-		$("#" + id).addClass("clickTrimcw");
-		for (var i = 0; i < checkQues.length; i++) {
-			if (checkQues[i].id == activeQuestion) {
-				ques = checkQues[i].id;
-				checkQues[i].item = id;// 获取当前考题的选项ID
-				checkQues[i].answer = $("#" + id).find(
-						"input[name=item]:checked").val();// 获取当前考题的选项值
-				checkQues[i].zqda = 0;
-			}
+		// 这里是多选题
+		obj = document.getElementsByName("item");
+		check_val = '';
+		for (k in obj) {
+			if (obj[k].checked)
+				check_val += obj[k].value;
 		}
+		if (check_val.length == zqda.length) {
+			if (zqda == check_val) {
+				var daxs = [ 'A', 'B', 'C', 'D' ];
+				// 把正确的答案显示出来
+				for (var i = 0; i < daxs.length; i++) {
+					if (zqda.search(daxs[i]) == -1) {
 
-		if (checkQues.length == 0 || activeQuestion != ques) {
-			var check = {};
-			check.id = activeQuestion;// 获取当前考题的编号
-			check.item = id;// 获取当前考题的选项ID
-			check.answer = $("#" + id).find("input[name=item]:checked").val();// 获取当前考题的选项值
-			check.zqda = 0;
-			checkQues.push(check);
-		}
-		// 把正确的答案显示出来
-		$(".question_info").each(function() {
-			var otherId = $(this).attr("id");
-			if (zqda == $("#" + otherId).find("input[name=item]").val()) {
-				zqid = otherId;
-				$("#" + otherId).addClass("clickTrim");
+					} else {
+						$("#item" + i).addClass("clickTrim");
+					}
+				}
+				for (var i = 0; i < checkQues.length; i++) {
+					if (checkQues[i].id == activeQuestion) {
+						ques = checkQues[i].id;
+						checkQues[i].item = id;// 获取当前考题的选项ID
+						checkQues[i].answer = $("#" + id).find(
+								"input[name=item]:checked").val();// 获取当前考题的选项值
+						checkQues[i].zqda = 1;
+					}
+				}
+
+				if (checkQues.length == 0 || activeQuestion != ques) {
+					var check = {};
+					check.id = activeQuestion;// 获取当前考题的编号
+					check.item = id;// 获取当前考题的选项ID
+					check.answer = $("#" + id).find("input[name=item]:checked")
+							.val();// 获取当前考题的选项值
+					check.zqda = 1;
+					checkQues.push(check);
+				}
+				if ((activeQuestion + 1) != questions.length) {
+					showQuestion(activeQuestion + 1);
+				} else {
+					$.toast("已经是最后一题了！");
+					// showQuestion(activeQuestion)
+				}
+			} else {
+				var daxs = [ 'A', 'B', 'C', 'D' ];
+				// 把正确的答案显示出来
+				for (var i = 0; i < daxs.length; i++) {
+					if (zqda.search(daxs[i]) == -1) {
+						$("#item" + i).addClass("clickTrimcw");
+					} else {
+						$("#item" + i).addClass("clickTrim");
+					}
+				}
+				for (var i = 0; i < checkQues.length; i++) {
+					if (checkQues[i].id == activeQuestion) {
+						ques = checkQues[i].id;
+						checkQues[i].item = id;// 获取当前考题的选项ID
+						checkQues[i].answer = $("#" + id).find(
+								"input[name=item]:checked").val();// 获取当前考题的选项值
+						checkQues[i].zqda = 0;
+					}
+				}
+				if (checkQues.length == 0 || activeQuestion != ques) {
+					var check = {};
+					check.id = activeQuestion;// 获取当前考题的编号
+					check.item = id;// 获取当前考题的选项ID
+					check.answer = $("#" + id).find("input[name=item]:checked")
+							.val();// 获取当前考题的选项值
+					check.zqda = 0;
+					checkQues.push(check);
+				}
+				cwthisquestion();
+				$(".markedred").addClass("markedred1");
+				if ($('#showjq').text().length < 1) {
+					$('.button_sp_area-zdy').hide();
+				}
+				$('#jqhide').show();
 			}
-		})
-		cwthisquestion();
-		$(".markedred").addClass("markedred1");
-		if ($('#showjq').text().length < 1) {
-			$('.button_sp_area-zdy').hide();
+
+		} else {
+
 		}
-		$('#jqhide').show();
 	}
-	/*
-	 * $(".question_info").each(function() { var otherId = $(this).attr("id");
-	 * if (otherId != id) { $("#" + otherId).find("input").prop("checked",
-	 * false); $("#" + otherId).removeClass("clickTrim"); $("#" +
-	 * otherId).removeClass("clickTrimcw"); } })
-	 */
 	Question = activeQuestion;
 	showctlv();
+	$("#heart").hide();
 }
 
 /* 设置进度条 */
@@ -242,20 +329,20 @@ function showctlv() {
 		$('.questionctl').text(sum.length + '/' + checkQues.length)
 	}
 }
- var audio  =null;
+var audio = null;
 // 语音读题
 function musicplay() {
 	var text = $('.question_title').text()
 	var url='http://tsn.baidu.com/text2audio?lan=zh&ctp=1&'
 	+'cuid='+Math.random().toString(36).substr(2)
 	+'&tok='+tokcs
-	+'&vol=12&per=0&spd=5&pit=12&aue=3&tex='+encodeURIComponent(encodeURIComponent(text));
+	+'&vol=12&per=0&spd=5&pit=14&aue=3&tex='+encodeURIComponent(encodeURIComponent(text));
 	if(audio==null){
 		audio=new Audio(url);
 	     audio.src = url;
 	     audio.play();
 	}
-   audio.src = url;
+    audio.src = url;
     audio.play();
 }
 // 语音技巧
